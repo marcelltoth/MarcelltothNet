@@ -31,3 +31,7 @@ _UpgradeReport_Files/
 Thumbs.db
 Desktop.ini
 .DS_Store
+
+#app settings may contain confidental data
+appsettings.json
+appsettings.Development.json
