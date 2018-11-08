@@ -1,0 +1,30 @@
+
+.TopRow{
+    display: flex;
+    justify-content: space-between;
+
+    .LeftSide{
+    }
+    
+    .Center{
+    
+    }
+    
+    .RightSide{
+    
+    }
+}
+
+
+
+ul.SocialLinks{
+    list-style: none;
+    li{
+        display: inline-block;
+        > a{
+            display: block;
+            padding: 15px;
+            line-height: 20px;
+        }
+    }
+}

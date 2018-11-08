@@ -1,0 +1,28 @@
+@import '~/normalize.css';
+@import 'variables';
+@import 'fonts';
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Muli', sans-serif;
+  font-size: 16px;
+  color: $primary-color;
+  font-weight: 400;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+a {
+  color: $primary-color;
+  transition: 0.2s color;
+
+  &:hover{
+    text-decoration: none;
+    color: $accent-color;
+    outline: none;
+  }
+}
