@@ -1,3 +1,8 @@
+@import '../../variables';
+
+@mixin horizontal-line(){
+    border-bottom: 1px solid #e2e6ea;
+}
 
 .TopRow{
     display: flex;
@@ -6,13 +11,10 @@
     padding-bottom: 15px;
     padding-top: 10px;
 
-    border-bottom: 1px solid #e2e6ea;
-    margin-bottom: 10px;
-
+    
+    @include horizontal-line();
 
 }
-
-
 
 ul.LinkPanel{
     list-style: none;
@@ -48,4 +50,71 @@ ul.LinkPanel{
         font-weight: 200;
         font-family: 'Muli', 'sans-serif';
     }
+}
+
+
+
+.menu{
+    position: relative;
+    text-align: center;
+    float: none;
+    padding-left: 0;
+    list-style-type: none;
+    display: block;
+    @include horizontal-line();
+    margin-bottom: 10px;
+
+    > li{
+        float: none;
+        display: inline-block;
+        position: relative;
+
+        > a{
+            display: block;
+            padding: 25px 15px;
+            line-height: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        &:hover > .dropdown{
+            transform: translateY(0px);
+            opacity: 1;
+            visibility: visible;
+        }
+
+        > .dropdown{
+            position: absolute;
+            left: 0;
+            width: 200px;
+            text-align: left;
+            z-index: 60;
+            transform: translateY(10px);
+            opacity: 0;
+            visibility: hidden;
+            -webkit-transition: 0.2s all;
+            transition: 0.2s all;
+
+            > .dropdownBody{
+                background-color: #fff;
+                -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+                box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+                border-top: 2px solid $accent-color;
+                > ul{
+                    padding-left: 0;
+                    list-style-type: none;
+                    a{
+                        display: block;
+                        padding: 8px 10px;
+                        font-size: 14px;
+                        line-height: 20px;
+                        font-weight: 700;
+                        text-transform: uppercase;
+                    }
+                }
+            }
+        }
+    }
+
+    
 }
