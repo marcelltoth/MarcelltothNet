@@ -17,14 +17,24 @@
 
 
 
-ul.SocialLinks{
+ul.LinkPanel{
     list-style: none;
     li{
         display: inline-block;
-        > a{
+        > a, > button{
             display: block;
             padding: 15px;
             line-height: 20px;
+        }
+        > button{
+            padding: 15px;
+            line-height: 20px;
+            text-align: center;
+            border: none;
+            background: transparent;
+            &:hover{
+                cursor: pointer;
+            }
         }
     }
 }
