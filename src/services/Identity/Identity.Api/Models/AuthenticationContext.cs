@@ -1,10 +1,10 @@
-using AuthenticationService.Options;
+using Identity.Api.Options;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
-namespace AuthenticationService.Models
+namespace Identity.Api.Models
 {
     public class AuthenticationContext : IdentityDbContext<ApplicationUser, ApplicationRole, int>
     {

@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace AuthenticationService.Controllers
+namespace Identity.Api.Controllers
 {
     [ApiController]
     public class UsersController : ControllerBase

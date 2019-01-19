@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace AuthenticationService.Migrations
+namespace Identity.Api.Migrations
 {
     public partial class InitialCreate : Migration
     {

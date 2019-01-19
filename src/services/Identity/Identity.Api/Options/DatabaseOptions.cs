@@ -1,4 +1,4 @@
-namespace AuthenticationService.Options
+namespace Identity.Api.Options
 {
     public class DatabaseOptions
     {

@@ -6,11 +6,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "services", "services", "{E8
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Article", "Article", "{DF366B01-98FD-49E7-8CA2-42B52C696BD2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArticleAPI", "src\services\Article\ArticleAPI\ArticleAPI.csproj", "{1B8D3CC5-6841-46E6-97CD-E84C401EFD8B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Article.Api", "src\services\Article\Article.Api\Article.Api.csproj", "{1B8D3CC5-6841-46E6-97CD-E84C401EFD8B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Identity", "Identity", "{1AA0892D-54BA-4FF0-B88F-065716AAEB16}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthenticationService", "src\services\Identity\AuthenticationService\AuthenticationService.csproj", "{ED8531B3-25EF-4BBA-BFBB-305EE92FA503}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Identity.Api", "src\services\Identity\Identity.Api\Identity.Api.csproj", "{ED8531B3-25EF-4BBA-BFBB-305EE92FA503}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
