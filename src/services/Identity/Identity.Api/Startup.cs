@@ -61,7 +61,12 @@ namespace Identity.Api
             }
 
             app.UseHttpsRedirection();
-            app.UseMvc();
+
+            app.UseStaticFiles();
+
+            app.UseIdentityServer();
+
+            app.UseMvcWithDefaultRoute();
         }
     }
 }

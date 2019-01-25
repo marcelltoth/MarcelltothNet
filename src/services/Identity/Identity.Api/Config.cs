@@ -16,7 +16,7 @@ namespace Identity.Api
                 IsActive = true,
                 Username = "marcell",
                 Password = "marcell",
-
+                SubjectId = "1234",
                 Claims =
                 {
                     new Claim(JwtClaimTypes.Address, "Wherever Hungary"),
