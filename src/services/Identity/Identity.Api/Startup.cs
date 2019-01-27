@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Identity.Api.Models;
+using Identity.Api.Options;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -45,7 +46,7 @@ namespace Identity.Api
                 .AddTestUsers(Config.GetTestUsers().ToList())
                 .AddInMemoryIdentityResources(Config.GetIdentityResources())
                 .AddInMemoryApiResources(Config.GetApiResources())
-                .AddInMemoryClients(Config.GetClients());
+                .AddInMemoryClients(Config.GetClients(Configuration.GetSection("ClientUri").Get<ClientUriOptions>()));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

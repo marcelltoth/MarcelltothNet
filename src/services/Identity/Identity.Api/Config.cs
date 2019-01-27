@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Security.Claims;
+using Identity.Api.Options;
 using IdentityModel;
 using IdentityServer4;
 using IdentityServer4.Models;
@@ -40,16 +41,17 @@ namespace Identity.Api
             };
         }
 
-        public static IEnumerable<Client> GetClients()
+        public static IEnumerable<Client> GetClients(ClientUriOptions clientUriOptions)
         {
             yield return new Client()
             {
-                ClientId = "admin-spa",
+                ClientId = "web-admin",
                 ClientName = "Administrator SPA Application",
                 AllowedGrantTypes = GrantTypes.Implicit,
                 AllowAccessTokensViaBrowser = true,
-                RedirectUris = {},
-                AllowedCorsOrigins = {},
+                RedirectUris = {$"{clientUriOptions.WebAdmin}/signin-oidc"},
+                AllowedCorsOrigins = { clientUriOptions.WebAdmin },
+                PostLogoutRedirectUris = { $"{clientUriOptions.WebAdmin}/signout??" },
                 AllowedScopes =
                 {
                     IdentityServerConstants.StandardScopes.OpenId,
