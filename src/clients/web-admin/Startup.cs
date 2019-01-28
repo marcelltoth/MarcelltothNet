@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using WebAdmin.Infrastructure.Middlewares;
+using WebAdmin.Options;
 
 namespace WebAdmin
 {
@@ -27,6 +29,30 @@ namespace WebAdmin
             {
                 configuration.RootPath = "ClientApp/build";
             });
+
+
+            var urlConfig = Configuration.GetSection("UrlConfig").Get<UrlConfig>();
+            
+            services.AddAuthentication(options =>
+                {
+                    options.DefaultChallengeScheme = "openidc";
+                    options.DefaultScheme = "cookies";
+                })
+                .AddCookie("cookies")
+                .AddOpenIdConnect("openidc", options =>
+                {
+                    options.Authority = urlConfig.IdentityApi;
+                    options.ClientId = "web-admin";
+                    options.ResponseType = "id_token";
+                    options.Scope.Clear();
+                    options.Scope.Add("openid");
+                    options.Scope.Add("email");
+                    options.SignInScheme = "cookies";
+                });
+
+            services.AddTransient<RequireAuthenticationMiddleware>();
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,6 +70,11 @@ namespace WebAdmin
             }
 
             app.UseHttpsRedirection();
+
+            // Add authentication here. Non authenticated users should not see this site at all.
+            app.UseAuthentication();
+            app.UseRequiredAuthentication();
+
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
 

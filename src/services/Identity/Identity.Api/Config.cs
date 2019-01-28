@@ -57,7 +57,8 @@ namespace Identity.Api
                     IdentityServerConstants.StandardScopes.OpenId,
                     IdentityServerConstants.StandardScopes.Profile,
                     IdentityServerConstants.StandardScopes.Email,
-                }
+                },
+                RequireConsent = false
             };
         }
     }

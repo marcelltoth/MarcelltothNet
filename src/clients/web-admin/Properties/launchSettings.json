@@ -1,4 +1,4 @@
-﻿{
+{
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
@@ -10,11 +10,10 @@
   "profiles": {
     "WebAdmin": {
       "commandName": "Project",
-      "launchBrowser": true,
-      "applicationUrl": "https://localhost:13101;http://localhost:13100",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      }
+      },
+      "applicationUrl": "https://localhost:13101;http://localhost:13100"
     }
   }
 }
