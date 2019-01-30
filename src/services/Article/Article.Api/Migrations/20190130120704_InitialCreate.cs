@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Article.Api.Migrations
+namespace MarcellTothNet.Services.Article.Api.Migrations
 {
     public partial class InitialCreate : Migration
     {

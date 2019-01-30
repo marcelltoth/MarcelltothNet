@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
 
-using Article.Api.Models;
+using ArticleContext = MarcellTothNet.Services.Article.Api.Models.ArticleContext;
 
-namespace Article.Api.Controllers
+namespace MarcellTothNet.Services.Article.Api.Controllers
 {
     [Route("api/v1/articles")]
     public class ArticleController : Controller

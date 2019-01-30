@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
-namespace Article.Api.Models
+namespace MarcellTothNet.Services.Article.Api.Models
 {
     public class ArticleContext : DbContext
     {

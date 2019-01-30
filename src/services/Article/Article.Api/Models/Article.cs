@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Article.Api.Models
+namespace MarcellTothNet.Services.Article.Api.Models
 {
     public class Article
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Article.Api.Contract
+namespace MarcellTothNet.Services.Article.Api.Contract
 {
     public class ArticleDto
     {

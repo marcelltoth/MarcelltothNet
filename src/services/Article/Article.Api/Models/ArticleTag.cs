@@ -1,4 +1,4 @@
-﻿namespace Article.Api.Models
+﻿namespace MarcellTothNet.Services.Article.Api.Models
 {
     public class ArticleTag
     {
