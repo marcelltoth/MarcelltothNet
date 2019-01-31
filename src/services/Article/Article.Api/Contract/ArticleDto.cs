@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace MarcellTothNet.Services.Article.Api.Contract
 {
@@ -11,5 +12,7 @@ namespace MarcellTothNet.Services.Article.Api.Contract
         public string Title { get; set; }
 
         public string Content { get; set; }
+
+        public IList<int> Tags { get; set; } = new List<int>();
     }
 }

@@ -5,11 +5,13 @@ namespace MarcellTothNet.Services.Article.Api.Models
 {
     public class ArticleContext : DbContext
     {
-        public ArticleContext(DbContextOptions options) : base(options)
+        public ArticleContext(DbContextOptions<ArticleContext> options) : base(options)
         {
         }
 
         public DbSet<Article> Articles { get; set; }
+
+        public DbSet<Tag> Tags { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

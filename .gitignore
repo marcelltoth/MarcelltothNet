@@ -35,3 +35,4 @@ Desktop.ini
 #app settings may contain confidental data
 appsettings.json
 appsettings.Development.json
+/src/services/Article/tests/Article.IntegrationTests/testappsettings.json

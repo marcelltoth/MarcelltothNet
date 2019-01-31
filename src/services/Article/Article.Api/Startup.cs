@@ -1,4 +1,5 @@
-﻿using MarcellTothNet.Services.Article.Api.Models;
+﻿using AutoMapper;
+using MarcellTothNet.Services.Article.Api.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -7,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Article.Api
+namespace MarcellTothNet.Services.Article.Api
 {
     public class Startup
     {
@@ -28,6 +29,8 @@ namespace Article.Api
                 options.UseSqlServer(Configuration.GetConnectionString("ArticleDatabase"));
                 options.ConfigureWarnings(warnings => warnings.Throw(RelationalEventId.QueryClientEvaluationWarning));
             });
+            
+            services.AddAutoMapper();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using MarcellTothNet.Services.Article.Api.Models;
+﻿using MarcellTothNet.Services.Article.Api.Models;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 using WebHostConfiguration;
 
-namespace Article.Api
+namespace MarcellTothNet.Services.Article.Api
 {
     public class Program
     {

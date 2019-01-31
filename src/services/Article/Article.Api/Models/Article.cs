@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace MarcellTothNet.Services.Article.Api.Models
 {
@@ -13,6 +14,6 @@ namespace MarcellTothNet.Services.Article.Api.Models
 
         public string Content { get; set; }
 
-        public IList<ArticleTag> ArticleTags { get; set; }
+        public IList<ArticleTag> ArticleTags { get; set; } = new List<ArticleTag>();
     }
 }

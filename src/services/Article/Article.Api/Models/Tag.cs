@@ -8,6 +8,6 @@ namespace MarcellTothNet.Services.Article.Api.Models
 
         public string DisplayName { get; set; }
 
-        public IList<ArticleTag> ArticleTags { get; set; }
+        public IList<ArticleTag> ArticleTags { get; set; } = new List<ArticleTag>();
     }
 }
