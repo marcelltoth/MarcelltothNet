@@ -3,7 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using MarcellTothNet.Article.Domain.ArticleAggregate;
+using MarcellTothNet.Services.Article.Domain.ArticleAggregate;
 using Xunit;
 
 namespace MarcellTothNet.Services.Article.UnitTests.Domain
@@ -11,7 +11,7 @@ namespace MarcellTothNet.Services.Article.UnitTests.Domain
     public class ArticleAggregateTests
     {
         
-        private readonly MarcellTothNet.Article.Domain.ArticleAggregate.Article _testArticle = new MarcellTothNet.Article.Domain.ArticleAggregate.Article()
+        private readonly Article.Domain.ArticleAggregate.Article _testArticle = new Article.Domain.ArticleAggregate.Article()
         {
             Id = 3,
             Content = "Test content",
@@ -22,7 +22,7 @@ namespace MarcellTothNet.Services.Article.UnitTests.Domain
 
 
         /// <summary>
-        ///     Checks if the <see cref="MarcellTothNet.Article.Domain.ArticleAggregate.Article.TagIds"/> property returns an empty <see cref="IEnumerable{Int32}"/> on a fresh article.
+        ///     Checks if the <see cref="Article.TagIds"/> property returns an empty <see cref="IEnumerable{Int32}"/> on a fresh article.
         /// </summary>
         [Fact]
         public void TagIds_Default_EmptyButNotNull()
@@ -32,7 +32,7 @@ namespace MarcellTothNet.Services.Article.UnitTests.Domain
         }
 
         /// <summary>
-        ///     Checks if the <see cref="MarcellTothNet.Article.Domain.ArticleAggregate.Article.AddTagId"/> method correctly adds two new distinct tags to the collection.
+        ///     Checks if the <see cref="Article.AddTagId"/> method correctly adds two new distinct tags to the collection.
         /// </summary>
         [Fact]
         public void AddTagId_TwoNewTags_AddsCorrectly()
@@ -46,7 +46,7 @@ namespace MarcellTothNet.Services.Article.UnitTests.Domain
         }
 
         /// <summary>
-        ///     Checks if adding the same tag ID twice to an <see cref="MarcellTothNet.Article.Domain.ArticleAggregate.Article"/> results in the second addition being discarded.
+        ///     Checks if adding the same tag ID twice to an <see cref="Article"/> results in the second addition being discarded.
         /// </summary>
         [Fact]
         public void AddTagId_SameTagTwice_DiscardsSecond()
