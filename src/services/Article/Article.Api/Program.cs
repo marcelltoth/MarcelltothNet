@@ -1,5 +1,4 @@
-﻿using MarcellTothNet.Services.Article.Api.Models;
-using Microsoft.AspNetCore;
+﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using WebHostConfiguration;
 
@@ -9,7 +8,7 @@ namespace MarcellTothNet.Services.Article.Api
     {
         public static void Main(string[] args)
         {
-            CreateWebHostBuilder(args).Build().ApplyMigrations<ArticleContext>().Run();
+            CreateWebHostBuilder(args).Build().Run();
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>

@@ -5,6 +5,7 @@
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
         <UserSecretsId>a566f6c3-81c9-4f48-b7d9-10c0a6f879d2</UserSecretsId>
         <RootNamespace>MarcellTothNet.Services.Article.Api</RootNamespace>
+        <LangVersion>7.1</LangVersion>
     </PropertyGroup>
 
     <ItemGroup>

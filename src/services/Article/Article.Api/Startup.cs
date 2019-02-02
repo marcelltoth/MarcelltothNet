@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using MarcellTothNet.Services.Article.Api.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -24,11 +23,11 @@ namespace MarcellTothNet.Services.Article.Api
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            services.AddDbContext<ArticleContext>(options =>
+            /*services.AddDbContext<ArticleContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("ArticleDatabase"));
                 options.ConfigureWarnings(warnings => warnings.Throw(RelationalEventId.QueryClientEvaluationWarning));
-            });
+            });*/
             
             services.AddAutoMapper();
         }
