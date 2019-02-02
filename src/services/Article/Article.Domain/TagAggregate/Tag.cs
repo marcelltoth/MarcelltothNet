@@ -1,6 +1,6 @@
 ﻿using MarcellTothNet.Common.DDDFoundations;
 
-namespace MarcellTothNet.Article.Domain.TagAggregate
+namespace MarcellTothNet.Services.Article.Domain.TagAggregate
 {
     /// <summary>
     ///     Represents an article-tag.

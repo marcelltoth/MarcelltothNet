@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using MarcellTothNet.Common.DDDFoundations;
 
-namespace MarcellTothNet.Article.Domain.TagAggregate
+namespace MarcellTothNet.Services.Article.Domain.TagAggregate
 {
     public interface ITagRepository : IRepository<Tag>
     {

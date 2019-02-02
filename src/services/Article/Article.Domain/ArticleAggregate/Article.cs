@@ -2,14 +2,28 @@
 using System.Collections.Generic;
 using MarcellTothNet.Common.DDDFoundations;
 
-namespace MarcellTothNet.Article.Domain.ArticleAggregate
+namespace MarcellTothNet.Services.Article.Domain.ArticleAggregate
 {
     /// <summary>
     ///     Represents a blog article.
     /// </summary>
     public class Article : Entity<int>, IAggregateRoot
     {
-        private readonly HashSet<int> _tagIds = new HashSet<int>();
+        private readonly HashSet<int> _tagIds;
+
+        public Article()
+        {
+            _tagIds = new HashSet<int>();
+        }
+
+        public Article(string title, DateTimeOffset publishTime, string content, ImageReference thumbnail, IEnumerable<int> tagIds)
+        {
+            Title = title;
+            PublishTime = publishTime;
+            Content = content;
+            Thumbnail = thumbnail;
+            _tagIds = new HashSet<int>(tagIds);
+        }
 
         /// <summary>
         ///     The title of the blog article.

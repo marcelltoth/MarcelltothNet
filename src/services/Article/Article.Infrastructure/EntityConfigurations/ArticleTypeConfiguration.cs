@@ -1,15 +1,21 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using MarcellTothNet.Services.Article.Infrastructure.PersistenceModels;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace MarcellTothNet.Services.Article.Infrastructure.EntityConfigurations
 {
-    public class ArticleTypeConfiguration : IEntityTypeConfiguration<Domain.ArticleAggregate.Article>
+    public class ArticleTypeConfiguration : IEntityTypeConfiguration<ArticleModel>
     {
-        public void Configure(EntityTypeBuilder<Domain.ArticleAggregate.Article> builder)
+        public void Configure(EntityTypeBuilder<ArticleModel> builder)
         {
             builder.ToTable("Articles");
 
             builder.HasKey(a => a.Id);
+
+
+            builder.Property(a => a.Id)
+                .ForSqlServerUseSequenceHiLo();
 
             builder.Property(a => a.Title)
                 .IsRequired()
@@ -22,8 +28,11 @@ namespace MarcellTothNet.Services.Article.Infrastructure.EntityConfigurations
                 .IsRequired();
 
             // Store the thumbnail data in the same table using EF Core 2.0's Owned Entities feature.
-            builder.OwnsOne(a => a.Thumbnail);
-
+            builder.OwnsOne(a => a.Thumbnail, irm =>
+            {
+                irm.Property(p => p.Location)
+                    .HasConversion(v => v.ToString(), v => new Uri(v));
+            });
 
         }
     }

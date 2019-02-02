@@ -8,7 +8,11 @@ namespace MarcellTothNet.Services.Article.Infrastructure.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<Tag> builder)
         {
-            throw new System.NotImplementedException();
+            builder.ToTable("Tags");
+
+            builder.HasKey(t => t.Id);
+
+            builder.Property(t => t.DisplayName).IsRequired().HasMaxLength(64);
         }
     }
 }

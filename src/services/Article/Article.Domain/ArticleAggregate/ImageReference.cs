@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using MarcellTothNet.Common.DDDFoundations;
 
-namespace MarcellTothNet.Article.Domain.ArticleAggregate
+namespace MarcellTothNet.Services.Article.Domain.ArticleAggregate
 {
     /// <summary>
     ///     Represents a reference to an image, along with miscellaneous data.
