@@ -69,15 +69,13 @@ namespace MarcellTothNet.Services.Article.IntegrationTests.Infrastructure
                         Location = _testImageLocation
                     }
                 };
-                Tag testTag2 = new Tag()
+                Tag testTag2 = new Tag("Test Tag 2")
                 {
-                    DisplayName = "Test Tag 2",
                     Id = 2
                 };
 
-                Tag testTag3 = new Tag()
+                Tag testTag3 = new Tag("Test Tag 3")
                 {
-                    DisplayName = "Test Tag 3",
                     Id = 3
                 };
                 context.Tags.Add(testTag2);
