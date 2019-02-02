@@ -23,6 +23,9 @@ namespace MarcellTothNet.Common.DDDFoundations
             if (other == null)
                 return false;
 
+            if (other.GetType() != GetType())
+                return false;
+
             // pair up the atomic values (their order is defined to be stable) and compare them on by one.
             var valuePairs = GetAtomicValues().Zip(other.GetAtomicValues(), (ours, theirs) => (ours, theirs));
             foreach (var (ours, theirs) in valuePairs)
