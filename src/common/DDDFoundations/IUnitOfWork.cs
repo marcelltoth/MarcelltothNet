@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace MarcellTothNet.Common.DDDFoundations
@@ -12,6 +13,6 @@ namespace MarcellTothNet.Common.DDDFoundations
         /// <summary>
         ///     Persists all changes tracked by this <see cref="IUnitOfWork"/> as a single transaction. Either all changes need to be persisted or none.
         /// </summary>
-        Task SaveEntitiesAsync();
+        Task SaveEntitiesAsync(CancellationToken ct = default);
     }
 }
