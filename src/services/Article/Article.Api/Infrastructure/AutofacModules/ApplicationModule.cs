@@ -14,6 +14,9 @@ namespace MarcellTothNet.Services.Article.Api.Infrastructure.AutofacModules
 
             builder.RegisterType<TagQueries>()
                 .As<ITagQueries>();
+
+            builder.RegisterType<ArticleQueries>()
+                .As<IArticleQueries>();
         }
     }
 }

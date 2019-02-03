@@ -32,6 +32,11 @@ namespace MarcellTothNet.Services.Article.Api.Controllers
             return Ok(await _queries.GetAllTagsAsync());
         }
 
+        /// <summary>
+        ///     Posts a new tag to the system.
+        ///     Returns the newly created tag object.
+        /// </summary>
+        /// <param name="command">The data for the tag to create.</param>
         [HttpPost]
         [Route("")]
         public async Task<IActionResult> PostNew([FromBody] CreateTagCommand command)

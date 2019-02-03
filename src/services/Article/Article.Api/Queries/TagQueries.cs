@@ -7,23 +7,13 @@ using Dapper;
 
 namespace MarcellTothNet.Services.Article.Api.Queries
 {
-    /// <inheritdoc />
-    public class TagQueries : ITagQueries
+    /// <inheritdoc cref="ITagQueries" />
+    public class TagQueries : QueriesBase, ITagQueries
     {
-        private readonly Func<DbConnection> _sqlConnectionFactory;
-
-        public TagQueries(Func<DbConnection> sqlConnectionFactory)
+        public TagQueries(Func<DbConnection> sqlConnectionFactory) : base(sqlConnectionFactory)
         {
-            _sqlConnectionFactory = sqlConnectionFactory;
         }
 
-        private async Task<DbConnection> CreateAndOpenDbConnectionAsync()
-        {
-            DbConnection connection = _sqlConnectionFactory();
-            await connection.OpenAsync();
-            return connection;
-        }
-        
         public async Task<IEnumerable<TagViewModel>> GetAllTagsAsync(bool includeArchived)
         {
             using (var connection = await CreateAndOpenDbConnectionAsync())
