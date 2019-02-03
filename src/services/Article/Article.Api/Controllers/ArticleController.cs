@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using MarcellTothNet.Services.Article.Api.Commands;
 using MarcellTothNet.Services.Article.Api.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -42,19 +43,33 @@ namespace MarcellTothNet.Services.Article.Api.Controllers
             return Ok(article);
         }
 
-
+        /// <summary>
+        ///     Saves a new article into the database.
+        /// </summary>
+        /// <param name="command">The data for the new article</param>
+        /// <returns>The view model for the newly inserted article.</returns>
         [HttpPost]
         [Route("")]
-        public IActionResult PostNew([FromBody] object dto)
+        public async Task<IActionResult> PostNew([FromBody] CreateArticleCommand command)
         {
-            throw new NotImplementedException();
+            var id = await _mediator.Send(command);
+            return Ok(await _queries.GetArticleAsync(id));
         }
 
         [HttpPut]
         [Route("{articleId}")]
-        public IActionResult Replace([FromRoute] int articleId, [FromBody] object dto)
+        public async Task<IActionResult> Update([FromRoute] int articleId, [FromBody] UpdateArticleCommand command)
         {
-            throw new NotImplementedException();
+            if (command.Id != articleId)
+            {
+                return BadRequest("The ID of the article should remain the same");
+            }
+
+            var result = await _mediator.Send(command);
+            if (result == false)
+                return NotFound();
+
+            return Ok(await _queries.GetArticleAsync(articleId));
         }
 
         [HttpDelete]
