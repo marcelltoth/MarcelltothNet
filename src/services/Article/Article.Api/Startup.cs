@@ -6,6 +6,7 @@ using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using AutoMapper;
 using MarcellTothNet.Services.Article.Api.Infrastructure.AutofacModules;
+using MarcellTothNet.Services.Article.Api.Infrastructure.Filters;
 using MarcellTothNet.Services.Article.Infrastructure;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
@@ -32,7 +33,7 @@ namespace MarcellTothNet.Services.Article.Api
         {
             // Add general services
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc(mvcOptions => { mvcOptions.Filters.Add<DomainExceptionFilter>(); }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddDbContext<ArticleContext>(options =>
             {
