@@ -55,7 +55,7 @@ namespace MarcellTothNet.Services.Article.Api.Controllers
             bool commandResult = await _mediator.Send(command);
 
             return commandResult 
-                ? NoContent() 
+                ? Ok(await _queries.GetTagByIdAsnyc(tagId))
                 : (IActionResult) NotFound();
         }
 
