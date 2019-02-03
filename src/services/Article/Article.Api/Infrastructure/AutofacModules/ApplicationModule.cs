@@ -1,5 +1,7 @@
 ﻿using Autofac;
 using MarcellTothNet.Services.Article.Api.Queries;
+using MarcellTothNet.Services.Article.Domain.TagAggregate;
+using MarcellTothNet.Services.Article.Infrastructure.Repositories;
 
 namespace MarcellTothNet.Services.Article.Api.Infrastructure.AutofacModules
 {

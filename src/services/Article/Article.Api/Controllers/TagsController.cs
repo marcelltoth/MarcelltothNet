@@ -36,6 +36,9 @@ namespace MarcellTothNet.Services.Article.Api.Controllers
         [Route("")]
         public async Task<IActionResult> PostNew([FromBody] CreateTagCommand command)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             var id = await _mediator.Send(command);
             return Ok(await _queries.GetTagByIdAsnyc(id));
         }

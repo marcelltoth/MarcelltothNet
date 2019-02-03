@@ -29,6 +29,10 @@ namespace MarcellTothNet.Services.Article.Api.Infrastructure.AutofacModules
                 .AsClosedTypesOf(typeof(IRequestHandler<>))
                 .InstancePerDependency();
 
+            builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
+                .AsClosedTypesOf(typeof(IRequestHandler<,>))
+                .InstancePerDependency();
+
             // Add Domain Event handlers
 
             builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())

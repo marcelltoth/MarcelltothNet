@@ -9,7 +9,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Folder Include="CommandHandlers\" />
         <Folder Include="Infrastructure\Migrations\" />
         <Folder Include="wwwroot\" />
     </ItemGroup>

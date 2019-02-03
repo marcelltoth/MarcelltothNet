@@ -59,6 +59,8 @@ namespace MarcellTothNet.Services.Article.Api
 
             builder.Populate(services);
 
+            builder.RegisterModule<InfrastructureAutofacModule>();
+
             builder.RegisterModule<MediatorModule>();
 
             builder.RegisterModule<ApplicationModule>();
