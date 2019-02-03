@@ -11,7 +11,8 @@ namespace MarcellTothNet.Services.Article.Api.Queries
         /// <summary>
         ///     Returns a list of all tags in the system.
         /// </summary>
-        Task<IEnumerable<TagViewModel>> GetAllTagsAsync();
+        /// <param name="includeArchived">Whether to include archived tags in the result set. Defaults to false.</param>
+        Task<IEnumerable<TagViewModel>> GetAllTagsAsync(bool includeArchived = false);
 
         /// <summary>
         ///     Fetches a certain tag by its id.

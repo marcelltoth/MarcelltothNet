@@ -24,11 +24,18 @@ namespace MarcellTothNet.Services.Article.Api.Queries
             return connection;
         }
         
-        public async Task<IEnumerable<TagViewModel>> GetAllTagsAsync()
+        public async Task<IEnumerable<TagViewModel>> GetAllTagsAsync(bool includeArchived)
         {
             using (var connection = await CreateAndOpenDbConnectionAsync())
             {
-                return await connection.QueryAsync<TagViewModel>("SELECT [Id], [DisplayName] FROM [Tags] ORDER BY [Id]");
+                if (includeArchived)
+                {
+                    return await connection.QueryAsync<TagViewModel>("SELECT [Id], [DisplayName] FROM [Tags] ORDER BY [Id]");
+                }
+                else
+                {
+                    return await connection.QueryAsync<TagViewModel>("SELECT [Id], [DisplayName] FROM [Tags] WHERE [IsArchived] = 0 ORDER BY [Id]");
+                }
             }
         }
 
