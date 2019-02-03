@@ -9,12 +9,18 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <Folder Include="CommandHandlers\" />
         <Folder Include="wwwroot\" />
     </ItemGroup>
 
     <ItemGroup>
+        <PackageReference Include="Autofac" Version="4.8.1" />
+        <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.3.1" />
         <PackageReference Include="AutoMapper" Version="8.0.0" />
         <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="6.0.0" />
+        <PackageReference Include="Dapper" Version="1.50.5" />
+        <PackageReference Include="MediatR" Version="6.0.0" />
+        <PackageReference Include="MediatR.Extensions.Autofac.DependencyInjection" Version="2.0.1" />
         <PackageReference Include="Microsoft.AspNetCore.App" />
         <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.0.2105168" />
     </ItemGroup>
@@ -22,6 +28,7 @@
     <ItemGroup>
       <ProjectReference Include="..\..\..\..\WebHostConfiguration\WebHostConfiguration.csproj" />
       <ProjectReference Include="..\Article.Domain\Article.Domain.csproj" />
+      <ProjectReference Include="..\Article.Infrastructure\Article.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>

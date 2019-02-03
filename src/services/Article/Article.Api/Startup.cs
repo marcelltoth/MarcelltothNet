@@ -1,4 +1,11 @@
-﻿using AutoMapper;
+﻿using System;
+using System.Reflection;
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
+using AutoMapper;
+using MarcellTothNet.Services.Article.Api.Infrastructure.AutofacModules;
+using MarcellTothNet.Services.Article.Infrastructure;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -19,17 +26,36 @@ namespace MarcellTothNet.Services.Article.Api
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
+            // Add general services
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            /*services.AddDbContext<ArticleContext>(options =>
+            services.AddDbContext<ArticleContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("ArticleDatabase"));
                 options.ConfigureWarnings(warnings => warnings.Throw(RelationalEventId.QueryClientEvaluationWarning));
-            });*/
+            });
             
             services.AddAutoMapper();
+
+            // Create AutoFac container
+
+            var builder = new ContainerBuilder();
+
+            // Copy the services above into AutoFac and register others
+
+            builder.Populate(services);
+
+            builder.RegisterModule<MediatorModule>();
+
+
+            // Build the container
+
+            var container = builder.Build();
+
+            return new AutofacServiceProvider(container);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
