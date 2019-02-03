@@ -33,7 +33,19 @@ namespace MarcellTothNet.Services.Article.Domain.TagAggregate
                 _displayName = value;
             }
         }
+        
+        /// <summary>
+        ///     Whether this tag is archived. Archived tags exist for historical purposes, but do not get displayed.
+        /// </summary>
+        public bool IsArchived { get; private set; }
 
+        /// <summary>
+        ///     Archives this tag.
+        /// </summary>
+        public void Archive()
+        {
+            IsArchived = true;
+        }
 
 
         private static void ThrowForEmptyDisplayName()
