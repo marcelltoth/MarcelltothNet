@@ -10,6 +10,7 @@
 
     <ItemGroup>
         <Folder Include="CommandHandlers\" />
+        <Folder Include="Infrastructure\Migrations\" />
         <Folder Include="wwwroot\" />
     </ItemGroup>
 
@@ -22,7 +23,7 @@
         <PackageReference Include="MediatR" Version="6.0.0" />
         <PackageReference Include="MediatR.Extensions.Autofac.DependencyInjection" Version="2.0.1" />
         <PackageReference Include="Microsoft.AspNetCore.App" />
-        <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.0.2105168" />
+        <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.4.2" />
     </ItemGroup>
 
     <ItemGroup>

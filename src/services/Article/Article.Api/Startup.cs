@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Data.Common;
+using System.Data.SqlClient;
 using System.Reflection;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
@@ -34,7 +36,10 @@ namespace MarcellTothNet.Services.Article.Api
 
             services.AddDbContext<ArticleContext>(options =>
             {
-                options.UseSqlServer(Configuration.GetConnectionString("ArticleDatabase"));
+                options.UseSqlServer(Configuration.GetConnectionString("ArticleDatabase"), opt =>
+                    {
+                        opt.MigrationsAssembly(Assembly.GetExecutingAssembly().FullName);
+                    });
                 options.ConfigureWarnings(warnings => warnings.Throw(RelationalEventId.QueryClientEvaluationWarning));
             });
             
@@ -46,9 +51,17 @@ namespace MarcellTothNet.Services.Article.Api
 
             // Copy the services above into AutoFac and register others
 
+
+            // Add DB Connection factory
+            builder.Register(context => new SqlConnection(Configuration.GetConnectionString("ArticleDatabase")))
+                .As<DbConnection>()
+                .InstancePerDependency();
+
             builder.Populate(services);
 
             builder.RegisterModule<MediatorModule>();
+
+            builder.RegisterModule<ApplicationModule>();
 
 
             // Build the container

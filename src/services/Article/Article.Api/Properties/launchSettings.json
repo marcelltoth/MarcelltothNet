@@ -20,8 +20,8 @@
     },
     "Docker": {
       "commandName": "Docker",
-      "launchBrowser": true,
-      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/"
+      "launchBrowser": true
+      //"launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/"
     }
   }
 }
