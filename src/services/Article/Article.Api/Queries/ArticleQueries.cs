@@ -41,7 +41,8 @@ namespace MarcellTothNet.Services.Article.Api.Queries
             using (var connection = await CreateAndOpenDbConnectionAsync())
             {
                 return await connection.QueryFirstOrDefaultAsync<ArticleViewModel>(
-                    @"SELECT [Articles].[Id], [Articles].[Title], [Articles].[PublishTime], [Articles].[Thumbnail_Location] as ThumbnailLocation, [Articles].[Thumbnail_AltText] as ThumbnailAltText, [Articles].[Content] FROM [Articles]");
+                    @"SELECT [Id], [Title], [PublishTime], [Thumbnail_Location] as ThumbnailLocation, [Thumbnail_AltText] as ThumbnailAltText, [Content], [IsPublished]
+                            FROM [Articles] WHERE [Id] = @id", new {id = articleId});
             }
         }
 
