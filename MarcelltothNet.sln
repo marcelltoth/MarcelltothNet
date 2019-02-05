@@ -29,15 +29,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Article.IntegrationTests", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Article.UnitTests", "src\services\Article\tests\Article.UnitTests\Article.UnitTests.csproj", "{8C1E5B5B-9AB2-4CDC-91DF-02583AB58D19}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDDFoundations", "src\common\DDDFoundations\DDDFoundations.csproj", "{3DB1B911-BC78-4300-B55D-FC0C0F4ED6F1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DDDFoundations", "src\common\DDDFoundations\DDDFoundations.csproj", "{3DB1B911-BC78-4300-B55D-FC0C0F4ED6F1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Article.Domain", "src\services\Article\Article.Domain\Article.Domain.csproj", "{666A4EB5-965B-434D-A6D5-594912876651}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Article.Domain", "src\services\Article\Article.Domain\Article.Domain.csproj", "{666A4EB5-965B-434D-A6D5-594912876651}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{3FB598AD-0313-4E19-A8D3-DDC2483F92DF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDDFoundations.UnitTests", "src\common\tests\DDDFoundations.UnitTests\DDDFoundations.UnitTests.csproj", "{DD7695BA-C7CB-49B5-BF0A-DCC28C233451}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DDDFoundations.UnitTests", "src\common\tests\DDDFoundations.UnitTests\DDDFoundations.UnitTests.csproj", "{DD7695BA-C7CB-49B5-BF0A-DCC28C233451}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Article.Infrastructure", "src\services\Article\Article.Infrastructure\Article.Infrastructure.csproj", "{692FFB08-0D0C-4EB8-BDA5-59B7E937023C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Article.Infrastructure", "src\services\Article\Article.Infrastructure\Article.Infrastructure.csproj", "{692FFB08-0D0C-4EB8-BDA5-59B7E937023C}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{AF7C5B70-C471-4324-9403-0A76A56B50E4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -85,6 +87,10 @@ Global
 		{692FFB08-0D0C-4EB8-BDA5-59B7E937023C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{692FFB08-0D0C-4EB8-BDA5-59B7E937023C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{692FFB08-0D0C-4EB8-BDA5-59B7E937023C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF7C5B70-C471-4324-9403-0A76A56B50E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF7C5B70-C471-4324-9403-0A76A56B50E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF7C5B70-C471-4324-9403-0A76A56B50E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF7C5B70-C471-4324-9403-0A76A56B50E4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+  article.api:
+    image: ${DOCKER_REGISTRY-}articleapi
+    build:
+      context: .
+      dockerfile: src/services/Article/Article.Api/Dockerfile
+
+  identity.api:
+    image: ${DOCKER_REGISTRY-}identityapi
+    build:
+      context: .
+      dockerfile: src/services/Identity/Identity.Api/Dockerfile
+
