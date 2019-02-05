@@ -22,7 +22,7 @@ namespace MarcellTothNet.Services.Article.Api.CommandHandlers
                 request.Title,
                 request.PublishDate,
                 request.Content, 
-                new ImageReference(new Uri(request.ThumbnailLocation), request.ThumbnailAltText),
+                new ImageReference(new Uri(request.ThumbnailLocation, UriKind.RelativeOrAbsolute), request.ThumbnailAltText),
                 request.TagIds
                 );
 

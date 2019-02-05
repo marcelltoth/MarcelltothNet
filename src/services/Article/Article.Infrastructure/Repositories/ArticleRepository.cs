@@ -53,7 +53,7 @@ namespace MarcellTothNet.Services.Article.Infrastructure.Repositories
                     return null;
 
                 return new Domain.ArticleAggregate.Article(dataModel.Title, dataModel.PublishTime, dataModel.Content, dataModel.Thumbnail.ToDomainModel(),
-                    dataModel.ArticleTags.Select(at => at.TagId))
+                    dataModel.ArticleTags.Select(at => at.TagId), dataModel.IsPublished)
                 {
                     Id = dataModel.Id
                 };
@@ -69,6 +69,7 @@ namespace MarcellTothNet.Services.Article.Infrastructure.Repositories
                 target.Content = domainModel.Content;
                 target.PublishTime = domainModel.PublishTime;
                 target.Thumbnail = ImageReferenceModel.FromDomainModel(domainModel.Thumbnail);
+                target.IsPublished = domainModel.IsPublished;
 
                 target.ArticleTags.Clear();
                 foreach (int tagId in domainModel.TagIds)

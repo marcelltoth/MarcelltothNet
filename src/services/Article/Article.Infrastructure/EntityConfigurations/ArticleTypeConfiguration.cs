@@ -40,6 +40,10 @@ namespace MarcellTothNet.Services.Article.Infrastructure.EntityConfigurations
                     .IsRequired();
             });
 
+            builder.Property(a => a.IsPublished)
+                .IsRequired()
+                .HasDefaultValue(true);
+
         }
     }
 }

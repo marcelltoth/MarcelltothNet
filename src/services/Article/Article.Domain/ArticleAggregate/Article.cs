@@ -16,12 +16,13 @@ namespace MarcellTothNet.Services.Article.Domain.ArticleAggregate
             _tagIds = new HashSet<int>();
         }
 
-        public Article(string title, DateTimeOffset publishTime, string content, ImageReference thumbnail, IEnumerable<int> tagIds)
+        public Article(string title, DateTimeOffset publishTime, string content, ImageReference thumbnail, IEnumerable<int> tagIds, bool isPublished = true)
         {
             Title = title;
             PublishTime = publishTime;
             Content = content;
             Thumbnail = thumbnail;
+            IsPublished = isPublished;
             _tagIds = new HashSet<int>(tagIds);
         }
 
@@ -81,6 +82,31 @@ namespace MarcellTothNet.Services.Article.Domain.ArticleAggregate
             {
                 AddTagId(tag);
             }
+        }
+
+        /// <summary>
+        ///     Whether the article is published. Non-published articles are not shown on the website, although they can be edited by the authors.
+        /// </summary>
+        public bool IsPublished { get; private set; }
+
+        /// <summary>
+        ///     Publishes the article. This makes it visible on the main site.
+        /// </summary>
+        public void Publish()
+        {
+            if(IsPublished)
+                throw new ArticleDomainException("Article is already published");
+            IsPublished = true;
+        }
+
+        /// <summary>
+        ///     Un-publishes the article. This makes it invisible on the main site.
+        /// </summary>
+        public void Archive()
+        {
+            if (!IsPublished)
+                throw new ArticleDomainException("Article is already archived");
+            IsPublished = false;
         }
     }
 }

@@ -33,7 +33,11 @@ namespace MarcellTothNet.Services.Article.Api
         {
             // Add general services
 
-            services.AddMvc(mvcOptions => { mvcOptions.Filters.Add<DomainExceptionFilter>(); }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc(mvcOptions =>
+            {
+                mvcOptions.Filters.Add<DomainExceptionFilter>();
+                mvcOptions.Filters.Add<CheckModelStateFilter>();
+            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddDbContext<ArticleContext>(options =>
             {

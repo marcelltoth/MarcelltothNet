@@ -44,5 +44,10 @@ namespace MarcellTothNet.Services.Article.Api.Queries
         /// </summary>
         public List<int> TagIds { get; set; } = new List<int>();
 
+        /// <summary>
+        ///     Whether the article is published.
+        /// </summary>
+        public bool IsPublished { get; set; }
+
     }
 }

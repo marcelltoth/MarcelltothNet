@@ -19,5 +19,7 @@ namespace MarcellTothNet.Services.Article.Infrastructure.PersistenceModels
         public ImageReferenceModel Thumbnail { get; set; }
 
         public List<ArticleTagModel> ArticleTags { get; set; } = new List<ArticleTagModel>();
+
+        public bool IsPublished { get; set; }
     }
 }
