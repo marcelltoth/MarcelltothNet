@@ -7,15 +7,14 @@ EXPOSE 80
 EXPOSE 443
 
 FROM microsoft/dotnet:2.2-sdk-nanoserver-1803 AS build
-WORKDIR /src
-COPY src/api-gateways/AdminGateway/AdminGateway.csproj src/api-gateways/AdminGateway/
-RUN dotnet restore src/api-gateways/AdminGateway/AdminGateway.csproj
-COPY . .
-WORKDIR /src/src/api-gateways/AdminGateway
-RUN dotnet build AdminGateway.csproj -c Release -o /app
+WORKDIR /src/api-gateways/AdminGateway/
+COPY src/api-gateways/AdminGateway/AdminGateway.csproj .
+RUN dotnet restore AdminGateway.csproj
+COPY src/api-gateways/AdminGateway/ .
+RUN dotnet build AdminGateway.csproj -c Release -o /app --no-restore
 
 FROM build AS publish
-RUN dotnet publish AdminGateway.csproj -c Release -o /app
+RUN dotnet publish AdminGateway.csproj -c Release -o /app --no-restore
 
 FROM base AS final
 WORKDIR /app
