@@ -28,7 +28,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\..\..\WebHostConfiguration\WebHostConfiguration.csproj" />
+      <ProjectReference Include="..\..\..\common\WebHostConfiguration\WebHostConfiguration.csproj" />
       <ProjectReference Include="..\Article.Domain\Article.Domain.csproj" />
       <ProjectReference Include="..\Article.Infrastructure\Article.Infrastructure.csproj" />
     </ItemGroup>

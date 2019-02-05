@@ -21,7 +21,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAdmin", "src\clients\web
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "common", "common", "{C1FE4504-342D-4E57-AD62-8BCD7CEE1EAE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebHostConfiguration", "WebHostConfiguration\WebHostConfiguration.csproj", "{EA7F82A7-98CE-44B1-A414-A7C52AD4BE76}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebHostConfiguration", "src\common\WebHostConfiguration\WebHostConfiguration.csproj", "{EA7F82A7-98CE-44B1-A414-A7C52AD4BE76}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{63C80D20-53B0-4737-8993-1AD6B1B415B5}"
 EndProject
