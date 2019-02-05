@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 
-namespace WebAdmin.Infrastructure.Middlewares
+namespace MarcellTothNet.Clients.WebAdmin.Infrastructure.Middlewares
 {
     /// <summary>
     ///     Middleware that denies access for unauthenticated users.

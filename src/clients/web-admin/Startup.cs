@@ -1,14 +1,13 @@
+using MarcellTothNet.Clients.WebAdmin.Infrastructure.Middlewares;
+using MarcellTothNet.Clients.WebAdmin.Infrastructure.Options;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using WebAdmin.Infrastructure.Middlewares;
-using WebAdmin.Options;
 
-namespace WebAdmin
+namespace MarcellTothNet.Clients.WebAdmin
 {
     public class Startup
     {

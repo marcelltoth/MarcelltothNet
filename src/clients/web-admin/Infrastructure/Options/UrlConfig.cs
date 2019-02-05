@@ -1,4 +1,4 @@
-﻿namespace WebAdmin.Options
+﻿namespace MarcellTothNet.Clients.WebAdmin.Infrastructure.Options
 {
     /// <summary>
     ///     Configuration class to hold the addresses of the surrounding services.

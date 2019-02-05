@@ -8,6 +8,7 @@
     <SpaRoot>ClientApp\</SpaRoot>
     <DefaultItemExcludes>$(DefaultItemExcludes);$(SpaRoot)node_modules\**</DefaultItemExcludes>
     <LangVersion>7.1</LangVersion>
+    <RootNamespace>MarcellTothNet.Clients.WebAdmin</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
