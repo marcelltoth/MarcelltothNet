@@ -5,14 +5,14 @@ EXPOSE 443
 
 FROM microsoft/dotnet:2.1-sdk AS build
 WORKDIR /src
-COPY src/services/Identity/Identity.Api/Identity.Api.csproj src/services/Identity/Identity.Api/
-RUN dotnet restore src/services/Identity/Identity.Api/Identity.Api.csproj
-COPY . .
-WORKDIR /src/src/services/Identity/Identity.Api
-RUN dotnet build Identity.Api.csproj -c Release -o /app
+COPY src/services/Identity/Identity.Api/Identity.Api.csproj services/Identity/Identity.Api/
+RUN dotnet restore services/Identity/Identity.Api/Identity.Api.csproj
+COPY src .
+WORKDIR /src/services/Identity/Identity.Api
+RUN dotnet build Identity.Api.csproj -c Release -o /app --no-restore
 
 FROM build AS publish
-RUN dotnet publish Identity.Api.csproj -c Release -o /appdoc
+RUN dotnet publish Identity.Api.csproj -c Release -o /app --no-restore
 
 FROM base AS final
 WORKDIR /app
