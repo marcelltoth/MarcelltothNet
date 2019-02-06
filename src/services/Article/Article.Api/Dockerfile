@@ -11,7 +11,7 @@ COPY src/services/Article/Article.Domain/Article.Domain.csproj ./services/Articl
 COPY src/common/DDDFoundations/DDDFoundations.csproj ./common/DDDFoundations/
 COPY src/common/WebHostConfiguration/WebHostConfiguration.csproj ./common/WebHostConfiguration/
 RUN dotnet restore ./services/Article/Article.Api/Article.Api.csproj
-COPY . .
+COPY src .
 WORKDIR /src/services/Article/Article.Api
 RUN dotnet build Article.Api.csproj -c Release -o /app --no-restore
 
