@@ -39,3 +39,4 @@ appsettings.Development.json
 
 #TLS Certificates
 *.pfx
+/rootca.pem

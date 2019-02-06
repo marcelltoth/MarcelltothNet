@@ -2,6 +2,8 @@ FROM microsoft/dotnet:2.2-aspnetcore-runtime AS base
 WORKDIR /app
 EXPOSE 80
 EXPOSE 443
+COPY rootca.pem .
+SHELL ["powershell", "-Command", "Import-Certificate -CertStoreLocation cert:\\LocalMachine\\Root -Filepath \"C:\\App\\rootca.pem\""]
 
 FROM microsoft/dotnet:2.2-sdk AS build
 WORKDIR /src/api-gateways/AdminGateway/

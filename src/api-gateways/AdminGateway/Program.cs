@@ -12,12 +12,12 @@ namespace MarcellTothNet.ApiGateways.AdminGateway
         public static void Main(string[] args)
         {
             var builder = new WebHostBuilder()
+                .UseWebRoot(Directory.GetCurrentDirectory())
+                .UseConfiguration(new ConfigurationBuilder().AddCommandLine(args).Build())
                 .UseKestrel((context, kestrelOptions) =>
                 {
                     kestrelOptions.Configure(context.Configuration.GetSection("Kestrel"));
                 })
-                .UseWebRoot(Directory.GetCurrentDirectory())
-                .UseConfiguration(new ConfigurationBuilder().AddCommandLine(args).Build())
                 .ConfigureLogging(l =>
                 {
                     l.AddDebug();

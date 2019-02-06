@@ -10,7 +10,8 @@
         }
       ],
       "UpstreamPathTemplate": "/v1/identity/{url}",
-      "UpstreamHttpMethod": []
+      "UpstreamHttpMethod": [],
+      "DangerousAcceptAnyServerCertificateValidator": true
     },
     {
       "DownstreamPathTemplate": "/api/v1/{url}",
@@ -22,7 +23,8 @@
         }
       ],
       "UpstreamPathTemplate": "/v1/article/{url}",
-      "UpstreamHttpMethod": []
+      "UpstreamHttpMethod": [],
+      "DangerousAcceptAnyServerCertificateValidator": true
     }
   ]
 }

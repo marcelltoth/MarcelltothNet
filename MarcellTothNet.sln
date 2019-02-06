@@ -48,6 +48,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A5BDAE98-F74D-41B8-87D1-913EDF53A8FA}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
+		rootca.pem = rootca.pem
 	EndProjectSection
 EndProject
 Global
