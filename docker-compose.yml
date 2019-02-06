@@ -14,7 +14,7 @@ services:
       dockerfile: src/services/Identity/Identity.Api/Dockerfile
 
 
-  admingateway:
+  admin.gateway:
     image: ${DOCKER_REGISTRY-}admingateway
     build:
       context: .

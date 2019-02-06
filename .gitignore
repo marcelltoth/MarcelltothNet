@@ -36,3 +36,6 @@ Desktop.ini
 appsettings.json
 appsettings.Development.json
 /src/services/Article/tests/Article.IntegrationTests/testappsettings.json
+
+#TLS Certificates
+*.pfx

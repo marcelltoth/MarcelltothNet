@@ -43,7 +43,12 @@ Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-co
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "api-gateways", "api-gateways", "{B9989114-A861-49B5-9C9D-ED5284ECF625}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdminGateway", "src\api-gateways\AdminGateway\AdminGateway.csproj", "{67149704-AAA3-42E3-90CA-0F17057112B4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdminGateway", "src\api-gateways\AdminGateway\AdminGateway.csproj", "{67149704-AAA3-42E3-90CA-0F17057112B4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A5BDAE98-F74D-41B8-87D1-913EDF53A8FA}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
