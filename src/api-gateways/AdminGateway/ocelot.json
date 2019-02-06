@@ -1,0 +1,28 @@
+{
+  "ReRoutes": [
+    {
+      "DownstreamPathTemplate": "/{url}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "identity.api",
+          "Port": 443
+        }
+      ],
+      "UpstreamPathTemplate": "/v1/identity/{url}",
+      "UpstreamHttpMethod": []
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/{url}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "article.api",
+          "Port": 443
+        }
+      ],
+      "UpstreamPathTemplate": "/v1/article/{url}",
+      "UpstreamHttpMethod": []
+    }
+  ]
+}
