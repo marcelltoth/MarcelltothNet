@@ -33,4 +33,10 @@
       <ProjectReference Include="..\Article.Infrastructure\Article.Infrastructure.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Update="server.pfx">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
 </Project>
