@@ -1,4 +1,4 @@
-version: '3.4'
+version: '3.5'
 
 services:
   article.api:
@@ -11,6 +11,7 @@ services:
     volumes:
       - ${APPDATA}/ASP.NET/Https:C:\Users\ContainerUser\AppData\Roaming\ASP.NET\https:ro
       - ${APPDATA}/Microsoft/UserSecrets:C:\Users\ContainerUser\AppData\Roaming\Microsoft\UserSecrets:ro
+    isolation: "hyperv"
   identity.api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
@@ -21,7 +22,7 @@ services:
     volumes:
       - ${APPDATA}/ASP.NET/Https:C:\Users\ContainerUser\AppData\Roaming\ASP.NET\https:ro
       - ${APPDATA}/Microsoft/UserSecrets:C:\Users\ContainerUser\AppData\Roaming\Microsoft\UserSecrets:ro
-
+    isolation: "hyperv"
   admin.gateway:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
@@ -35,3 +36,4 @@ services:
     depends_on:
       - identity.api
       - article.api
+    isolation: "hyperv"
