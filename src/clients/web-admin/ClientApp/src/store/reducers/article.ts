@@ -26,6 +26,15 @@ export const reducer : Reducer<ArticleState> = (state: ArticleState = initialSta
             return {...state, articleList: action.articleList, isRefreshing: false};
         case 'LOAD_ARTICLES_ERROR':
             return {...state, isRefreshing: false};
+        case 'LOAD_SINGLE_ARTICLE_BEGIN':
+            return {...state, isRefreshing: true};
+        case 'LOAD_SINGLE_ARTICLE_SUCCESS':
+            return {...state, 
+                articleList: [...state.articleList.filter(a => a.id !== action.articleData.id), action.articleData],
+                isRefreshing: false
+            };
+        case 'LOAD_SINGLE_ARTICLE_ERROR':
+            return {...state, isRefreshing: false};
     }
 
     return state;

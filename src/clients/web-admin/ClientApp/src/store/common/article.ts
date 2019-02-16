@@ -7,4 +7,5 @@ export interface ArticleData{
     thumbnailAltText: string;
     isPublished: boolean;
     tagIds: number[];
+    content?: string;
 }

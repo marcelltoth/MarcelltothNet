@@ -8,6 +8,7 @@ import { Table } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
+import { AsyncAction, MakeDispatchProps } from '../../store/common';
 
 
 interface StateProps{
@@ -15,7 +16,7 @@ interface StateProps{
     isLoading: boolean;
 }
 
-type DispatchProps = typeof ArticleActions;
+type DispatchProps = MakeDispatchProps<typeof ArticleActions>;
 
 type ArticleListPageImplProps = StateProps & DispatchProps;
 

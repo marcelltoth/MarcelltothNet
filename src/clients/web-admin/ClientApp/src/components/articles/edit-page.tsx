@@ -5,6 +5,7 @@ import { ApplicationState } from '../../store/reducers';
 import { connect } from 'react-redux';
 import { actionCreators as ArticleActions } from '../../store/actions/article';
 import { ArticleEditor } from './article-editor';
+import { VoidFunctionOf } from '../../store/common';
 
 
 interface MatchParams{
@@ -19,17 +20,37 @@ interface StateProps{
     article?: ArticleData;
 }
 
-type DispatchProps = {loadArticles: typeof ArticleActions.loadArticles};
+type DispatchProps = {
+    loadArticle: VoidFunctionOf<typeof ArticleActions.loadSingleArticle>,
+    changeTitle: typeof ArticleActions.changeTitle,
+    changePublishDate: typeof ArticleActions.changePublishDate,
+    changeThumbnail: typeof ArticleActions.changeThumbnail,
+    changeContent: typeof ArticleActions.changeContent,
+};
 
 type ArticleEditPageImplProps = OwnProps & StateProps & DispatchProps;
 
 class ArticleEditPageImpl extends React.Component<ArticleEditPageImplProps>{
+    componentDidMount(){
+        const {loadArticle,match: {params: {id}}} = this.props;
+        
+        loadArticle(Number(id));
+    }
 
-    public componentDidMount(){
-        const {article,loadArticles} = this.props;
-        if(article === undefined){
-            loadArticles();
-        }
+    private handleChangePublishDate = (newDate: Date) => {
+
+    }
+
+    private handleChangeTitle = (newValue: string) => {
+
+    }
+
+    private handleChangeThumbnail = (newUri: string, newAltText: string) => {
+
+    }
+
+    private handleChangeContent = (newValue: string) => {
+
     }
 
     render(){
@@ -40,7 +61,11 @@ class ArticleEditPageImpl extends React.Component<ArticleEditPageImplProps>{
         if(article === undefined){
             return "Not found";
         }
-        return <ArticleEditor article={article} />;
+        return <ArticleEditor article={article} 
+                    onChangeTitle={this.handleChangeTitle}
+                    onChangePublishDate={this.handleChangePublishDate}
+                    onChangeThumbnail={this.handleChangeThumbnail}
+                    onChangeContent={this.handleChangeContent} />;
     }
 }
 
@@ -55,5 +80,11 @@ const mapStateToProps = (state: ApplicationState, ownProps: OwnProps) : StatePro
 
 export const ArticleEditPage = connect<StateProps, DispatchProps, OwnProps, ApplicationState>(
     mapStateToProps,
-    {loadArticles: ArticleActions.loadArticles}
+    {
+        loadArticle: ArticleActions.loadSingleArticle,
+        changeTitle: ArticleActions.changeTitle, 
+        changePublishDate: ArticleActions.changePublishDate,
+        changeThumbnail: ArticleActions.changeThumbnail,
+        changeContent: ArticleActions.changeContent,
+    }
 )(ArticleEditPageImpl);
