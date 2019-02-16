@@ -22,6 +22,7 @@ namespace MarcellTothNet.ApiGateways.AdminGateway
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
             services.AddOcelot();
         }
 
@@ -32,6 +33,11 @@ namespace MarcellTothNet.ApiGateways.AdminGateway
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors(cpb => 
+                cpb.WithOrigins(
+                    Configuration.GetSection("AllowedOrigins").Get<string[]>()
+            ));
             
             app.UseOcelot().Wait();
         }
