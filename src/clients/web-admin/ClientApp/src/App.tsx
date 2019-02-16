@@ -4,8 +4,9 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Navbar } from './components/navbar';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { ArticlesPage } from './components/articles/page';
+import { ArticleListPage } from './components/articles/list-page';
 import { Container } from 'reactstrap';
+import { ArticleEditPage } from './components/articles/edit-page';
 
 export class App extends React.Component {
   render() {
@@ -15,7 +16,8 @@ export class App extends React.Component {
           <Navbar />
           <Container>
             <Switch>
-              <Route path="/articles" component={ArticlesPage} />
+              <Route path="/articles/:id" component={ArticleEditPage} />
+              <Route path="/articles" component={ArticleListPage} />
             </Switch>
           </Container>
         </>

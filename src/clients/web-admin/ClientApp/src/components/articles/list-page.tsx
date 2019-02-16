@@ -17,9 +17,9 @@ interface StateProps{
 
 type DispatchProps = typeof ArticleActions;
 
-type ArticlesPageImplProps = StateProps & DispatchProps;
+type ArticleListPageImplProps = StateProps & DispatchProps;
 
-class ArticlesPageImpl extends React.Component<ArticlesPageImplProps>{
+class ArticleListPageImpl extends React.Component<ArticleListPageImplProps>{
 
     componentDidMount(){
         this.props.loadArticles();
@@ -65,7 +65,7 @@ const mapStateToProps = (state: ApplicationState) : StateProps => {
     };
 }
 
-export const ArticlesPage = connect<StateProps, DispatchProps, {}, ApplicationState>(
+export const ArticleListPage = connect<StateProps, DispatchProps, {}, ApplicationState>(
     mapStateToProps,
     {...ArticleActions}
-)(ArticlesPageImpl);
+)(ArticleListPageImpl);
