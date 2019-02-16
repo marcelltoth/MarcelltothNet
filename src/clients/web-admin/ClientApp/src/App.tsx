@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Navbar } from './components/navbar';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { ArticlesPage } from './components/articles/page';
+import { Container } from 'reactstrap';
 
 export class App extends React.Component {
   render() {
@@ -12,9 +13,11 @@ export class App extends React.Component {
       <BrowserRouter>
         <>
           <Navbar />
-          <Switch>
-            <Route path="/articles" component={ArticlesPage} />
-          </Switch>
+          <Container>
+            <Switch>
+              <Route path="/articles" component={ArticlesPage} />
+            </Switch>
+          </Container>
         </>
       </BrowserRouter>
     );
