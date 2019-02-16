@@ -1,21 +1,22 @@
 import * as React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Nav, NavbarBrand, Navbar, NavItem } from 'reactstrap';
+import { Navbar } from './components/navbar';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { ArticlesPage } from './components/articles/page';
 
 export class App extends React.Component {
   render() {
     return (
-      <Navbar expand light color="light">
-        <NavbarBrand>MarcellToth.Net</NavbarBrand>
-        <Nav>
-          <NavItem>
-            Articles
-          </NavItem>
-        </Nav>
-      </Navbar>
+      <BrowserRouter>
+        <>
+          <Navbar />
+          <Switch>
+            <Route path="/articles" component={ArticlesPage} />
+          </Switch>
+        </>
+      </BrowserRouter>
     );
   }
 }
