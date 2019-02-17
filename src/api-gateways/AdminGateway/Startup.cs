@@ -36,8 +36,10 @@ namespace MarcellTothNet.ApiGateways.AdminGateway
 
             app.UseCors(cpb => 
                 cpb.WithOrigins(
-                    Configuration.GetSection("AllowedOrigins").Get<string[]>()
-            ));
+                    Configuration.GetSection("AllowedOrigins").Get<string[]>())
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+            );
             
             app.UseOcelot().Wait();
         }
