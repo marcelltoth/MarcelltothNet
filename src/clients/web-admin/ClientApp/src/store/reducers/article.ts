@@ -55,6 +55,20 @@ export const reducer : Reducer<ArticleState> = (state: ArticleState = initialSta
             return updateArticle(state, action.id, {thumbnailLocation: action.newUri, thumbnailAltText: action.newAltText});
         case 'ARTICLE_CHANGE_CONTENT':
             return updateArticle(state, action.id, {content: action.newContent});
+
+        case 'ARCHIVE_ARTICLE_BEGIN':
+            return {...state, isRefreshing: true};
+        case 'ARCHIVE_ARTICLE_SUCCESS':
+            return archiveArticle(state, action.id);
+        case 'ARCHIVE_ARTICLE_ERROR':
+            return {...state, isRefreshing: false};
+            
+        case 'PUBLISH_ARTICLE_BEGIN':
+            return {...state, isRefreshing: true};
+        case 'PUBLISH_ARTICLE_SUCCESS':
+            return publishArticle(state, action.id);
+        case 'PUBLISH_ARTICLE_ERROR':
+            return {...state, isRefreshing: false};
     }
 
     return state;
@@ -63,6 +77,34 @@ export const reducer : Reducer<ArticleState> = (state: ArticleState = initialSta
 type ArticleChangeSet = {
     [prop in keyof ArticleData]?: ArticleData[prop];
 }
+
+
+function archiveArticle(state: ArticleState, id: number) : ArticleState{
+    return {
+        ..._changeArticlePublishState(state, id, false),
+        isRefreshing: false
+    };
+}
+function publishArticle(state: ArticleState, id: number) : ArticleState{
+    return {
+        ..._changeArticlePublishState(state, id, true),
+        isRefreshing: false
+    };
+}
+
+function _changeArticlePublishState(state: ArticleState, id: number, publishState: boolean) : ArticleState{
+    return {
+        ...state,
+        articleList: state.articleList.map(a => {
+            if(a.id !== id)
+                return a;
+            else
+                return {...a, isPublished: publishState};
+        })
+    }
+}
+
+
 
 function updateArticle(state: ArticleState, id: number, changeSet: ArticleChangeSet) : ArticleState{
     return {

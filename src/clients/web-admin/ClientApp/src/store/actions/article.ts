@@ -77,7 +77,41 @@ export interface ArticleChangeContentAction{
 
 export type ArticleChangeActions = ArticleChangeTitleAction | ArticleChangePublishDateAction | ArticleChangeThumbnailAction | ArticleChangeContentAction;
 
-export type ArticleActions = LoadArticlesActions | LoadSingleArticleActions | SaveArticleActions | ArticleChangeActions;
+
+export interface ArchiveArticleBeginAction{
+    type: 'ARCHIVE_ARTICLE_BEGIN';
+}
+
+export interface ArchiveArticleSuccessAction{
+    type: 'ARCHIVE_ARTICLE_SUCCESS';
+    id: number;
+}
+
+export interface ArchiveArticleErrorAction{
+    type: 'ARCHIVE_ARTICLE_ERROR';
+}
+
+export type ArchiveArticleActions = ArchiveArticleBeginAction | ArchiveArticleSuccessAction | ArchiveArticleErrorAction;
+
+
+export interface PublishArticleBeginAction{
+    type: 'PUBLISH_ARTICLE_BEGIN';
+}
+
+export interface PublishArticleSuccessAction{
+    type: 'PUBLISH_ARTICLE_SUCCESS';
+    id: number;
+}
+
+export interface PublishArticleErrorAction{
+    type: 'PUBLISH_ARTICLE_ERROR';
+}
+
+export type PublishArticleActions = PublishArticleBeginAction | PublishArticleSuccessAction | PublishArticleErrorAction;
+
+
+export type ArticleActions = LoadArticlesActions | LoadSingleArticleActions | SaveArticleActions 
+    | ArticleChangeActions | ArchiveArticleActions | PublishArticleActions;
 
 
 export const actionCreators = {
@@ -115,6 +149,30 @@ export const actionCreators = {
             }
             catch{
                 dispatch({type: 'SAVE_ARTICLE_ERROR'});
+            }
+        }
+    },
+    archiveArticle: (id: number) : AsyncAction<ArchiveArticleActions> => async (dispatch, getState) => { 
+        if(!getState().article.isRefreshing){
+            dispatch({type: 'ARCHIVE_ARTICLE_BEGIN'});
+            try{
+                await axios.patch(`https://localhost:13101/v1/article/articles/${id}/archive`);
+                dispatch({type: 'ARCHIVE_ARTICLE_SUCCESS', id});
+            }
+            catch{
+                dispatch({type: 'ARCHIVE_ARTICLE_ERROR'});
+            }
+        }
+    },
+    publishArticle: (id: number) : AsyncAction<PublishArticleActions> => async (dispatch, getState) => { 
+        if(!getState().article.isRefreshing){
+            dispatch({type: 'PUBLISH_ARTICLE_BEGIN'});
+            try{
+                await axios.patch(`https://localhost:13101/v1/article/articles/${id}/publish`);
+                dispatch({type: 'PUBLISH_ARTICLE_SUCCESS', id});
+            }
+            catch{
+                dispatch({type: 'PUBLISH_ARTICLE_ERROR'});
             }
         }
     },

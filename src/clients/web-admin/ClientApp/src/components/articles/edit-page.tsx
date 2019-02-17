@@ -24,6 +24,8 @@ interface StateProps{
 type DispatchProps = {
     loadArticle: VoidFunctionOf<typeof ArticleActions.loadSingleArticle>,
     saveArticle: VoidFunctionOf<typeof ArticleActions.saveArticle>,
+    archiveArticle: VoidFunctionOf<typeof ArticleActions.archiveArticle>,
+    publishArticle: VoidFunctionOf<typeof ArticleActions.publishArticle>,
     changeTitle: typeof ArticleActions.changeTitle,
     changePublishDate: typeof ArticleActions.changePublishDate,
     changeThumbnail: typeof ArticleActions.changeThumbnail,
@@ -58,6 +60,14 @@ class ArticleEditPageImpl extends React.Component<ArticleEditPageImplProps>{
     private handleSaveClick = () => {
         this.props.saveArticle(Number(this.props.match.params.id));
     }
+    
+    private handleArchiveClick = () => {
+        this.props.archiveArticle(Number(this.props.match.params.id));
+    }
+
+    private handlePublishClick = () => {
+        this.props.publishArticle(Number(this.props.match.params.id));
+    }
 
     render(){
         const {article, isLoading} = this.props;
@@ -69,6 +79,10 @@ class ArticleEditPageImpl extends React.Component<ArticleEditPageImplProps>{
         }
         return <div className="mt-3">
             <div className="d-flex justify-content-end">
+                {article.isPublished 
+                    ? <Button outline color="danger" onClick={this.handleArchiveClick}>Archive</Button>
+                    : <Button outline color="primary" onClick={this.handlePublishClick}>Publish</Button>
+                }
                 <Button outline color="success" disabled={!article.isDirty} onClick={this.handleSaveClick}>Save</Button>
             </div>
             <ArticleEditor article={article} 
@@ -98,6 +112,8 @@ export const ArticleEditPage = connect<StateProps, DispatchProps, OwnProps, Appl
         changePublishDate: ArticleActions.changePublishDate,
         changeThumbnail: ArticleActions.changeThumbnail,
         changeContent: ArticleActions.changeContent,
-        saveArticle: ArticleActions.saveArticle
+        saveArticle: ArticleActions.saveArticle,
+        archiveArticle: ArticleActions.archiveArticle,
+        publishArticle: ArticleActions.publishArticle
     }
 )(ArticleEditPageImpl);
