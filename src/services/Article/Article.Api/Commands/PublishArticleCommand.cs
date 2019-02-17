@@ -1,21 +1,20 @@
 ﻿using MediatR;
-using Newtonsoft.Json;
 
 namespace MarcellTothNet.Services.Article.Api.Commands
 {
     /// <summary>
-    ///     Command to archive an article.
+    ///     Command to publish an article.
     ///     Handlers should return true on success, false if not found.
     /// </summary>
-    public class ArchiveArticleCommand : IRequest<bool>
+    public class PublishArticleCommand : IRequest<bool>
     {
-        public ArchiveArticleCommand(int articleId)
+        public PublishArticleCommand(int articleId)
         {
             ArticleId = articleId;
         }
 
         /// <summary>
-        ///     The ID of the article to archive.
+        ///     The ID of the article to publish.
         /// </summary>
         public int ArticleId { get; }
     }

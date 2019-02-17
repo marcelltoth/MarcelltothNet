@@ -72,14 +72,38 @@ namespace MarcellTothNet.Services.Article.Api.Controllers
             return Ok(await _queries.GetArticleAsync(articleId));
         }
 
-        [HttpDelete]
-        [Route("{articleId}")]
-        public IActionResult Delete([FromRoute] int articleId)
+        /// <summary>
+        ///     Archives the given article.
+        /// </summary>
+        /// <param name="articleId">The ID of the article to archive.</param>
+        /// <returns><see cref="NoContentResult"/> on success.</returns>
+        [HttpPatch]
+        [Route("{articleId}/archive")]
+        public async Task<IActionResult> Archive([FromRoute] int articleId)
         {
-            throw new NotImplementedException();
+            var command = new ArchiveArticleCommand(articleId);
+            var result = await _mediator.Send(command);
+            if (result == false)
+                return NotFound();
+            return NoContent();
+        }
+
+        /// <summary>
+        ///     Publishes the given article.
+        /// </summary>
+        /// <param name="articleId">The ID of the article to publish.</param>
+        /// <returns><see cref="NoContentResult"/> on success.</returns>
+        [HttpPatch]
+        [Route("{articleId}/publish")]
+        public async Task<IActionResult> Publish([FromRoute] int articleId)
+        {
+            var command = new PublishArticleCommand(articleId);
+            var result = await _mediator.Send(command);
+            if (result == false)
+                return NotFound();
+            return NoContent();
         }
 
     }
-
 
 }

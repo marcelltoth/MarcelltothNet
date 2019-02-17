@@ -6,28 +6,26 @@ using MediatR;
 
 namespace MarcellTothNet.Services.Article.Api.CommandHandlers
 {
-    public class ArchiveArticleCommandHandler : IRequestHandler<ArchiveArticleCommand, bool>
+    public class PublishArticleCommandHandler : IRequestHandler<PublishArticleCommand, bool>
     {
         private readonly IArticleRepository _repository;
 
-        public ArchiveArticleCommandHandler(IArticleRepository repository)
+        public PublishArticleCommandHandler(IArticleRepository repository)
         {
             _repository = repository;
         }
 
-        public async Task<bool> Handle(ArchiveArticleCommand request, CancellationToken cancellationToken)
+        public async Task<bool> Handle(PublishArticleCommand request, CancellationToken cancellationToken)
         {
-            var article = await _repository.GetByIdAsync(request.ArticleId);
-
-            if (article == null)
+            var model = await _repository.GetByIdAsync(request.ArticleId);
+            if (model == null)
                 return false;
 
-            article.Archive();
-            
-            _repository.Update(article);
+            model.Publish();
+
+            _repository.Update(model);
             await _repository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
             return true;
-
         }
     }
 }
