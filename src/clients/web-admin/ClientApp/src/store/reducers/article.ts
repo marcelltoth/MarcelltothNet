@@ -26,6 +26,7 @@ export const reducer : Reducer<ArticleState> = (state: ArticleState = initialSta
             return {...state, articleList: action.articleList, isRefreshing: false};
         case 'LOAD_ARTICLES_ERROR':
             return {...state, isRefreshing: false};
+
         case 'LOAD_SINGLE_ARTICLE_BEGIN':
             return {...state, isRefreshing: true};
         case 'LOAD_SINGLE_ARTICLE_SUCCESS':
@@ -35,7 +36,42 @@ export const reducer : Reducer<ArticleState> = (state: ArticleState = initialSta
             };
         case 'LOAD_SINGLE_ARTICLE_ERROR':
             return {...state, isRefreshing: false};
+
+        case 'SAVE_ARTICLE_BEGIN':
+            return {...state, isRefreshing: true};
+        case 'SAVE_ARTICLE_SUCCESS':
+            return {...state, 
+                articleList: [...state.articleList.filter(a => a.id !== action.articleData.id), action.articleData],
+                isRefreshing: false
+            };
+        case 'SAVE_ARTICLE_ERROR':
+            return {...state, isRefreshing: false};
+
+        case 'ARTICLE_CHANGE_TITLE':
+            return updateArticle(state, action.id, {title: action.newTitle});
+        case 'ARTICLE_CHANGE_PUBLISH_DATE':
+            return updateArticle(state, action.id, {publishDate: action.newDate.toISOString()});
+        case 'ARTICLE_CHANGE_THUMBNAIL':
+            return updateArticle(state, action.id, {thumbnailLocation: action.newUri, thumbnailAltText: action.newAltText});
+        case 'ARTICLE_CHANGE_CONTENT':
+            return updateArticle(state, action.id, {content: action.newContent});
     }
 
     return state;
+}
+
+type ArticleChangeSet = {
+    [prop in keyof ArticleData]?: ArticleData[prop];
+}
+
+function updateArticle(state: ArticleState, id: number, changeSet: ArticleChangeSet) : ArticleState{
+    return {
+        ...state,
+        articleList: state.articleList.map(a => {
+            if(a.id !== id)
+                return a;
+            else
+                return {...a, ...changeSet, isDirty: true};
+        })
+    }
 }

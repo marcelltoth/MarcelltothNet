@@ -34,6 +34,21 @@ export interface LoadSingleArticleErrorAction{
 
 export type LoadSingleArticleActions = LoadSingleArticleBeginAction | LoadSingleArticleSuccessAction | LoadSingleArticleErrorAction;
 
+export interface SaveArticleBeginAction{
+    type: 'SAVE_ARTICLE_BEGIN';
+}
+
+export interface SaveArticleSuccessAction{
+    type: 'SAVE_ARTICLE_SUCCESS';
+    articleData: ArticleData;
+}
+
+export interface SaveArticleErrorAction{
+    type: 'SAVE_ARTICLE_ERROR';
+}
+
+export type SaveArticleActions = SaveArticleBeginAction | SaveArticleSuccessAction | SaveArticleErrorAction;
+
 
 export interface ArticleChangeTitleAction{
     type: 'ARTICLE_CHANGE_TITLE';
@@ -62,7 +77,7 @@ export interface ArticleChangeContentAction{
 
 export type ArticleChangeActions = ArticleChangeTitleAction | ArticleChangePublishDateAction | ArticleChangeThumbnailAction | ArticleChangeContentAction;
 
-export type ArticleActions = LoadArticlesActions | LoadSingleArticleActions | ArticleChangeActions;
+export type ArticleActions = LoadArticlesActions | LoadSingleArticleActions | SaveArticleActions | ArticleChangeActions;
 
 
 export const actionCreators = {
@@ -87,6 +102,19 @@ export const actionCreators = {
             }
             catch{
                 dispatch({type: 'LOAD_SINGLE_ARTICLE_ERROR'});
+            }
+        }
+    },
+    saveArticle: (id: number) : AsyncAction<SaveArticleActions> => async (dispatch, getState) => { 
+        const article = getState().article.articleList.find(a => a.id === id);
+        if(!getState().article.isRefreshing && article !== undefined){
+            dispatch({type: 'SAVE_ARTICLE_BEGIN'});
+            try{
+                const response = await axios.put<ArticleData>(`https://localhost:13101/v1/article/articles/${id}`, article);
+                dispatch({type: 'SAVE_ARTICLE_SUCCESS', articleData: response.data});
+            }
+            catch{
+                dispatch({type: 'SAVE_ARTICLE_ERROR'});
             }
         }
     },

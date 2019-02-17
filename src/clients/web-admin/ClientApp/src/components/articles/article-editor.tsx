@@ -4,6 +4,7 @@ import { Form, FormGroup, Label, Input, Row, Col } from 'reactstrap';
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { FileSelector } from '../common/file-selector';
 
 interface ArticleEditorProps{
     article: ArticleData;
@@ -25,6 +26,10 @@ export class ArticleEditor extends React.Component<ArticleEditorProps>{
 
     private handleChangeThumbnailAltText = (event: React.ChangeEvent<HTMLInputElement>) => {
         this.props.onChangeThumbnail(this.props.article.thumbnailLocation, event.currentTarget.value);
+    }
+    
+    private handleChangeThumbnailLocation = (newValue: string) => {
+        this.props.onChangeThumbnail(newValue, this.props.article.thumbnailAltText);
     }
 
     private handleChangeContent = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -52,7 +57,7 @@ export class ArticleEditor extends React.Component<ArticleEditorProps>{
                 <Col width={6}>
                     <FormGroup>
                         <Label>Thumbnail image:</Label>
-                        <Input type="file" placeholder="Image" />
+                        <FileSelector placeholderText="Image" value={thumbnailLocation} onChange={this.handleChangeThumbnailLocation} />
                     </FormGroup>
                 </Col>
                 <Col width={6}>
@@ -64,7 +69,7 @@ export class ArticleEditor extends React.Component<ArticleEditorProps>{
             </Row>
             <FormGroup>
                 <Label>Content:</Label>
-                <Input type="textarea" value={content} onChange={this.handleChangeContent} />
+                <Input type="textarea" value={content} onChange={this.handleChangeContent} style={{height: 400}} />
             </FormGroup>
         </Form>
     }

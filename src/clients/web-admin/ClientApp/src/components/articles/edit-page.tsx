@@ -1,11 +1,12 @@
 import * as React from 'react';
-import { RouteComponentProps } from 'react-router';
+import { RouteComponentProps, Prompt } from 'react-router';
 import { ArticleData } from '../../store/common/article';
 import { ApplicationState } from '../../store/reducers';
 import { connect } from 'react-redux';
 import { actionCreators as ArticleActions } from '../../store/actions/article';
 import { ArticleEditor } from './article-editor';
 import { VoidFunctionOf } from '../../store/common';
+import { CardBody, Card, CardTitle, CardSubtitle, Button } from 'reactstrap';
 
 
 interface MatchParams{
@@ -22,6 +23,7 @@ interface StateProps{
 
 type DispatchProps = {
     loadArticle: VoidFunctionOf<typeof ArticleActions.loadSingleArticle>,
+    saveArticle: VoidFunctionOf<typeof ArticleActions.saveArticle>,
     changeTitle: typeof ArticleActions.changeTitle,
     changePublishDate: typeof ArticleActions.changePublishDate,
     changeThumbnail: typeof ArticleActions.changeThumbnail,
@@ -38,19 +40,23 @@ class ArticleEditPageImpl extends React.Component<ArticleEditPageImplProps>{
     }
 
     private handleChangePublishDate = (newDate: Date) => {
-
+        this.props.changePublishDate(Number(this.props.match.params.id), newDate);
     }
 
     private handleChangeTitle = (newValue: string) => {
-
+        this.props.changeTitle(Number(this.props.match.params.id), newValue);
     }
 
     private handleChangeThumbnail = (newUri: string, newAltText: string) => {
-
+        this.props.changeThumbnail(Number(this.props.match.params.id), newUri, newAltText);
     }
 
     private handleChangeContent = (newValue: string) => {
-
+        this.props.changeContent(Number(this.props.match.params.id), newValue);
+    }
+    
+    private handleSaveClick = () => {
+        this.props.saveArticle(Number(this.props.match.params.id));
     }
 
     render(){
@@ -61,11 +67,17 @@ class ArticleEditPageImpl extends React.Component<ArticleEditPageImplProps>{
         if(article === undefined){
             return "Not found";
         }
-        return <ArticleEditor article={article} 
-                    onChangeTitle={this.handleChangeTitle}
-                    onChangePublishDate={this.handleChangePublishDate}
-                    onChangeThumbnail={this.handleChangeThumbnail}
-                    onChangeContent={this.handleChangeContent} />;
+        return <div className="mt-3">
+            <div className="d-flex justify-content-end">
+                <Button outline color="success" disabled={!article.isDirty} onClick={this.handleSaveClick}>Save</Button>
+            </div>
+            <ArticleEditor article={article} 
+                        onChangeTitle={this.handleChangeTitle}
+                        onChangePublishDate={this.handleChangePublishDate}
+                        onChangeThumbnail={this.handleChangeThumbnail}
+                        onChangeContent={this.handleChangeContent} />
+            <Prompt message="Are you sure you want to discard your edits?" when={!!article.isDirty}/>
+        </div>;
     }
 }
 
@@ -86,5 +98,6 @@ export const ArticleEditPage = connect<StateProps, DispatchProps, OwnProps, Appl
         changePublishDate: ArticleActions.changePublishDate,
         changeThumbnail: ArticleActions.changeThumbnail,
         changeContent: ArticleActions.changeContent,
+        saveArticle: ArticleActions.saveArticle
     }
 )(ArticleEditPageImpl);

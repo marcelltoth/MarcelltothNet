@@ -8,4 +8,6 @@ export interface ArticleData{
     isPublished: boolean;
     tagIds: number[];
     content?: string;
+
+    isDirty?: boolean;
 }
