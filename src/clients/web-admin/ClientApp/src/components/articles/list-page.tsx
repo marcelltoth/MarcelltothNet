@@ -54,7 +54,13 @@ class ArticleListPageImpl extends React.Component<ArticleListPageImplProps>{
                     {orderedArticles.map(a => (<tr>
                         <td>{a.id}</td>
                         <td>{a.title}</td>
-                        <td>{a.publishDate}</td>
+                        <td>
+                            {new Date(a.publishDate)
+                                .toLocaleDateString(
+                                    'en-US', 
+                                    { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' }
+                            )}
+                        </td>
                         <td style={{textAlign: "center"}}>{a.isPublished ? <FontAwesomeIcon icon={faGlobe} /> : <FontAwesomeIcon icon={faArchive} />}</td>
                         <td style={{textAlign: "center"}}>
                             <Link to={`/articles/${a.id}`}>
