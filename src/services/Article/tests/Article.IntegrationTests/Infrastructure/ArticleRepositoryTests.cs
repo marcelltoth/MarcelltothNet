@@ -51,7 +51,7 @@ namespace MarcellTothNet.Services.Article.IntegrationTests.Infrastructure
         private static readonly int[] _testTagIds = { 2, 3 };
         private static readonly DateTimeOffset _testPublishTime = DateTimeOffset.FromUnixTimeSeconds(10240);
 
-        private readonly Domain.ArticleAggregate.Article _testArticle = new Domain.ArticleAggregate.Article(_testArticleTitle, _testPublishTime, _testContent, _testImageReference, _testTagIds);
+        private readonly Domain.ArticleAggregate.Article _testArticle = new Domain.ArticleAggregate.Article(_testArticleTitle, _testPublishTime, _testContent, _testImageReference, _testTagIds, true);
 
         private void AddTestArticleToDb()
         {

@@ -23,7 +23,8 @@ namespace MarcellTothNet.Services.Article.Api.CommandHandlers
                 request.PublishDate,
                 request.Content, 
                 new ImageReference(request.ThumbnailLocation, request.ThumbnailAltText),
-                request.TagIds
+                request.TagIds,
+                false
                 );
 
             _repository.Add(article);

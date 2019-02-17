@@ -16,7 +16,7 @@ namespace MarcellTothNet.Services.Article.Domain.ArticleAggregate
             _tagIds = new HashSet<int>();
         }
 
-        public Article(string title, DateTimeOffset publishTime, string content, ImageReference thumbnail, IEnumerable<int> tagIds, bool isPublished = true)
+        public Article(string title, DateTimeOffset publishTime, string content, ImageReference thumbnail, IEnumerable<int> tagIds, bool isPublished)
         {
             Title = title;
             PublishTime = publishTime;
