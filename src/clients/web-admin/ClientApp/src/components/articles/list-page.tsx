@@ -3,7 +3,7 @@ import { ArticleData } from '../../store/common/article';
 import { actionCreators as ArticleActions } from '../../store/actions/article';
 import { connect } from 'react-redux';
 import { ApplicationState } from '../../store/reducers';
-import { Table } from 'reactstrap';
+import { Table, Button } from 'reactstrap';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPencilAlt, faGlobe, faArchive } from '@fortawesome/free-solid-svg-icons';
@@ -26,13 +26,22 @@ class ArticleListPageImpl extends React.Component<ArticleListPageImplProps>{
         this.props.loadArticles();
     }
 
+    private handleInsertClick = () => {
+        this.props.createEmptyArticle();
+    }
+
     render(){
         const {isLoading, articles} = this.props;
         if(isLoading){
             return "Loading...";
         }
 
-        return (
+        const orderedArticles = [...articles].sort((a, b) => (new Date(b.publishDate).valueOf() - new Date(a.publishDate).valueOf()));
+
+        return <div className="mt-3">
+            <div className="d-flex justify-content-end mb-2">
+                <Button outline color="primary" onClick={this.handleInsertClick}>New Article</Button>
+            </div>
             <Table>
                 <thead>
                     <tr>
@@ -42,7 +51,7 @@ class ArticleListPageImpl extends React.Component<ArticleListPageImplProps>{
                         <th style={{textAlign: "center"}}>Active</th>
                         <th style={{textAlign: "center"}}>Actions</th>
                     </tr>
-                    {articles.map(a => (<tr>
+                    {orderedArticles.map(a => (<tr>
                         <td>{a.id}</td>
                         <td>{a.title}</td>
                         <td>{a.publishDate}</td>
@@ -54,7 +63,7 @@ class ArticleListPageImpl extends React.Component<ArticleListPageImplProps>{
                     </tr>))}
                 </thead>
             </Table>
-        );
+        </div>;
     }
 }
 

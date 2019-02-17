@@ -37,6 +37,13 @@ export const reducer : Reducer<ArticleState> = (state: ArticleState = initialSta
         case 'LOAD_SINGLE_ARTICLE_ERROR':
             return {...state, isRefreshing: false};
 
+        case 'CREATE_ARTICLE_BEGIN':
+            return {...state, isRefreshing: true};
+        case 'CREATE_ARTICLE_SUCCESS':
+            return {...state, articleList: [...state.articleList, action.articleData], isRefreshing: false};
+        case 'CREATE_ARTICLE_ERROR':
+            return {...state, isRefreshing: false};
+
         case 'SAVE_ARTICLE_BEGIN':
             return {...state, isRefreshing: true};
         case 'SAVE_ARTICLE_SUCCESS':

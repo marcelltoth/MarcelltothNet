@@ -34,6 +34,23 @@ export interface LoadSingleArticleErrorAction{
 
 export type LoadSingleArticleActions = LoadSingleArticleBeginAction | LoadSingleArticleSuccessAction | LoadSingleArticleErrorAction;
 
+
+export interface CreateArticleBeginAction{
+    type: 'CREATE_ARTICLE_BEGIN';
+}
+
+export interface CreateArticleSuccessAction{
+    type: 'CREATE_ARTICLE_SUCCESS';
+    articleData: ArticleData;
+}
+
+export interface CreateArticleErrorAction{
+    type: 'CREATE_ARTICLE_ERROR';
+}
+
+export type CreateArticleActions = CreateArticleBeginAction | CreateArticleSuccessAction | CreateArticleErrorAction;
+
+
 export interface SaveArticleBeginAction{
     type: 'SAVE_ARTICLE_BEGIN';
 }
@@ -110,8 +127,8 @@ export interface PublishArticleErrorAction{
 export type PublishArticleActions = PublishArticleBeginAction | PublishArticleSuccessAction | PublishArticleErrorAction;
 
 
-export type ArticleActions = LoadArticlesActions | LoadSingleArticleActions | SaveArticleActions 
-    | ArticleChangeActions | ArchiveArticleActions | PublishArticleActions;
+export type ArticleActions = LoadArticlesActions | LoadSingleArticleActions |CreateArticleActions
+    | SaveArticleActions | ArticleChangeActions | ArchiveArticleActions | PublishArticleActions;
 
 
 export const actionCreators = {
@@ -136,6 +153,30 @@ export const actionCreators = {
             }
             catch{
                 dispatch({type: 'LOAD_SINGLE_ARTICLE_ERROR'});
+            }
+        }
+    },
+    createEmptyArticle: () : AsyncAction<CreateArticleActions> => async (dispatch, getState) => { 
+        if(!getState().article.isRefreshing){
+            dispatch({type: 'CREATE_ARTICLE_BEGIN'});
+            try{
+
+                const newArticle : ArticleData = {
+                    id: 0,
+                    title: "Draft article",
+                    thumbnailLocation: "",
+                    thumbnailAltText: "",
+                    tagIds: [],
+                    content: "Draft article content",
+                    publishDate: new Date().toISOString(),
+                    isPublished: false
+                };
+
+                const response = await axios.post<ArticleData>(`https://localhost:13101/v1/article/articles`, newArticle);
+                dispatch({type: 'CREATE_ARTICLE_SUCCESS', articleData: response.data});
+            }
+            catch{
+                dispatch({type: 'CREATE_ARTICLE_ERROR'});
             }
         }
     },
