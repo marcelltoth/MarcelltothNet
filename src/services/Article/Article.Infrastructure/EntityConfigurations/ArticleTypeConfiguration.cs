@@ -31,8 +31,6 @@ namespace MarcellTothNet.Services.Article.Infrastructure.EntityConfigurations
             builder.OwnsOne(a => a.Thumbnail, irm =>
             {
                 irm.Property(p => p.Location)
-                    .HasConversion(v => v.ToString(), v => new Uri(v))
-                    .HasMaxLength(512)
                     .IsRequired();
 
                 irm.Property(p => p.AltText)

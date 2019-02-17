@@ -9,17 +9,17 @@ namespace MarcellTothNet.Services.Article.Domain.ArticleAggregate
     /// </summary>
     public class ImageReference : ValueObject
     {
-        public ImageReference(Uri location, string altText)
+        public ImageReference(string location, string altText)
         {
             Location = location;
             AltText = altText;
         }
 
         /// <summary>
-        ///     The location of the image. Can be an absolute or a relative Uri.
+        ///     The location of the image. Can be an absolute or a relative Uri, or a Data URI.
         ///     If the image is external, use an absolute uri, if it is local, use a relative link.
         /// </summary>
-        public Uri Location { get; }
+        public string Location { get; }
 
         /// <summary>
         ///     The alternate text of the image. Used by screen readers.

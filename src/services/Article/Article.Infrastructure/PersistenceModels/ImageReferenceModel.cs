@@ -8,7 +8,7 @@ namespace MarcellTothNet.Services.Article.Infrastructure.PersistenceModels
     /// </summary>
     public class ImageReferenceModel
     {
-        public Uri Location { get; set; }
+        public string Location { get; set; }
 
         public string AltText { get; set; }
 

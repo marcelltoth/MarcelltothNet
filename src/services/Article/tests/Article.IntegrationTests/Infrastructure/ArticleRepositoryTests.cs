@@ -44,7 +44,7 @@ namespace MarcellTothNet.Services.Article.IntegrationTests.Infrastructure
         // Create a test article
 
         private static readonly string _testArticleTitle = "Test article";
-        private static readonly Uri _testImageLocation = new Uri("relative-uri.png", UriKind.Relative);
+        private static readonly string _testImageLocation = "relative-uri.png";
         private static readonly string _testImageAltText = "image-alt-text";
         private static string _testContent = "Test Content";
         private static readonly ImageReference _testImageReference = new ImageReference(_testImageLocation, _testImageAltText);

@@ -16,7 +16,7 @@ namespace MarcellTothNet.Services.Article.UnitTests.Domain
             Id = 3,
             Content = "Test content",
             PublishTime = DateTimeOffset.FromUnixTimeSeconds(10240),
-            Thumbnail = new ImageReference(new Uri("thumbnail.png", UriKind.Relative), "Test thumbnail"),
+            Thumbnail = new ImageReference("thumbnail.png", "Test thumbnail"),
             Title = "Test title"
         };
 

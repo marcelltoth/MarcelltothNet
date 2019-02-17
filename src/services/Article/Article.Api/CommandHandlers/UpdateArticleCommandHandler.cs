@@ -25,7 +25,7 @@ namespace MarcellTothNet.Services.Article.Api.CommandHandlers
             article.Content = request.Content;
             article.PublishTime = request.PublishDate;
             article.Title = request.Title;
-            article.Thumbnail = new ImageReference(new Uri(request.ThumbnailLocation), request.ThumbnailAltText);
+            article.Thumbnail = new ImageReference(request.ThumbnailLocation, request.ThumbnailAltText);
             article.ReplaceTagIds(request.TagIds);
             
             _repository.Update(article);
