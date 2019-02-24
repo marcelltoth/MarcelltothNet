@@ -13,10 +13,14 @@ services:
       context: .
       dockerfile: src/services/Identity/Identity.Api/Dockerfile
 
-
   admin.gateway:
     image: ${DOCKER_REGISTRY-}admingateway
     build:
       context: .
       dockerfile: src\api-gateways\AdminGateway\Dockerfile
 
+  spa.aggregator:
+    image: ${DOCKER_REGISTRY-}spaaggregator
+    build:
+      context: .
+      dockerfile: src\api-gateways\SpaAggregator\Dockerfile
