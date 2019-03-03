@@ -30,7 +30,7 @@ export const HighlightedArticleThumbnail : React.FC<HighlightedArticleThumbnailP
         </ArticleLink>
         <div className={style.overlay}>
             <div className={style.tags}>
-                {tags.map(t => <TagBadge tag={t} />)}
+                {tags.map(t => <TagBadge key={t.id} tag={t} />)}
             </div>
             <ArticleTitleNegative title={title} articleId={articleId} />
             <ArticleMetaList className={style.meta}>

@@ -30,7 +30,7 @@ export const ArticlePreviewPanel : React.FC<ArticlePreviewPanelProps> = ({articl
             </ArticleLink>
             <div className={style.info}>
                 <div className={style.tags}>
-                    {tags.map(t => <TagBadge tag={t} />)}
+                    {tags.map(t => <TagBadge key={t.id} tag={t} />)}
                 </div>
                 <ArticleTitle title={title} articleId={articleId} />
                 <ArticleMetaList>
