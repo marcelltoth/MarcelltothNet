@@ -1,0 +1,23 @@
+@import 'src/variables';
+
+.meta{
+    margin-bottom: 10px;
+
+    li{
+        color: $primary-color;
+        display: inline-block;
+        font-size: 12px;
+        text-transform: uppercase;
+
+        &:not(:last-child)::after{
+            content: '•';
+            display: inline-block;
+            padding-left: 5px;
+            padding-right: 5px;
+        }
+
+        &:global(.primary){
+            font-weight: 700;
+        }
+    }
+}

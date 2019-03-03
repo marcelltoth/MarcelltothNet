@@ -1,0 +1,37 @@
+
+.article-preview-panel{
+
+    height: 200px;
+    position: relative;
+    margin-bottom: 30px;
+
+    .img-link{
+        display: block;
+        overflow: hidden;
+        width: 40%;
+        float: left;
+        height: 100%;
+        position: relative;
+
+        img{
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            transition: 1s transform;
+        }
+
+        &:hover img{
+            transform: scale(1.1);
+        }
+    }
+
+    .info{
+        margin: 0px 0px 0px calc(40% + 30px);
+        padding: 0;
+        position: relative;
+
+        .tags{
+            margin-bottom: 10px;
+        }
+    }
+}

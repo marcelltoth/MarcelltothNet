@@ -2,6 +2,9 @@ import * as React from 'react';
 import { ArticleLink, TagLink } from '../../../common/links';
 import {format} from 'date-fns';
 import style from './highlighted-article-thumbnail.module.scss';
+import { TagBadge } from '../tag-badge';
+import { ArticleTitleNegative } from '../article-title';
+import { ArticleMetaList } from '../article-meta-list';
 
 interface TagData{
     title: string;
@@ -29,24 +32,11 @@ export const HighlightedArticleThumbnail : React.FC<HighlightedArticleThumbnailP
             <div className={style.tags}>
                 {tags.map(t => <TagBadge tag={t} />)}
             </div>
-            <h3 className={style.title}>
-                <ArticleLink id={articleId}>{title}</ArticleLink>
-            </h3>
-            <ul className={style.meta}>
-                <li className={style.primary}>{author}</li>
+            <ArticleTitleNegative title={title} articleId={articleId} />
+            <ArticleMetaList className={style.meta}>
+                <li className="primary">{author}</li>
                 <li>{format(publishDate, 'MMMM D, YYYY')}</li>
-            </ul>
+            </ArticleMetaList>
         </div>
     </div>
-}
-
-
-interface TagBadgeProps{
-    tag: TagData;
-}
-
-export const TagBadge : React.FC<TagBadgeProps> = ({tag: {title, id}}) => {
-    return (
-        <TagLink id={id} title={title} className="badge badge-danger">#{title}</TagLink>
-    )
 }

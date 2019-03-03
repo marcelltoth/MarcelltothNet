@@ -1,0 +1,18 @@
+@import 'src/variables';
+
+.title{
+    a {
+        font-size: 18px;
+        color: $primary-color;
+        &:hover, &:focus{
+            color: $accent-color;
+        }
+    }
+    margin-bottom: 14px;
+
+    &.negative{
+        a{
+            color: #fff;
+        }
+    }
+}
