@@ -4,3 +4,19 @@
         margin-right: 5px;
     }
 }
+
+.flair-holder{
+    margin-right: 20px;
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    > *{
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
+    :global(.LI-badge-container){
+        width: 100% !important;
+    }
+}

@@ -3,6 +3,8 @@ import { Container, Row, Col } from 'reactstrap';
 import { HighlightedArticlePanel, HighlightedArticleThumbnail } from './highlighted-articles';
 import { SectionTitle } from '../../common';
 import { ArticlePreviewPanel } from './article-preview';
+import { GithubFlair, StackoverflowFlair, LinkedInFlair } from './flairs';
+import styles from './home.module.scss';
 
 export const HomePage : React.FC = () => {
     return (<>
@@ -42,7 +44,7 @@ export const HomePage : React.FC = () => {
         <section>
             <Container>
                 <Row>
-                    <Col md={8}>
+                    <Col lg={8}>
                         <SectionTitle title="Older posts" />
                         
                         <ArticlePreviewPanel 
@@ -74,6 +76,14 @@ export const HomePage : React.FC = () => {
                             publishDate={new Date()}
                             tags={[{title: "csharp", id: 3}]}
                             />
+                    </Col>
+                    <Col lg={4}>
+                        <SectionTitle title="Platforms" />
+                        <div className={styles['flair-holder']}>
+                            <GithubFlair />
+                            <StackoverflowFlair />
+                            <LinkedInFlair />
+                        </div>
                     </Col>
                 </Row>
             </Container>
