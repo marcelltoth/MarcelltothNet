@@ -11,7 +11,7 @@ import { SearchComponent } from './SearchComponent';
 export class TopRow extends React.PureComponent{
     render(){
         return <Container className={styles.TopRow}>
-            <div className={styles.LeftSide}>
+            <div className={styles.left}>
                 <LinkPanel>
                     <ExternalLink url="https://www.linkedin.com/in/marcell-tóth-38a80815b/">
                         <FontAwesomeIcon icon={faLinkedin} />
@@ -27,7 +27,7 @@ export class TopRow extends React.PureComponent{
             <div className={styles.center}>
                 <Title />
             </div>
-            <div className={styles.RightSide}>
+            <div className={styles.right}>
                 <LinkPanel>
                     <SearchComponent />
                 </LinkPanel>

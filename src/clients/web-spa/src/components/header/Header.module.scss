@@ -10,9 +10,21 @@
     align-items: center;
     padding-bottom: 15px;
     padding-top: 10px;
-
     
     @include horizontal-line();
+
+    .left{
+        width: 150px;
+    }
+    
+    .center{
+        text-align: center;
+    }
+
+    .right{
+        width: 150px;
+        text-align: right;
+    }
 
 }
 
@@ -38,9 +50,6 @@ ul.LinkPanel{
     }
 }
 
-.center{
-    text-align: center;
-}
 
 .titleText{
     font-family: 'Montserrat', 'Muli', 'sans-serif';
