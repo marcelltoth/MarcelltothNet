@@ -10,13 +10,20 @@ export const StackoverflowFlair : React.FC = () => {
     </a>;
 }
 
-export const LinkedInFlair : React.FC = () => {
+export const LinkedInFlair : React.FC = React.memo(() => {
+    React.useEffect(() => {
+        const linkedinRenderCallback = (window as any).LIRenderAll;
+        if(linkedinRenderCallback){
+            linkedinRenderCallback();
+        }
+    });
+
     return <div className="LI-profile-badge"  data-version="v1" data-size="large" data-locale="en_US" data-type="horizontal" data-theme="light" data-vanity="marcell-tóth-38a80815b">
         <a className="LI-simple-link" href='https://hu.linkedin.com/in/marcell-t%C3%B3th-38a80815b?trk=profile-badge'>
             Marcell Tóth
         </a>
     </div>;
-}
+});
 
 export const GithubFlair : React.FC = () => {
     return <div 
