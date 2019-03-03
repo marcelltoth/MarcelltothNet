@@ -1,0 +1,40 @@
+
+.highlighted-article-thumbnail{
+    > a{
+        display: block;
+        position: relative;
+        overflow: hidden;
+        
+
+        .thumbnail-image{
+            width: 100%;
+            transition: 1s transform;
+        }
+
+        &:hover .thumbnail-image{
+            transform: scale(1.1);
+        }
+
+        &::after{
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            background: linear-gradient(rgba(27, 28, 30, 0) 0, rgba(27, 28, 30, 0.8) 90%);
+        }
+    }
+
+    > .overlay{
+        position: absolute;
+        margin: 0px;
+        padding: 0px 5%;
+        z-index: 20;
+        bottom: 5%;
+
+        > .tags{
+            margin-bottom: 10px;
+        }
+    }
+}
