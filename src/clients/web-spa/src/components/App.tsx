@@ -1,7 +1,6 @@
 import * as React from 'react';
 import styles from './App.module.scss';
 import { Header } from './header';
-import { Container } from 'reactstrap';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { HomePage } from './pages/home/home-page';
 import { NotFoundPage } from './pages/not-found';

@@ -1,7 +1,7 @@
 @import '../../variables';
 
 @mixin horizontal-line(){
-    border-bottom: 1px solid #e2e6ea;
+    border-bottom: 1px solid $separator-color;
 }
 
 .TopRow{

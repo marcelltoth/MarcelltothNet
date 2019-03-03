@@ -1,0 +1,30 @@
+@import 'src/variables';
+
+.section-title{
+    position: relative;
+    margin-bottom: 20px;
+
+    h2{
+        position: relative;
+        display: inline-block;
+        background-color: #fff;
+        font-size: 16px;
+        text-transform: uppercase;
+        margin-top: 0px;
+        margin-bottom: 0px;
+        padding-right: 10px;
+        z-index: 20;
+    }
+
+    &::after {
+        content: "";
+        display: inline-block;
+        height: 2px;
+        background-color: $separator-color;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 10px;
+        z-index: 10;
+    }
+}
