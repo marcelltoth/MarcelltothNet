@@ -1,0 +1,21 @@
+@import 'src/variables';
+
+.tag-list{
+    > li{
+        border-bottom: 1px solid $separator-color;
+
+        > a{
+            display: block;
+            padding: 12px 0;
+            text-transform: uppercase;
+            font-weight: 700;
+
+            > span{
+                float: right;
+                margin-left: 15px;
+                font-size: 14px;
+                color: $faded-color;
+            }
+        }
+    }
+}

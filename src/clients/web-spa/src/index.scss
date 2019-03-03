@@ -18,6 +18,10 @@ code {
 
 section{
   margin-bottom: 30px;
+
+  section{
+    margin-bottom: 20px; // nested sections only get pushed down by 20px
+  }
 }
 
 a {

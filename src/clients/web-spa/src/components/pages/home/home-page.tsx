@@ -5,6 +5,7 @@ import { SectionTitle } from '../../common';
 import { ArticlePreviewPanel } from './article-preview';
 import { GithubFlair, StackoverflowFlair, LinkedInFlair } from './flairs';
 import styles from './home.module.scss';
+import { TagList, TagListItem } from './tag-list';
 
 export const HomePage : React.FC = () => {
     return (<>
@@ -78,12 +79,22 @@ export const HomePage : React.FC = () => {
                             />
                     </Col>
                     <Col lg={4}>
-                        <SectionTitle title="Platforms" />
-                        <div className={styles['flair-holder']}>
-                            <GithubFlair />
-                            <StackoverflowFlair />
-                            <LinkedInFlair />
-                        </div>
+                        <section>
+                            <SectionTitle title="Platforms" />
+                            <div className={styles['flair-holder']}>
+                                <GithubFlair />
+                                <StackoverflowFlair />
+                                <LinkedInFlair />
+                            </div>
+                        </section>
+                        <section>
+                            <SectionTitle title="Tags" />
+                            <TagList>
+                                <TagListItem id={3} title="csharp" articleCount={12} />
+                                <TagListItem id={4} title="performance-optimization" articleCount={8} />
+                                <TagListItem id={5} title="frontend" articleCount={3} />
+                            </TagList>
+                        </section>
                     </Col>
                 </Row>
             </Container>
