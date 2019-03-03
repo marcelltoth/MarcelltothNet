@@ -27,6 +27,60 @@ a {
   }
 }
 
-ul{
-  margin-bottom: 0;
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Montserrat', sans-serif;
+  color: $primary-color;
+  font-weight: 700;
+  margin: 0px 0px 15px;
+}
+
+h1 {
+  font-size: 32.437px;
+}
+
+h2 {
+  font-size: 25.629px;
+}
+
+h3 {
+  font-size: 20.25px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {}
+
+p {
+  margin: 0px 0px 20px;
+}
+
+a {
+  color: $primary-color;
+  -webkit-transition: 0.2s color;
+  transition: 0.2s color;
+}
+
+a:hover, a:focus {
+  color: $accent-color;
+  text-decoration: none;
+  outline: none;
+}
+
+::-moz-selection {
+  background-color: $accent-color;
+  color: #FFF;
+}
+
+::selection {
+  background-color: $accent-color;
+  color: #FFF;
+}
+
+ul, ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }

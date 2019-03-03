@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Col, Row } from 'reactstrap';
+import style from './home.module.scss';
 
 export const HighlightedArticlePanel : React.FC = ({children}) => {
     const childrenComponents = React.Children.toArray(children);
@@ -11,13 +12,13 @@ export const HighlightedArticlePanel : React.FC = ({children}) => {
         return childrenComponents[0] as React.ReactElement;
 
     return (
-        <Row>
-            <Col md={8}>
+        <Row className={style['highlighted-article-panel']}>
+            <Col md={8} className={style.left}>
                 <div>
                     {childrenComponents[0]}
                 </div>
             </Col>
-            <Col md={4}>
+            <Col md={4} className={style.right}>
                 <div>
                     {childrenComponents[1]}
                 </div>

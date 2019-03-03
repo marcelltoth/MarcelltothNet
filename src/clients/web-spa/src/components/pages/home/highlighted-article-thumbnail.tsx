@@ -2,7 +2,7 @@ import * as React from 'react';
 import { ArticleLink, TagLink } from '../../common/links';
 import { Badge } from 'reactstrap';
 import {format} from 'date-fns';
-import style from './home.module.scss';
+import style from './highlighted-article-thumbnail.module.scss';
 
 interface TagData{
     title: string;
@@ -30,9 +30,9 @@ export const HighlightedArticleThumbnail : React.FC<HighlightedArticleThumbnailP
             <div className={style.tags}>
                 {tags.map(t => <TagBadge tag={t} />)}
             </div>
-            <div className={style.title}>
+            <h3 className={style.title}>
                 <ArticleLink id={articleId}>{title}</ArticleLink>
-            </div>
+            </h3>
             <ul className={style.meta}>
                 <li className={style.primary}>{author}</li>
                 <li>{format(publishDate, 'MMMM D, YYYY')}</li>

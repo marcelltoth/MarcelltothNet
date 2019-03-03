@@ -24,7 +24,7 @@ export class TopRow extends React.PureComponent{
                     </ExternalLink>
                 </LinkPanel>
             </div>
-            <div className={styles.Center}>
+            <div className={styles.center}>
                 <Title />
             </div>
             <div className={styles.RightSide}>
