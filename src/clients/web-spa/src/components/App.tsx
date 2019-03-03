@@ -11,14 +11,12 @@ class App extends React.Component<any> {
     return (
       <div className={styles.App}>
         <Header />
-        <Container>
-          <BrowserRouter>
-            <Switch>
-              <Route path="/" exact component={HomePage} />
-              <Route component={NotFoundPage} />
-            </Switch>
-          </BrowserRouter>
-        </Container>
+        <BrowserRouter>
+          <Switch>
+            <Route path="/" exact component={HomePage} />
+            <Route component={NotFoundPage} />
+          </Switch>
+        </BrowserRouter>
       </div>
     );
   }

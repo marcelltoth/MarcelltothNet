@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Col, Row } from 'reactstrap';
-import style from './home.module.scss';
+import style from './highlighted-article-panel.module.scss';
 
 export const HighlightedArticlePanel : React.FC = ({children}) => {
     const childrenComponents = React.Children.toArray(children);

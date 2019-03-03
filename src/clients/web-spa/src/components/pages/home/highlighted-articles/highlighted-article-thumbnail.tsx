@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { ArticleLink, TagLink } from '../../common/links';
-import { Badge } from 'reactstrap';
+import { ArticleLink, TagLink } from '../../../common/links';
 import {format} from 'date-fns';
 import style from './highlighted-article-thumbnail.module.scss';
 
