@@ -4,6 +4,9 @@ import styles from './App.module.scss';
 import { Header } from './header';
 import { Container } from 'reactstrap';
 import { HighlightedPostHolder } from './highlighted-post-holder';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { HomePage } from './pages/home';
+import { NotFoundPage } from './pages/not-found';
 
 class App extends React.Component<any> {
   render() {
@@ -11,7 +14,12 @@ class App extends React.Component<any> {
       <div className={styles.App}>
         <Header />
         <Container>
-          <HighlightedPostHolder />
+          <BrowserRouter>
+            <Switch>
+              <Route path="/" exact component={HomePage} />
+              <Route component={NotFoundPage} />
+            </Switch>
+          </BrowserRouter>
         </Container>
       </div>
     );
