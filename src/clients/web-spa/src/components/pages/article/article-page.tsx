@@ -4,6 +4,8 @@ import { Container, Row, Col } from 'reactstrap';
 import { Header } from './header';
 import { Sidebar } from '../common/sidebar';
 import { SharingPanel } from './sharing-panel';
+import {testArticleContent} from './test-article';
+import { ContentRenderer } from './content-renderer';
 
 interface RouteParams{
     id: string;
@@ -31,7 +33,7 @@ export class ArticlePage extends React.PureComponent<ArticlePageProps>{
                         <Col md={8}>
                             <SharingPanel link={window.location.href} />
                             <article>
-                                Article content
+                                <ContentRenderer content={testArticleContent} />
                             </article>
                         </Col>
                         <Col md={4}>
