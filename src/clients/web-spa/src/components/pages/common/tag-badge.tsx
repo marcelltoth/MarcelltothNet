@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { TagLink } from "../../common";
-import styles from './home.module.scss';
+import { TagLink } from "./links";
+import styles from './common.module.scss';
 import classNames from 'classnames';
 
 interface TagData{

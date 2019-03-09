@@ -1,11 +1,9 @@
 import * as React from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import { HighlightedArticlePanel, HighlightedArticleThumbnail } from './highlighted-articles';
-import { SectionTitle } from '../../common';
+import { SectionTitle } from '../common';
 import { ArticlePreviewPanel } from './article-preview';
-import { GithubFlair, StackoverflowFlair, LinkedInFlair } from './flairs';
-import styles from './home.module.scss';
-import { TagList, TagListItem } from './tag-list';
+import { Sidebar } from '../common/sidebar';
 
 export const HomePage : React.FC = () => {
     return (<>
@@ -79,22 +77,7 @@ export const HomePage : React.FC = () => {
                             />
                     </Col>
                     <Col lg={4}>
-                        <section>
-                            <SectionTitle title="Platforms" />
-                            <div className={styles['flair-holder']}>
-                                <GithubFlair />
-                                <StackoverflowFlair />
-                                <LinkedInFlair />
-                            </div>
-                        </section>
-                        <section>
-                            <SectionTitle title="Tags" />
-                            <TagList>
-                                <TagListItem id={3} title="csharp" articleCount={12} />
-                                <TagListItem id={4} title="performance-optimization" articleCount={8} />
-                                <TagListItem id={5} title="frontend" articleCount={3} />
-                            </TagList>
-                        </section>
+                        <Sidebar />
                     </Col>
                 </Row>
             </Container>

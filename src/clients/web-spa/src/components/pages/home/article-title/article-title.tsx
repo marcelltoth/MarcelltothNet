@@ -1,6 +1,6 @@
 import * as React from 'react';
 import style from './article-title.module.scss';
-import { ArticleLink } from '../../../common';
+import { ArticleLink } from '../../common';
 import classNames from 'classnames';
 
 interface ArticleTitleProps{

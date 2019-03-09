@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styles from './tag-list.module.scss';
-import { TagLink } from '../../../common';
+import { TagLink } from '../../links';
 
 interface TagData{
     id: number;

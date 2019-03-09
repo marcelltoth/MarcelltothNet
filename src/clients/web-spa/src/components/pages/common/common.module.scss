@@ -28,3 +28,9 @@
         z-index: 10;
     }
 }
+
+.tag-badge{
+    &:not(:last-child){
+        margin-right: 5px;
+    }
+}

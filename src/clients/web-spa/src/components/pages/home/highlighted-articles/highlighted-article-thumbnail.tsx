@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { ArticleLink, TagLink } from '../../../common/links';
+import { ArticleLink, TagLink } from '../../common/links';
 import {format} from 'date-fns';
 import style from './highlighted-article-thumbnail.module.scss';
-import { TagBadge } from '../tag-badge';
+import { TagBadge } from '../../common/tag-badge';
 import { ArticleTitleNegative } from '../article-title';
 import { ArticleMetaList } from '../article-meta-list';
 
