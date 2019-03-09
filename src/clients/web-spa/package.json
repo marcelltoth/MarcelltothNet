@@ -27,6 +27,7 @@
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.5",
+    "react-social-sharing": "^3.0.1",
     "reactstrap": "^6.5.0",
     "speakingurl": "^14.0.1",
     "typescript": "^3.1.6"

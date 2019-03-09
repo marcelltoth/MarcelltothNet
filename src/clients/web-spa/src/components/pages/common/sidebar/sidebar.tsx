@@ -4,6 +4,7 @@ import { GithubFlair, StackoverflowFlair, LinkedInFlair } from './flairs';
 import { TagList, TagListItem } from '.';
 import styles from './sidebar.module.scss';
 
+
 export const Sidebar : React.FC = () => {
     return (<>
         <section>
