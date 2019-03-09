@@ -1,9 +1,8 @@
 import * as React from 'react';
 
 import style from './article-preview.module.scss';
-import { ArticleLink, TagBadge } from '../../common';
+import { ArticleLink, TagBadge, ArticleMetaList } from '../../common';
 import { ArticleTitle } from '../article-title';
-import { ArticleMetaList } from '../article-meta-list';
 import { format } from 'date-fns';
 
 interface TagData{
