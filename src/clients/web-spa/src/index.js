@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter,} from 'react-router-dom';
 
 import 'bootstrap/dist/css/bootstrap.css';
 import App from './components/App';
@@ -14,7 +15,14 @@ serviceWorker.unregister();
 
 
 const render = (Component) => {
-    return ReactDOM.render(<Component />, document.getElementById('root'));
+
+    const tree = (
+        <BrowserRouter>
+            <Component />
+        </BrowserRouter>
+    );
+
+    return ReactDOM.render(tree, document.getElementById('root'));
 }
 
 render(App);

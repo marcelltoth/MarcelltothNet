@@ -1,0 +1,29 @@
+
+$footer-color: #97989b;
+
+.footer{
+    color: $footer-color;
+    background-color: #1b1c1e;
+    margin-top: 40px;
+    padding-top: 80px;
+    padding-bottom: 40px;
+
+    .bottom-row{
+        margin-top: 30px;
+        padding-top: 30px;
+        border-top: 1px solid #323335
+    }
+
+    a{
+        color: $footer-color;
+    }
+}
+
+.nav{
+    text-align: right;
+
+    li{
+        display: inline-block;
+        margin-right: 10px;
+    }
+}

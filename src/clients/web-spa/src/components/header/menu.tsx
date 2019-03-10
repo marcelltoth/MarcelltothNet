@@ -18,7 +18,7 @@ export class Menu extends React.Component{
                     <MenuItem title="Blog" />
                     <MenuItem title="Neptun Lite" />
                 </MenuItem>
-                <MenuItem title="Contacts" />
+                <MenuItem title="Contact Me" />
             </ul>
         </Container>
     }
