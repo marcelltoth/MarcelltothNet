@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Container from 'reactstrap/lib/Container';
-import styles from './Header.module.scss';
+import styles from './header.module.scss';
 
 export class Menu extends React.Component{
     render(){

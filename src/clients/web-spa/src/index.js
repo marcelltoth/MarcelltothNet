@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter,} from 'react-router-dom';
 
 import 'bootstrap/dist/css/bootstrap.css';
-import App from './components/App';
+import App from './components/app';
 import './index.scss';
 
 import * as serviceWorker from './serviceWorker';
@@ -28,8 +28,8 @@ const render = (Component) => {
 render(App);
 
 if(module.hot){
-    module.hot.accept('./components/App', () => {
-        const NextApp = require('./components/App').default;
+    module.hot.accept('./components/app', () => {
+        const NextApp = require('./components/app').default;
         render(NextApp);
     });
 }

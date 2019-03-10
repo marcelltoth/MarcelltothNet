@@ -1,5 +1,5 @@
 import * as React from 'react';
-import styles from './Header.module.scss';
+import styles from './header.module.scss';
 
 export class LinkPanel extends React.Component{
     render(){

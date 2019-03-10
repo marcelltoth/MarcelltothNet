@@ -1,5 +1,5 @@
 import * as React from 'react';
-import styles from './Header.module.scss';
+import styles from './header.module.scss';
 
 export class Title extends React.Component{
     render(){

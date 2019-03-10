@@ -1,12 +1,12 @@
 import * as React from 'react';
-import {Container, Row, Col} from 'reactstrap';
+import {Container} from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faStackOverflow, faLinkedin, faGithub} from '@fortawesome/free-brands-svg-icons';
-import { ExternalLink } from '../SocialLink';
-import { LinkPanel } from './LinkPanel';
-import styles from './Header.module.scss';
-import { Title } from './Title';
-import { SearchComponent } from './SearchComponent';
+import { ExternalLink } from '../social-link';
+import { LinkPanel } from './link-panel';
+import styles from './header.module.scss';
+import { Title } from './title';
+import { SearchComponent } from './search-component';
 
 export class TopRow extends React.PureComponent{
     render(){

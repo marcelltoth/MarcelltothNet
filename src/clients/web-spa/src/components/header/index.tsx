@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { TopRow } from './TopRow';
+import { TopRow } from './top-row';
 import { Menu } from './menu';
 
 
