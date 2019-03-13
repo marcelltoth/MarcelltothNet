@@ -1,0 +1,20 @@
+@import 'src/variables';
+
+.page-header-wide{
+    position: relative;
+    margin: 0;
+    padding-top: 120px;
+    padding-bottom: 80px;
+    background-color: $page-header-background-color;
+
+    h1{
+        font-size: 40px;
+        color: $page-header-color;
+        text-transform: uppercase;
+    }
+
+    .lead{
+        font-size: 20px;
+        color: $page-header-color;
+    }
+}
