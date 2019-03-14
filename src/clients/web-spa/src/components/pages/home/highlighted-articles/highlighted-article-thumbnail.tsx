@@ -1,9 +1,8 @@
 import * as React from 'react';
-import { ArticleLink, ArticleMetaList } from '../../common';
+import { ArticleLink, ArticleMetaList, ArticleTitleNegative } from '../../common';
 import {format} from 'date-fns';
 import style from './highlighted-article-thumbnail.module.scss';
 import { TagBadge } from '../../common/tag-badge';
-import { ArticleTitleNegative } from '../article-title';
 
 interface TagData{
     title: string;

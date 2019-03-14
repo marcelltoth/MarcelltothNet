@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import { HighlightedArticlePanel, HighlightedArticleThumbnail } from './highlighted-articles';
-import { SectionTitle } from '../common';
-import { ArticlePreviewPanel } from './article-preview';
+import { SectionTitle, ArticlePreviewPanel } from '../common';
 import { Sidebar } from '../common/sidebar';
 
 export const HomePage : React.FC = () => {
