@@ -2,7 +2,7 @@ import * as React from 'react';
 import styles from './app.module.scss';
 import { Header } from './header';
 import { Switch, Route } from 'react-router-dom';
-import { HomePage, NotFoundPage, ArticlePage, TagPage, PrivacyPolicyPage } from './pages';
+import * as Pages from './pages';
 import { Footer } from './footer';
 
 class App extends React.Component<any> {
@@ -11,11 +11,12 @@ class App extends React.Component<any> {
       <div className={styles.App}>
           <Header />
           <Switch>
-            <Route path="/" exact component={HomePage} />
-            <Route path="/privacy-policy" exact component={PrivacyPolicyPage} />
-            <Route path="/article/:id" component={ArticlePage} />
-            <Route path="/tag/:id" component={TagPage} />
-            <Route component={NotFoundPage} />
+            <Route path="/" exact component={Pages.HomePage} />
+            <Route path="/privacy-policy" exact component={Pages.PrivacyPolicyPage} />
+            <Route path="/contact" exact component={Pages.ContactPage} />
+            <Route path="/article/:id" component={Pages.ArticlePage} />
+            <Route path="/tag/:id" component={Pages.TagPage} />
+            <Route component={Pages.NotFoundPage} />
           </Switch>
           <Footer />
       </div>

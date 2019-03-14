@@ -4,8 +4,11 @@ import { GithubFlair, StackoverflowFlair, LinkedInFlair } from './flairs';
 import { TagList, TagListItem } from '.';
 import styles from './sidebar.module.scss';
 
+interface SidebarProps{
+    showPopularTags?: boolean;
+}
 
-export const Sidebar : React.FC = () => {
+export const Sidebar : React.FC<SidebarProps> = ({showPopularTags = true}) => {
     return (<>
         <section>
             <SectionTitle title="Platforms" />
@@ -15,13 +18,13 @@ export const Sidebar : React.FC = () => {
                 <LinkedInFlair />
             </div>
         </section>
-        <section>
+        {showPopularTags && <section>
             <SectionTitle title="Tags" />
             <TagList>
                 <TagListItem id={3} title="csharp" articleCount={12} />
                 <TagListItem id={4} title="performance-optimization" articleCount={8} />
                 <TagListItem id={5} title="frontend" articleCount={3} />
             </TagList>
-        </section>
+        </section>}
     </>)
 }

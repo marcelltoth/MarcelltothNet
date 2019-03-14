@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Container from 'reactstrap/lib/Container';
 import styles from './header.module.scss';
+import { Link } from 'react-router-dom';
 
 export class Menu extends React.Component{
     render(){
@@ -18,7 +19,7 @@ export class Menu extends React.Component{
                     <MenuItem title="Blog" />
                     <MenuItem title="Neptun Lite" />
                 </MenuItem>
-                <MenuItem title="Contact Me" />
+                <MenuItem title="Contact Me" target="/contact" />
             </ul>
         </Container>
     }
@@ -26,14 +27,15 @@ export class Menu extends React.Component{
 
 interface MenuItemProps{
     title: string;
+    target?: string;
 }
 
 class MenuItem extends React.Component<MenuItemProps>{
     render(){
-        const {title, children} = this.props;
+        const {title, target, children} = this.props;
         const hasDropdown = React.Children.count(children) > 0;
         return <li>
-            <a href="#">{title}</a>
+            {target ? <Link to={target}>{title}</Link> : <a href="#">{title}</a>}
             {hasDropdown && <div className={styles.dropdown}>
                 <div className={styles.dropdownBody}>
                     <ul>
