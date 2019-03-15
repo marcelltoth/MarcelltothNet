@@ -6,7 +6,7 @@ export class Title extends React.Component{
     render(){
         return <Link to="/" className={styles.titleText}>
             <span>Marcell Toth</span>
-            <small>Full stack developer, exploring the world of .NET and friends</small>
+            <small>Full stack developer exploring the world of .NET, React and their friends</small>
         </Link>
     }
 }
