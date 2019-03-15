@@ -5,3 +5,4 @@ export * from './article-meta-list';
 export * from './article-preview';
 export * from './article-title';
 export * from './sidebar';
+export * from './content-renderer';

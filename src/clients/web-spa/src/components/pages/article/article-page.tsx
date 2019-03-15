@@ -2,10 +2,9 @@ import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
 import { Container, Row, Col } from 'reactstrap';
 import { Header } from './header';
-import { Sidebar } from '../common/sidebar';
+import { Sidebar, ContentRenderer } from '../common';
 import { SharingPanel } from './sharing-panel';
 import {testArticleContent} from './test-article';
-import { ContentRenderer } from './content-renderer';
 
 interface RouteParams{
     id: string;

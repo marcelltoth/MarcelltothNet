@@ -50,5 +50,8 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "raw-loader": "^1.0.0"
+  }
 }
