@@ -20,7 +20,7 @@ namespace MarcellTothNet.Services.Article.Api.Queries
             {
                 // Load all the articles
                 IList<ArticleViewModel> articleViewModels = (await connection.QueryAsync<ArticleViewModel>(
-                    @"SELECT [Articles].[Id], [Articles].[Title], [Articles].[PublishTime] as PublishDate, [Articles].[Thumbnail_Location] as ThumbnailLocation, [Articles].[Thumbnail_AltText] as ThumbnailAltText, [IsPublished]
+                    @"SELECT [Articles].[Id], [Articles].[Title], [Articles].[PublishTime] as PublishDate, [Articles].[Thumbnail_AltText] as ThumbnailAltText, [IsPublished]
                           FROM [Articles];")).AsList();
 
                 // Load all the tag mappings

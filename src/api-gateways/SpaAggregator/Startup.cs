@@ -1,14 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Net.Http;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Http;
+using SpaAggregator.Infrastructure.Options;
+using SpaAggregator.Services.DownstreamClients;
 
 namespace SpaAggregator
 {
@@ -29,6 +29,18 @@ namespace SpaAggregator
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
+
+            ApiLocations baseAddresses = Configuration.GetSection("ApiLocations").Get<ApiLocations>();
+            services.AddHttpClient<ArticleApiClient>(client =>
+            {
+                client.BaseAddress = new Uri(baseAddresses.ArticleApi);
+            }).ConfigurePrimaryHttpMessageHandler(() =>
+            {
+                return new HttpClientHandler
+                {
+                    ServerCertificateCustomValidationCallback = (message, certificate2, arg3, arg4) => true // TODO
+                };
             });
 
             services.AddCors();
