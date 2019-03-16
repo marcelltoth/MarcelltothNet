@@ -1,5 +1,5 @@
 
-interface ArticleDto{
+export interface ArticleDto{
     id: number;
     title: string;
     publishDate: string;

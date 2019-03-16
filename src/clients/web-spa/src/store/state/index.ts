@@ -1,7 +1,10 @@
 import {ArticlesState} from './articles';
 import {TagsState} from './tags';
+import { UiState } from './ui';
+import { DeepReadonly } from 'ts-essentials';
 
-export interface ApplicationState{
+export type ApplicationState = DeepReadonly<{
     articles: ArticlesState;
     tags: TagsState;
-}
+    ui: UiState;
+}>;

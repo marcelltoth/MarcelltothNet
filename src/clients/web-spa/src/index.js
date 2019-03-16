@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter,} from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { BrowserRouter} from 'react-router-dom';
 
 import 'bootstrap/dist/css/bootstrap.css';
 import App from './components/app';
@@ -19,9 +20,11 @@ const store = buildStore();
 const render = (Component) => {
 
     const tree = (
-        <BrowserRouter>
-            <Component />
-        </BrowserRouter>
+        <Provider store={store}>
+            <BrowserRouter>
+                <Component />
+            </BrowserRouter>
+        </Provider>
     );
 
     return ReactDOM.render(tree, document.getElementById('root'));

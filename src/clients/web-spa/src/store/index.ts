@@ -4,13 +4,16 @@ import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { rootReducer } from './reducers';
 import thunk from 'redux-thunk';
+import { fetchBasicData } from './actions/basic-data';
 
 
 export function buildStore(){
     const composeEnhancers = composeWithDevTools({
-        // dev tools options
+        actionCreators: {
+            fetchBasicData: fetchBasicData
+        }
     });
-    const store = createStore(rootReducer, /* preloadedState,*/ composeEnhancers(
+    return createStore(rootReducer, /* preloadedState,*/ composeEnhancers(
         applyMiddleware(thunk)
     ));
 }
