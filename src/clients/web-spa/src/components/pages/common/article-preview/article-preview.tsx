@@ -6,7 +6,7 @@ import { ArticleTitle } from '../article-title';
 import { format } from 'date-fns';
 
 interface TagData{
-    title: string;
+    displayName: string;
     id: number;
 }
 

@@ -25,7 +25,7 @@ export class ArticlePage extends React.PureComponent<ArticlePageProps>{
                     title="Some random article which is the first preview"
                     author="Marcell Toth"
                     publishDate={new Date()}
-                    tags={[{title: "csharp", id: 3}]}
+                    tags={[{displayName: "csharp", id: 3}]}
                 />
                 <Container>
                     <Row>

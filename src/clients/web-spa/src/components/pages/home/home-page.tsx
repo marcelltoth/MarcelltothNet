@@ -1,41 +1,40 @@
 import * as React from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import { HighlightedArticlePanel, HighlightedArticleThumbnail } from './highlighted-articles';
-import { SectionTitle, ArticlePreviewPanel } from '../common';
-import { Sidebar } from '../common/sidebar';
+import { SectionTitle, ArticlePreviewPanel, Sidebar } from '../common';
+import { ApplicationState } from '../../../store/state';
+import { selectArticlesOrderedByAgeDesc, ArticleDataDeep } from '../../../store/selectors';
+import { take, slice } from 'lodash-es';
+import { connect } from 'react-redux';
 
-export const HomePage : React.FC = () => {
+interface StateProps{
+    articles: ReadonlyArray<ArticleDataDeep>;
+}
+
+type HomePageImplProps = StateProps;
+
+const fallbackThumbnailLocation = "https://via.placeholder.com/1200x800";
+const HomePageImpl : React.FC<HomePageImplProps> = ({articles}) => {
+
+    const highlightedArticles = take(articles, 3);
+    const olderArticles = slice(articles, 3, 5);
+
     return (<>
         <section>
             <Container>
                 <HighlightedArticlePanel>
-                    <HighlightedArticleThumbnail 
-                        articleId={1}
-                        thumbnailImage="https://via.placeholder.com/1200x800"
-                        thumbnailAltText="Placeholder Image"
-                        title="Some random article which is the first preview"
-                        author="Marcell Toth"
-                        publishDate={new Date()}
-                        tags={[{title: "csharp", id: 3}]}
+                    {highlightedArticles.map(a => (
+                        <HighlightedArticleThumbnail 
+                            key={a.id}
+                            articleId={a.id}
+                            thumbnailImage={a.thumbnailLocaion || fallbackThumbnailLocation}
+                            thumbnailAltText={a.thumbnailAltText}
+                            title={a.title}
+                            author="Marcell Toth"
+                            publishDate={a.publishDate}
+                            tags={a.tags}
                         />
-                    <HighlightedArticleThumbnail 
-                        articleId={2}
-                        thumbnailImage="https://via.placeholder.com/1200x800"
-                        thumbnailAltText="Placeholder Image"
-                        title="Some random article which is the second preview"
-                        author="Marcell Toth"
-                        publishDate={new Date()}
-                        tags={[{title: "csharp", id: 3}]}
-                        />
-                    <HighlightedArticleThumbnail 
-                        articleId={3}
-                        thumbnailImage="https://via.placeholder.com/1200x800"
-                        thumbnailAltText="Placeholder Image"
-                        title="Some random article which is the third preview"
-                        author="Marcell Toth"
-                        publishDate={new Date()}
-                        tags={[{title: "csharp", id: 3}]}
-                        />
+                    ))}
                 </HighlightedArticlePanel>
             </Container>
         </section>
@@ -44,36 +43,18 @@ export const HomePage : React.FC = () => {
                 <Row>
                     <Col lg={8}>
                         <SectionTitle title="Older posts" />
-                        
-                        <ArticlePreviewPanel 
-                            articleId={4}
-                            thumbnailImage="https://via.placeholder.com/1200x800"
-                            thumbnailAltText="Placeholder Image"
-                            title="Some random article which has a really really long title that even wraps to the third line"
-                            author="Marcell Toth"
-                            publishDate={new Date()}
-                            tags={[{title: "csharp", id: 3}, {title: "performance-optimization", id: 4}]}
+                        {olderArticles.map(a => (
+                            <ArticlePreviewPanel 
+                                key={a.id}
+                                articleId={a.id}
+                                thumbnailImage={a.thumbnailLocaion || fallbackThumbnailLocation}
+                                thumbnailAltText={a.thumbnailAltText}
+                                title={a.title}
+                                author="Marcell Toth"
+                                publishDate={a.publishDate}
+                                tags={a.tags}
                             />
-                        
-                        <ArticlePreviewPanel 
-                            articleId={5}
-                            thumbnailImage="https://via.placeholder.com/1200x800"
-                            thumbnailAltText="Placeholder Image"
-                            title="Some random article which is the third preview"
-                            author="Marcell Toth"
-                            publishDate={new Date()}
-                            tags={[{title: "csharp", id: 3}]}
-                            />
-                        
-                        <ArticlePreviewPanel 
-                            articleId={6}
-                            thumbnailImage="https://via.placeholder.com/1200x800"
-                            thumbnailAltText="Placeholder Image"
-                            title="Some random article which is the third preview"
-                            author="Marcell Toth"
-                            publishDate={new Date()}
-                            tags={[{title: "csharp", id: 3}]}
-                            />
+                        ))}
                     </Col>
                     <Col lg={4}>
                         <Sidebar />
@@ -83,3 +64,11 @@ export const HomePage : React.FC = () => {
         </section>
     </>);
 }
+
+const mapStateToProps = (state: ApplicationState) : StateProps => {
+    return {
+        articles: selectArticlesOrderedByAgeDesc(state)
+    };
+}
+
+export const HomePage = connect(mapStateToProps)(HomePageImpl);

@@ -28,7 +28,7 @@ export class TagPage extends React.Component<ArticlePageProps>{
                             title="Some random article which has a really really long title that even wraps to the third line"
                             author="Marcell Toth"
                             publishDate={new Date()}
-                            tags={[{title: "csharp", id: 3}, {title: "performance-optimization", id: 4}]}
+                            tags={[{displayName: "csharp", id: 3}, {displayName: "performance-optimization", id: 4}]}
                             />
                         
                         <ArticlePreviewPanel 
@@ -38,7 +38,7 @@ export class TagPage extends React.Component<ArticlePageProps>{
                             title="Some random article which is the third preview"
                             author="Marcell Toth"
                             publishDate={new Date()}
-                            tags={[{title: "csharp", id: 3}]}
+                            tags={[{displayName: "csharp", id: 3}]}
                             />
                         
                         <ArticlePreviewPanel 
@@ -48,7 +48,7 @@ export class TagPage extends React.Component<ArticlePageProps>{
                             title="Some random article which is the third preview"
                             author="Marcell Toth"
                             publishDate={new Date()}
-                            tags={[{title: "csharp", id: 3}]}
+                            tags={[{displayName: "csharp", id: 3}]}
                             />
                     </Col>
                     <Col md={4}>

@@ -2,7 +2,7 @@ import {Dictionary} from 'ts-essentials';
 
 export type TagDto = TagData;
 
-interface TagData{
+export interface TagData{
     id: number;
     displayName: string;
 }

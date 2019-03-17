@@ -5,7 +5,7 @@ import style from './highlighted-article-thumbnail.module.scss';
 import { TagBadge } from '../../common/tag-badge';
 
 interface TagData{
-    title: string;
+    displayName: string;
     id: number;
 }
 

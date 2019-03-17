@@ -3,12 +3,29 @@ import { SectionTitle } from '..';
 import { GithubFlair, StackoverflowFlair, LinkedInFlair } from './flairs';
 import { TagList, TagListItem } from '.';
 import styles from './sidebar.module.scss';
+import { ApplicationState } from '../../../../store/state';
+import { connect } from 'react-redux';
+import { selectTagsByArticleCountDesc } from '../../../../store/selectors';
+import { take } from 'lodash';
 
-interface SidebarProps{
+interface OwnProps{
     showPopularTags?: boolean;
 }
 
-export const Sidebar : React.FC<SidebarProps> = ({showPopularTags = true}) => {
+interface StateProps{
+    tagsByArticleCount: {
+        id: number;
+        displayName: string;
+        articleCount: number;
+    }[];
+}
+
+type SidebarImplProps = OwnProps & StateProps;
+
+const SidebarImpl : React.FC<SidebarImplProps> = ({tagsByArticleCount, showPopularTags = true}) => {
+
+    const tagsToShow = take(tagsByArticleCount, 8);
+
     return (<>
         <section>
             <SectionTitle title="Platforms" />
@@ -21,10 +38,16 @@ export const Sidebar : React.FC<SidebarProps> = ({showPopularTags = true}) => {
         {showPopularTags && <section>
             <SectionTitle title="Tags" />
             <TagList>
-                <TagListItem id={3} title="csharp" articleCount={12} />
-                <TagListItem id={4} title="performance-optimization" articleCount={8} />
-                <TagListItem id={5} title="frontend" articleCount={3} />
+                {tagsToShow.map(t => <TagListItem key={t.id} {...t} />)}
             </TagList>
         </section>}
     </>)
 }
+
+function mapStateToProps(state: ApplicationState) : StateProps{
+    return {
+        tagsByArticleCount: selectTagsByArticleCountDesc(state)
+    };
+}
+
+export const Sidebar = connect(mapStateToProps)(SidebarImpl);

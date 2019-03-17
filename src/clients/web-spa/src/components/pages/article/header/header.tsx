@@ -5,7 +5,7 @@ import { format } from 'date-fns';
 import styles from './header.module.scss';
 
 interface TagData{
-    title: string;
+    displayName: string;
     id: number;
 }
 

@@ -4,7 +4,7 @@ import styles from './common.module.scss';
 import classNames from 'classnames';
 
 interface TagData{
-    title: string;
+    displayName: string;
     id: number;
 }
 
@@ -13,8 +13,8 @@ interface TagBadgeProps{
     className?: string;
 }
 
-export const TagBadge : React.FC<TagBadgeProps> = ({tag: {title, id}, className}) => {
+export const TagBadge : React.FC<TagBadgeProps> = ({tag: {displayName, id}, className}) => {
     return (
-        <TagLink id={id} title={title} className={classNames("badge badge-danger", styles["tag-badge"], className)}>#{title.toLocaleLowerCase()}</TagLink>
+        <TagLink id={id} title={displayName} className={classNames("badge badge-danger", styles["tag-badge"], className)}>#{displayName.toLocaleLowerCase()}</TagLink>
     )
 }

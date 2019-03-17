@@ -4,7 +4,7 @@ import { TagLink } from '../../links';
 
 interface TagData{
     id: number;
-    title: string;
+    displayName: string;
     articleCount: number;
 }
 
@@ -13,10 +13,10 @@ export const TagList : React.FC = ({children}) =>
         {children}
     </ul>;
 
-export const TagListItem : React.FC<TagData> = ({id, title, articleCount}) => {
+export const TagListItem : React.FC<TagData> = ({id, displayName, articleCount}) => {
     return <li>
-        <TagLink id={id} title={title}>
-            #{title}
+        <TagLink id={id} title={displayName}>
+            #{displayName}
             <span>{articleCount}</span>
         </TagLink>
     </li>

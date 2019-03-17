@@ -9,14 +9,14 @@ export interface ArticleDto{
     content?: string;
 }
 
-interface ArticleData extends ArticleDto{
+export interface ArticleData extends ArticleDto{
     isLoading: boolean;
 }
 
 export type ArticlesState = ReadonlyArray<ArticleData>;
 
-export namespace ArticleData{
-    function fromDto(dto: ArticleDto) : ArticleData{
+export class ArticleData{
+    static fromDto(dto: ArticleDto) : ArticleData{
         return {
             ...dto,
             isLoading: false
