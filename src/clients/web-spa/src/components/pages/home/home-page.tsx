@@ -28,7 +28,7 @@ const HomePageImpl : React.FC<HomePageImplProps> = ({articles}) => {
                         <HighlightedArticleThumbnail 
                             key={a.id}
                             articleId={a.id}
-                            thumbnailImage={a.thumbnailLocaion || fallbackThumbnailLocation}
+                            thumbnailImage={a.thumbnailLocation || fallbackThumbnailLocation}
                             thumbnailAltText={a.thumbnailAltText}
                             title={a.title}
                             author="Marcell Toth"
@@ -48,7 +48,7 @@ const HomePageImpl : React.FC<HomePageImplProps> = ({articles}) => {
                             <ArticlePreviewPanel 
                                 key={a.id}
                                 articleId={a.id}
-                                thumbnailImage={a.thumbnailLocaion || fallbackThumbnailLocation}
+                                thumbnailImage={a.thumbnailLocation || fallbackThumbnailLocation}
                                 thumbnailAltText={a.thumbnailAltText}
                                 title={a.title}
                                 author="Marcell Toth"

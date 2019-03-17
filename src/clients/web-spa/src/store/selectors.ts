@@ -6,14 +6,23 @@ import { ArticleData } from "./state/articles";
 import { TagData } from "./state/tags";
 import { map, mapValues } from "lodash-es";
 
-export type ArticleDataDeep = 
-    Omit<Writable<ArticleData>, 'tagIds'| 'publishDate'> 
-    & {tags: TagData[], publishDate: Date};
+
+/* BASIC */
 
 const selectArticles = (state: ApplicationState) => state.articles;
 const selectTags = (state: ApplicationState) => state.tags;
 
-export const selectArticlesDeep = createSelector(
+export const selectBaiscDataLoading = (state: ApplicationState) => state.ui.basicDataLoading;
+export const selectBaiscDataLoaded = (state: ApplicationState) => state.ui.basicDataLoaded;
+
+
+/* ARTICLES */
+
+export type ArticleDataDeep = 
+    Omit<Writable<ArticleData>, 'tagIds'| 'publishDate'> 
+    & {tags: TagData[], publishDate: Date};
+
+const selectArticlesDeep = createSelector(
     selectArticles,
     selectTags,
     (articles, tags) => articles.map(a => {
@@ -25,10 +34,15 @@ export const selectArticlesDeep = createSelector(
     })
 )
 
+export const selectArticle = (state: ApplicationState, id: number) => selectArticlesDeep(state).find(a => a.id === id);
+
 export const selectArticlesOrderedByAgeDesc = createSelector(
     selectArticlesDeep,
     a => orderBy(a, ['id'], ['desc'])
 );
+
+
+/* TAGS */
 
 export const selectTagsByArticleCountDesc = createSelector(
     selectTags,
@@ -46,3 +60,4 @@ export const selectArticlesByTag = createSelector(
 );
 
 export const selectTagById = selectTags;
+

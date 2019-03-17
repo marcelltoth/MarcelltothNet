@@ -6,12 +6,22 @@ import * as Pages from './pages';
 import { Footer } from './footer';
 
 import {portfolioPages} from './pages/static';
+import { ApplicationState } from '../store/state';
+import { selectBaiscDataLoaded } from '../store/selectors';
+import { connect } from 'react-redux';
+import { Loader } from './loader';
 
-class App extends React.Component<any> {
-  render() {
-    return (
-      <div className={styles.App}>
-          <Header />
+interface StateProps{
+  isLoaded: boolean;
+}
+
+type AppProps = StateProps;
+
+const AppImpl : React.FC<AppProps> = ({isLoaded}) => {
+  return (
+    <div className={styles.App}>
+        <Header />
+        {isLoaded ? 
           <Switch>
             <Route path="/" exact component={Pages.HomePage} />
             <Route path="/privacy-policy" exact component={Pages.PrivacyPolicyPage} />
@@ -21,10 +31,16 @@ class App extends React.Component<any> {
             <Route path="/tag/:id" component={Pages.TagPage} />
             <Route component={Pages.NotFoundPage} />
           </Switch>
-          <Footer />
-      </div>
-    );
-  }
+          : <Loader />}
+        <Footer />
+    </div>
+  );
 }
 
-export default App;
+const mapStateToProps = (state: ApplicationState) : StateProps => {
+  return {
+    isLoaded: selectBaiscDataLoaded(state)
+  };
+};
+
+export default connect(mapStateToProps, undefined, undefined, {pure: false})(AppImpl);

@@ -1,6 +1,7 @@
 import { TagDto } from "../state/tags";
 import { ArticleDto } from "../state/articles";
 import { ThunkAction, apiClient } from "./common";
+import { selectBaiscDataLoading } from "../selectors";
 
 
 
@@ -27,7 +28,7 @@ export type FetchBasicDataActions = FetchBasicDataBeginAction | FetchBasicDataSu
 
 
 export const fetchBasicData = () : ThunkAction => (dispatch, getState) => {
-    if(!getState().ui.basicDataLoading){
+    if(!selectBaiscDataLoading(getState())){
         dispatch(createBeginAction());
         apiClient.get<BasicDataDto>('/v1/basic-data')
             .then(response => {

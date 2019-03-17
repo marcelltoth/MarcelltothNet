@@ -41,7 +41,7 @@ class TagPageImpl extends React.Component<TagPageProps>{
                         {articles.map(a => <ArticlePreviewPanel 
                                 key={a.id}
                                 articleId={a.id}
-                                thumbnailImage={a.thumbnailLocaion || fallbackThumbnailLocation}
+                                thumbnailImage={a.thumbnailLocation || fallbackThumbnailLocation}
                                 thumbnailAltText={a.thumbnailAltText}
                                 title={a.title}
                                 author="Marcell Toth"

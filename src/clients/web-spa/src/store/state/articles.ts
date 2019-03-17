@@ -5,7 +5,7 @@ export interface ArticleDto{
     publishDate: string;
     thumbnailAltText: string;
     tagIds: number[];
-    thumbnailLocaion?: string;
+    thumbnailLocation?: string;
     content?: string;
 }
 

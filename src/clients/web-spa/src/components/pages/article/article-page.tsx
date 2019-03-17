@@ -4,9 +4,11 @@ import { Container, Row, Col } from 'reactstrap';
 import { Header } from './header';
 import { Sidebar, ContentRenderer } from '../common';
 import { SharingPanel } from './sharing-panel';
-import { ArticleDataDeep, selectArticlesDeep } from '../../../store/selectors';
+import { ArticleDataDeep, selectArticle } from '../../../store/selectors';
 import { ApplicationState } from '../../../store/state';
 import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
+import { fetchArticleDetails } from '../../../store/actions/articles';
 
 
 const fallbackThumbnailLocation = "https://via.placeholder.com/1200x800";
@@ -23,21 +25,30 @@ interface StateProps {
     article: ArticleDataDeep | undefined;
 }
 
-type ArticlePageProps = OwnProps & StateProps;
+interface DispatchProps{
+    loadArticle: () => void;
+}
 
-class ArticlePageImpl extends React.PureComponent<ArticlePageProps>{
+type ArticlePageProps = OwnProps & StateProps & DispatchProps;
 
-    render(){
-        if(this.props.article === undefined){
+const ArticlePageImpl : React.FC<ArticlePageProps> = ({article, loadArticle}) => {
+
+        React.useEffect(() => {
+            if(article === undefined || article.content === undefined && !article.isLoading){
+                loadArticle();
+            }
+        }, [article && article.id]);
+
+        if(article === undefined){
             // article not found with this ID, redirect to the home page
             return <Redirect to="/" />
         }
 
-        const {article: {title, thumbnailAltText, thumbnailLocaion, publishDate, tags, content}} = this.props;
+        const {title, thumbnailAltText, thumbnailLocation, publishDate, tags, content} = article;
         return (
             <>
                 <Header 
-                    thumbnailImage={thumbnailLocaion || fallbackThumbnailLocation}
+                    thumbnailImage={thumbnailLocation || fallbackThumbnailLocation}
                     thumbnailAltText={thumbnailAltText}
                     title={title}
                     author="Marcell Toth"
@@ -59,13 +70,19 @@ class ArticlePageImpl extends React.PureComponent<ArticlePageProps>{
                 </Container>
             </>
         )
-    }
 }
 
 const mapStateToProps = (state: ApplicationState, ownProps: OwnProps) : StateProps => {
     return {
-        article: selectArticlesDeep(state).find(a => a.id === Number(ownProps.match.params.id))
+        article: selectArticle(state, Number(ownProps.match.params.id))
     }
 };
 
-export const ArticlePage = connect(mapStateToProps)(ArticlePageImpl);
+const mapDispatchToProps = (dispatch: Dispatch<any>, ownProps: OwnProps) : DispatchProps => {
+    const articleId = Number(ownProps.match.params.id);
+    return {
+        loadArticle: () => dispatch(fetchArticleDetails(articleId))
+    };
+}
+
+export const ArticlePage = connect(mapStateToProps, mapDispatchToProps)(ArticlePageImpl);
