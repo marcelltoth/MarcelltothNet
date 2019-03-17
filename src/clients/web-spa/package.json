@@ -43,7 +43,7 @@
     "typescript": "^3.1.6"
   },
   "scripts": {
-    "start": "set PORT=15200 && react-scripts start",
+    "start": "set PORT=15200&&set BROWSER=NONE&&react-scripts start",
     "stop": "taskkill -F -IM node.exe",
     "build": "react-scripts build",
     "test": "react-scripts test",
