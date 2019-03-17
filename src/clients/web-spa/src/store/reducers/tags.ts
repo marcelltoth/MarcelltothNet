@@ -1,6 +1,7 @@
 import { Reducer } from "redux";
 import { TagsState } from "../state/tags";
 import { FetchBasicDataSuccessAction } from "../actions/basic-data";
+import { keyBy } from "lodash-es";
 
 type KnownAction = FetchBasicDataSuccessAction;
 
@@ -10,7 +11,7 @@ export const tagsReducer : Reducer<TagsState> = (state = initialState, incomming
     const action = incommingAction as KnownAction;
     switch(action.type){
         case 'FETCH_BASIC_DATA_SUCCESS':
-            return action.data.tags;
+            return keyBy(action.data.tags, t => t.id);
     }
     return state;
 }

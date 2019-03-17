@@ -14,6 +14,7 @@ interface StateProps{
 type HomePageImplProps = StateProps;
 
 const fallbackThumbnailLocation = "https://via.placeholder.com/1200x800";
+
 const HomePageImpl : React.FC<HomePageImplProps> = ({articles}) => {
 
     const highlightedArticles = take(articles, 3);
