@@ -27,6 +27,7 @@ namespace SpaAggregator
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMemoryCache();
+            services.AddResponseCaching();
 
             services.AddTransient<ThumbnailRepository>();
 
@@ -82,6 +83,8 @@ namespace SpaAggregator
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+
+            app.UseResponseCaching();
 
             app.UseMvc(routes =>
             {
