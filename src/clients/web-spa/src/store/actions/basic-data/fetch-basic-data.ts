@@ -1,8 +1,14 @@
-import { TagDto } from "../state/tags";
-import { ArticleDto } from "../state/articles";
-import { ThunkAction, apiClient } from "./common";
-import { selectBaiscDataLoading } from "../selectors";
+import { TagDto } from "../../state/tags";
+import { ThunkAction, apiClient } from "../common";
+import { selectBaiscDataLoading } from "../../selectors";
 
+interface ArticleDto{
+    id: number;
+    title: string;
+    publishDate: string;
+    thumbnailAltText: string;
+    tagIds: number[];
+}
 
 
 interface BasicDataDto{

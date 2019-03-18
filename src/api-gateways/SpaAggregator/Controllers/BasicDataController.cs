@@ -1,6 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SpaAggregator.DataTransfer;
+using SpaAggregator.Models;
+using SpaAggregator.Services;
 using SpaAggregator.Services.DownstreamClients;
 
 namespace SpaAggregator.Controllers
@@ -9,10 +13,12 @@ namespace SpaAggregator.Controllers
     public class BasicDataController : Controller
     {
         private readonly ArticleApiClient _articleClient;
+        private readonly ThumbnailRepository _thumbnailRepository;
 
-        public BasicDataController(ArticleApiClient articleClient)
+        public BasicDataController(ArticleApiClient articleClient, ThumbnailRepository thumbnailRepository)
         {
             _articleClient = articleClient;
+            _thumbnailRepository = thumbnailRepository;
         }
 
         [HttpGet]
@@ -25,6 +31,21 @@ namespace SpaAggregator.Controllers
                 Articles = await articleTask,
                 Tags = await tagTask
             });
+        }
+
+        [HttpGet("thumbnails")]
+        public async Task<IActionResult> GetThumbnails([FromQuery] int[] ids, [FromQuery] int targetWidth)
+        {
+            ThumbnailImage[] thumbnails = await Task.WhenAll(ids.Select(async id =>
+            {
+                Article data = await _articleClient.GetArticleDetails(id);
+                if (!data.ThumbnailLocation.StartsWith("data"))
+                    return null;
+                return await _thumbnailRepository.GetAsync(data.ThumbnailLocation, targetWidth, Int32.MaxValue);
+            }));
+            
+
+            return Ok(thumbnails.Select(t => t?.ToDataUri()));
         }
     }
 }

@@ -6,19 +6,35 @@ import { ApplicationState } from '../../../store/state';
 import { selectArticlesOrderedByAgeDesc, ArticleDataDeep } from '../../../store/selectors';
 import { take, slice } from 'lodash-es';
 import { connect } from 'react-redux';
+import { fetchThumbnails } from '../../../store/actions/basic-data';
 
 interface StateProps{
     articles: ReadonlyArray<ArticleDataDeep>;
 }
 
-type HomePageImplProps = StateProps;
+interface DispatchProps {
+    fetchThumbnails: (ids: number[], width: number) => void;
+}
+
+type HomePageImplProps = StateProps & DispatchProps;
+
 
 const fallbackThumbnailLocation = "https://via.placeholder.com/1200x800";
 
-const HomePageImpl : React.FC<HomePageImplProps> = ({articles}) => {
+const HomePageImpl : React.FC<HomePageImplProps> = ({articles, fetchThumbnails}) => {
 
     const highlightedArticles = take(articles, 3);
-    const olderArticles = slice(articles, 3, 5);
+    const olderArticles = slice(articles, 3, 8);
+
+    const highlightedIds = highlightedArticles.map(a => a.id);
+    React.useEffect(() => {
+        fetchThumbnails(highlightedIds, 400);
+    }, [highlightedIds.join('-')])
+    
+    const olderIds = olderArticles.map(a => a.id);
+    React.useEffect(() => {
+        fetchThumbnails(olderIds, 250);
+    }, [olderIds.join('-')])
 
     return (<>
         <section>
@@ -72,4 +88,8 @@ const mapStateToProps = (state: ApplicationState) : StateProps => {
     };
 }
 
-export const HomePage = connect(mapStateToProps)(HomePageImpl);
+const mapDispatchToProps = {
+    fetchThumbnails
+};
+
+export const HomePage = connect(mapStateToProps, mapDispatchToProps)(HomePageImpl);

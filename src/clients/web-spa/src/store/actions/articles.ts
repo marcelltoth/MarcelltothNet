@@ -1,6 +1,15 @@
-import { ArticleDto } from "../state/articles";
 import { ThunkAction, apiClient } from "./common";
 import { selectArticle } from "../selectors";
+
+interface ArticleDto{
+    id: number;
+    title: string;
+    publishDate: string;
+    thumbnailAltText: string;
+    tagIds: number[];
+    thumbnailLocation: string;
+    content: string;
+}
 
 export interface ArticlePageResult{
     article: ArticleDto;

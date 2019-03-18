@@ -1,10 +1,10 @@
 import { Reducer } from "redux";
 import { ArticlesState, ArticleData } from "../state/articles";
-import { FetchBasicDataSuccessAction } from "../actions/basic-data";
+import { FetchBasicDataSuccessAction, FetchThumbnailsSuccessAction } from "../actions/basic-data";
 import { keyBy } from "lodash-es";
 import { FetchArticleDetailsActions } from "../actions/articles";
 
-type KnownAction = FetchBasicDataSuccessAction | FetchArticleDetailsActions;
+type KnownAction = FetchBasicDataSuccessAction | FetchArticleDetailsActions | FetchThumbnailsSuccessAction;
 
 const initialState : ArticlesState = [];
 
@@ -19,6 +19,14 @@ export const articlesReducer : Reducer<ArticlesState> = (state = initialState, i
             return updateArticle(state, action.articleId, {isLoading: false, ...action.data.article});
         case 'FETCH_ARTICLE_DETAILS_ERROR':
             return updateArticle(state, action.articleId, {isLoading: false});
+        case 'FETCH_THUMBNAILS_SUCCESS':{
+            return state.map(a => {
+                const index = action.ids.indexOf(a.id);
+                if(index === -1 || action.data[index] === null)
+                    return a;
+                return {...a, thumbnailLocation: action.data[index]}
+            })
+        }
     }
     return state;
 }
@@ -29,7 +37,10 @@ function mergeBasicData(state: ArticlesState, action: FetchBasicDataSuccessActio
     return action.data.articles.map(newArticle => {
         const oldArticle = articlesById[newArticle.id];
         if(!oldArticle)
-            return ArticleData.fromDto(newArticle);
+            return {
+                ...newArticle,
+                isLoading: false
+            };
         return {
             ...oldArticle,
             ...newArticle
