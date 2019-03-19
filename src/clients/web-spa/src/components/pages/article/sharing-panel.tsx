@@ -15,7 +15,7 @@ export const SharingPanel : React.FC<SharingPanelProps> = ({link}) => {
             fontSize: "14px",
         }
     };
-    return (<div style={{fontSize: 14}}>
+    return (<div style={{fontSize: 14, marginBottom: 20}}>
         <Linkedin {...buttonProps} />
         <Facebook {...buttonProps} />
         <Twitter {...buttonProps} />
