@@ -14,7 +14,11 @@ type ArticleLinkProps = {
 }
 
 export const ArticleLink : React.FC<ArticleLinkProps> = ({id, title, children, ...rest}) => 
-    <Link to={`/article/${id}/${seoUrlGenerator(title || "")}`} {...rest}>{children}</Link>;
+    <Link to={generateArticleUrl(id, title || "")} {...rest}>{children}</Link>;
+
+export function generateArticleUrl(id: number, title: string){
+    return `/article/${id}/${seoUrlGenerator(title)}`;
+}
 
 interface TagLinkProps{
     id: number;

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { RouteComponentProps, Redirect } from 'react-router';
 import { Container, Row, Col } from 'reactstrap';
 import { Header } from './header';
-import { Sidebar, ContentRenderer } from '../common';
+import { Sidebar, ContentRenderer, generateArticleUrl } from '../common';
 import { SharingPanel } from './sharing-panel';
 import { ArticleDataDeep, selectArticle } from '../../../store/selectors';
 import { ApplicationState } from '../../../store/state';
@@ -44,7 +44,17 @@ const ArticlePageImpl : React.FC<ArticlePageProps> = ({article, loadArticle}) =>
             return <Redirect to="/" />
         }
 
-        const {title, thumbnailAltText, thumbnailLocation, publishDate, tags, content} = article;
+        
+
+        const {id, title, thumbnailAltText, thumbnailLocation, publishDate, tags, content} = article;
+        
+        // redirect to the canonical url if we are not there
+        const canonicalUrl = generateArticleUrl(id, title);
+        if(location.pathname !== canonicalUrl){
+            return <Redirect to={canonicalUrl}/>;
+        }
+
+
         return (
             <>
                 <Header 
