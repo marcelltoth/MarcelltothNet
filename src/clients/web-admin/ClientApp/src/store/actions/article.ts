@@ -92,7 +92,13 @@ export interface ArticleChangeContentAction{
     newContent: string;
 }
 
-export type ArticleChangeActions = ArticleChangeTitleAction | ArticleChangePublishDateAction | ArticleChangeThumbnailAction | ArticleChangeContentAction;
+export interface ArticleChangeTagsAction{
+    type: 'ARTICLE_CHANGE_TAGS';
+    id: number;
+    newTags: number[];
+}
+
+export type ArticleChangeActions = ArticleChangeTitleAction | ArticleChangePublishDateAction | ArticleChangeThumbnailAction | ArticleChangeContentAction | ArticleChangeTagsAction;
 
 
 export interface ArchiveArticleBeginAction{
@@ -237,5 +243,10 @@ export const actionCreators = {
         type: 'ARTICLE_CHANGE_CONTENT',
         id,
         newContent
+    }),
+    changeTags: (id: number, newTagIds: number[]) => ({
+        type: 'ARTICLE_CHANGE_TAGS',
+        id,
+        newTags: newTagIds
     })
 }

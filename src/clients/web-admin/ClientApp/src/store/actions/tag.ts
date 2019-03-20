@@ -1,5 +1,6 @@
 import { TagData } from "../common/tag";
-import { ActionCreatorsMapObject } from "redux";
+import { AsyncAction } from "../common";
+import axios from 'axios';
 
 
 export interface LoadTagsBeginAction{
@@ -7,7 +8,7 @@ export interface LoadTagsBeginAction{
 }
 
 export interface LoadTagsSuccessAction{
-    type: 'LOAD_TAGS_BEGIN';
+    type: 'LOAD_TAGS_SUCCESS';
     tagList: TagData[];
 }
 
@@ -19,6 +20,17 @@ export type LoadTagsActions = LoadTagsBeginAction | LoadTagsSuccessAction | Load
 
 export type TagActions = LoadTagsActions;
 
-export const actionCreators : ActionCreatorsMapObject<TagActions> = {
-    
-}
+export const actionCreators = {
+    loadTags: () : AsyncAction<LoadTagsActions> => async (dispatch, getState) => { 
+        if(!getState().tag.isRefreshing){
+            dispatch({type: 'LOAD_TAGS_BEGIN'});
+            try{
+                const response = await axios.get<TagData[]>('https://localhost:13101/v1/article/tags');
+                dispatch({type: 'LOAD_TAGS_SUCCESS', tagList: response.data});
+            }
+            catch{
+                dispatch({type: 'LOAD_TAGS_ERROR'});
+            }
+        }
+    } 
+};

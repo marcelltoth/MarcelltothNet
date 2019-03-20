@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { ArticleData } from '../../store/common/article';
 import { actionCreators as ArticleActions } from '../../store/actions/article';
+import { actionCreators as TagActions } from '../../store/actions/tag';
 import { connect } from 'react-redux';
 import { ApplicationState } from '../../store/reducers';
 import { Table, Button } from 'reactstrap';
@@ -8,7 +9,7 @@ import { Table, Button } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPencilAlt, faGlobe, faArchive } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
-import { AsyncAction, MakeDispatchProps } from '../../store/common';
+import { MakeDispatchProps } from '../../store/common';
 
 
 interface StateProps{
@@ -16,7 +17,7 @@ interface StateProps{
     isLoading: boolean;
 }
 
-type DispatchProps = MakeDispatchProps<typeof ArticleActions>;
+type DispatchProps = MakeDispatchProps<typeof ArticleActions> & MakeDispatchProps<typeof TagActions>;
 
 type ArticleListPageImplProps = StateProps & DispatchProps;
 
@@ -24,6 +25,7 @@ class ArticleListPageImpl extends React.Component<ArticleListPageImplProps>{
 
     componentDidMount(){
         this.props.loadArticles();
+        this.props.loadTags();
     }
 
     private handleInsertClick = () => {
@@ -83,5 +85,5 @@ const mapStateToProps = (state: ApplicationState) : StateProps => {
 
 export const ArticleListPage = connect<StateProps, DispatchProps, {}, ApplicationState>(
     mapStateToProps,
-    {...ArticleActions}
+    {...ArticleActions, ...TagActions}
 )(ArticleListPageImpl);

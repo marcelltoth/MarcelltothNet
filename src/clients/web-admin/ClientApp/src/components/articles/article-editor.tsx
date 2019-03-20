@@ -5,13 +5,18 @@ import { Form, FormGroup, Label, Input, Row, Col } from 'reactstrap';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { FileSelector } from '../common/file-selector';
+import Select from 'react-select';
+import { TagData } from '../../store/common/tag';
+import { Option } from 'react-select/lib/filters';
 
 interface ArticleEditorProps{
+    availableTags: ReadonlyArray<TagData>;
     article: ArticleData;
     onChangeTitle: (newTitle: string) => void;
     onChangePublishDate: (newDate: Date) => void;
     onChangeThumbnail: (newUri: string, newAltText: string) => void;
     onChangeContent: (newContent: string) => void;
+    onChangeTags: (newTagIds: number[]) => void;
 }
 
 export class ArticleEditor extends React.Component<ArticleEditorProps>{
@@ -35,10 +40,21 @@ export class ArticleEditor extends React.Component<ArticleEditorProps>{
     private handleChangeContent = (event: React.ChangeEvent<HTMLInputElement>) => {
         this.props.onChangeContent(event.currentTarget.value);
     }
+
+    private handleChangeTags = (newOptions: Option[] | undefined | null) => {
+        if(newOptions){
+            this.props.onChangeTags(newOptions.map(o => Number(o.value)));
+        } else {
+            this.props.onChangeTags([]);
+        }
+        
+    }
     
 
     render(){
-        const {article: {title, publishDate, content, thumbnailLocation, thumbnailAltText, tagIds}} = this.props;
+        const {availableTags, article: {title, publishDate, content, thumbnailLocation, thumbnailAltText, tagIds}} = this.props;
+        const options = availableTags.map(t => ({ value: t.id, label: t.displayName }));
+        const selectedOptions = options.filter(o => tagIds.includes(o.value));
         return <Form>
             <FormGroup>
                 <Label>Title:</Label>
@@ -65,6 +81,11 @@ export class ArticleEditor extends React.Component<ArticleEditorProps>{
                         <Label>Thumbnail alt text:</Label>
                         <Input type="text" placeholder="Alt text" value={thumbnailAltText} onChange={this.handleChangeThumbnailAltText} />
                     </FormGroup>
+                </Col>
+            </Row>
+            <Row>
+                <Col width={12}>
+                    <Select options={options} value={selectedOptions} onChange={this.handleChangeTags as any} isMulti={true} />
                 </Col>
             </Row>
             <FormGroup>

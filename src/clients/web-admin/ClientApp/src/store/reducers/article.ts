@@ -62,6 +62,8 @@ export const reducer : Reducer<ArticleState> = (state: ArticleState = initialSta
             return updateArticle(state, action.id, {thumbnailLocation: action.newUri, thumbnailAltText: action.newAltText});
         case 'ARTICLE_CHANGE_CONTENT':
             return updateArticle(state, action.id, {content: action.newContent});
+        case 'ARTICLE_CHANGE_TAGS':
+            return updateArticle(state, action.id, {tagIds: action.newTags});
 
         case 'ARCHIVE_ARTICLE_BEGIN':
             return {...state, isRefreshing: true};
