@@ -5,6 +5,8 @@
 **/.idea/**/tasks.xml
 **/.idea/shelf/*
 **/.idea/dictionaries
+**/.idea/markdown-navigator
+**/.idea/markdown-navigator.xml
 
 # Sensitive or high-churn files
 **/.idea/**/dataSources/
