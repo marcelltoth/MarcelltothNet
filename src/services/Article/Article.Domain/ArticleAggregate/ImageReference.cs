@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using MarcellTothNet.Common.DDDFoundations;
+﻿using MarcellToth.DDDBuildingBlocks.Domain;
 
 namespace MarcellTothNet.Services.Article.Domain.ArticleAggregate
 {
@@ -25,11 +23,6 @@ namespace MarcellTothNet.Services.Article.Domain.ArticleAggregate
         ///     The alternate text of the image. Used by screen readers.
         /// </summary>
         public string AltText { get; }
-
-        protected override IEnumerable<object> GetAtomicValues()
-        {
-            yield return Location;
-            yield return AltText;
-        }
+        
     }
 }

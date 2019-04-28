@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using MarcellTothNet.Common.DDDFoundations;
+using MarcellToth.DDDBuildingBlocks.Domain;
+using MarcellToth.DDDBuildingBlocks.Domain.Abstractions;
 
 namespace MarcellTothNet.Services.Article.Domain.ArticleAggregate
 {
@@ -11,12 +12,21 @@ namespace MarcellTothNet.Services.Article.Domain.ArticleAggregate
     {
         private readonly HashSet<int> _tagIds;
 
-        public Article()
+        public Article() : this(default)
+        {}
+        
+        public Article(int id) : base(id)
         {
             _tagIds = new HashSet<int>();
         }
 
         public Article(string title, DateTimeOffset publishTime, string content, ImageReference thumbnail, IEnumerable<int> tagIds, bool isPublished)
+            :this(default, title, publishTime, content, thumbnail, tagIds, isPublished)
+        {
+        }
+
+        public Article(int id, string title, DateTimeOffset publishTime, string content, ImageReference thumbnail,
+            IEnumerable<int> tagIds, bool isPublished) : base(id)
         {
             Title = title;
             PublishTime = publishTime;

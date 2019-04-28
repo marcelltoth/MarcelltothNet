@@ -1,7 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using MarcellTothNet.Services.Article.Api.Commands;
-using MarcellTothNet.Services.Article.Domain.ArticleAggregate;
+using MarcellTothNet.Services.Article.Infrastructure.Repositories;
 using MediatR;
 
 namespace MarcellTothNet.Services.Article.Api.CommandHandlers
@@ -23,7 +23,7 @@ namespace MarcellTothNet.Services.Article.Api.CommandHandlers
 
             model.Publish();
 
-            _repository.Update(model);
+            await _repository.UpdateAsync(model);
             await _repository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
             return true;
         }

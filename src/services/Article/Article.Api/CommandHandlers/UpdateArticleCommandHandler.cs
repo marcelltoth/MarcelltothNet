@@ -1,8 +1,8 @@
-﻿using System;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using MarcellTothNet.Services.Article.Api.Commands;
 using MarcellTothNet.Services.Article.Domain.ArticleAggregate;
+using MarcellTothNet.Services.Article.Infrastructure.Repositories;
 using MediatR;
 
 namespace MarcellTothNet.Services.Article.Api.CommandHandlers
@@ -28,7 +28,7 @@ namespace MarcellTothNet.Services.Article.Api.CommandHandlers
             article.Thumbnail = new ImageReference(request.ThumbnailLocation, request.ThumbnailAltText);
             article.ReplaceTagIds(request.TagIds);
             
-            _repository.Update(article);
+            await _repository.UpdateAsync(article);
             await _repository.UnitOfWork.SaveEntitiesAsync(ct);
             return true;
         }

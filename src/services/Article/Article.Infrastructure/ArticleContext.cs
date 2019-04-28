@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
-using MarcellTothNet.Common.DDDFoundations;
+using MarcellToth.DDDBuildingBlocks.Persistence.Abstractions;
 using MarcellTothNet.Services.Article.Domain.TagAggregate;
 using MarcellTothNet.Services.Article.Infrastructure.PersistenceModels;
 using Microsoft.EntityFrameworkCore;

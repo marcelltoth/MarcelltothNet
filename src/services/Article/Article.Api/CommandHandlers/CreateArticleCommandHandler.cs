@@ -1,8 +1,8 @@
-﻿using System;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using MarcellTothNet.Services.Article.Api.Commands;
 using MarcellTothNet.Services.Article.Domain.ArticleAggregate;
+using MarcellTothNet.Services.Article.Infrastructure.Repositories;
 using MediatR;
 
 namespace MarcellTothNet.Services.Article.Api.CommandHandlers
@@ -27,7 +27,7 @@ namespace MarcellTothNet.Services.Article.Api.CommandHandlers
                 false
                 );
 
-            _repository.Add(article);
+            await _repository.AddAsync(article);
             await _repository.UnitOfWork.SaveEntitiesAsync(ct);
             return article.Id;
         }

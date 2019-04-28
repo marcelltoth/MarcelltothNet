@@ -69,15 +69,8 @@ namespace MarcellTothNet.Services.Article.IntegrationTests.Infrastructure
                         Location = _testImageLocation
                     }
                 };
-                Tag testTag2 = new Tag("Test Tag 2")
-                {
-                    Id = 2
-                };
-
-                Tag testTag3 = new Tag("Test Tag 3")
-                {
-                    Id = 3
-                };
+                Tag testTag2 = new Tag(2, "Test Tag 2");
+                Tag testTag3 = new Tag(3, "Test Tag 3");
                 context.Tags.Add(testTag2);
                 context.Tags.Add(testTag3);
                 am.ArticleTags.Add(new ArticleTagModel()
@@ -107,7 +100,7 @@ namespace MarcellTothNet.Services.Article.IntegrationTests.Infrastructure
             using (var articleContext = CreateDbContext())
             {
                 ArticleRepository repo = new ArticleRepository(articleContext);
-                repo.Add(domainObject);
+                await repo.AddAsync(domainObject);
                 await articleContext.SaveChangesAsync();
             }
 
@@ -167,7 +160,7 @@ namespace MarcellTothNet.Services.Article.IntegrationTests.Infrastructure
             {
                 ArticleRepository repo = new ArticleRepository(actContext);
 
-                repo.Delete(1);
+                await repo.DeleteAsync(1);
 
                 await actContext.SaveEntitiesAsync();
             }
@@ -189,7 +182,7 @@ namespace MarcellTothNet.Services.Article.IntegrationTests.Infrastructure
 
                 var testArticle = await repo.GetByIdAsync(1);
                 testArticle.Thumbnail = new ImageReference(_testImageLocation, "NewAltText");
-                repo.Update(testArticle);
+                await repo.UpdateAsync(testArticle);
 
                 await actContext.SaveEntitiesAsync();
             }
@@ -215,7 +208,7 @@ namespace MarcellTothNet.Services.Article.IntegrationTests.Infrastructure
 
                 var testArticle = await repo.GetByIdAsync(1);
                 testArticle.ReplaceTagIds(new []{3,4});
-                repo.Update(testArticle);
+                await repo.UpdateAsync(testArticle);
 
                 await actContext.SaveEntitiesAsync();
             }

@@ -1,4 +1,5 @@
-﻿using MarcellTothNet.Common.DDDFoundations;
+﻿using MarcellToth.DDDBuildingBlocks.Domain;
+using MarcellToth.DDDBuildingBlocks.Domain.Abstractions;
 
 namespace MarcellTothNet.Services.Article.Domain.TagAggregate
 {
@@ -12,13 +13,15 @@ namespace MarcellTothNet.Services.Article.Domain.TagAggregate
     {
         private string _displayName;
 
-        public Tag(string displayName)
+        public Tag(int id, string displayName) : base(id)
         {
             if (string.IsNullOrWhiteSpace(displayName))
                 ThrowForEmptyDisplayName();
-
             _displayName = displayName;
         }
+
+        public Tag(string displayName) : this(default, displayName)
+        {}
 
         /// <summary>
         ///     The display name of the tag, such as "C#" / "WPF"

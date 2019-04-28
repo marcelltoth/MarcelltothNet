@@ -1,7 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using MarcellTothNet.Services.Article.Api.Commands;
-using MarcellTothNet.Services.Article.Domain.TagAggregate;
+using MarcellTothNet.Services.Article.Infrastructure.Repositories;
 using MediatR;
 
 namespace MarcellTothNet.Services.Article.Api.CommandHandlers

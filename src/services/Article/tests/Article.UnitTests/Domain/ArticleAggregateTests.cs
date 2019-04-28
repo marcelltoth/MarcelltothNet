@@ -11,9 +11,8 @@ namespace MarcellTothNet.Services.Article.UnitTests.Domain
     public class ArticleAggregateTests
     {
         
-        private readonly Article.Domain.ArticleAggregate.Article _testArticle = new Article.Domain.ArticleAggregate.Article()
+        private readonly Article.Domain.ArticleAggregate.Article _testArticle = new Article.Domain.ArticleAggregate.Article(3)
         {
-            Id = 3,
             Content = "Test content",
             PublishTime = DateTimeOffset.FromUnixTimeSeconds(10240),
             Thumbnail = new ImageReference("thumbnail.png", "Test thumbnail"),

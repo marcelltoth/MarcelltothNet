@@ -2,6 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>netcoreapp2.2</TargetFramework>
+        <RuntimeIdentifiers>win-x64;linux-x64</RuntimeIdentifiers>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
         <UserSecretsId>a566f6c3-81c9-4f48-b7d9-10c0a6f879d2</UserSecretsId>
         <RootNamespace>MarcellTothNet.Services.Article.Api</RootNamespace>

@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using MarcellTothNet.Common.DDDFoundations;
+using MarcellToth.DDDBuildingBlocks.Persistence.Abstractions;
 using MarcellTothNet.Services.Article.Domain.TagAggregate;
 
 namespace MarcellTothNet.Services.Article.Infrastructure.Repositories
@@ -21,14 +21,26 @@ namespace MarcellTothNet.Services.Article.Infrastructure.Repositories
             return _dbContext.Tags.FindAsync(tagId);
         }
 
-        public void Add(Tag tag)
+        public Task AddAsync(Tag tag)
         {
             _dbContext.Add(tag);
+            return Task.CompletedTask;
         }
 
-        public void Delete(Tag tag)
+        public Task UpdateAsync(Tag entity)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task DeleteAsync(int entityId)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task DeleteAsync(Tag tag)
         {
             _dbContext.Remove(tag);
+            return Task.CompletedTask;
         }
     }
 }

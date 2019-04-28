@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿
 using System.Linq;
 using System.Threading.Tasks;
-using MarcellTothNet.Common.DDDFoundations;
-using MarcellTothNet.Services.Article.Domain.ArticleAggregate;
+using MarcellToth.DDDBuildingBlocks.Persistence.Abstractions;
 using MarcellTothNet.Services.Article.Infrastructure.PersistenceModels;
 using Microsoft.EntityFrameworkCore;
 
@@ -27,22 +25,25 @@ namespace MarcellTothNet.Services.Article.Infrastructure.Repositories
                 );
         }
 
-        public void Add(Domain.ArticleAggregate.Article article)
+        public Task AddAsync(Domain.ArticleAggregate.Article article)
         {
             var mappedModel = ArticleMapper.MapToDataModel(article);
             _dbContext.ArticleModels.Add(mappedModel);
-            article.Id = mappedModel.Id;
+            article.SetId(mappedModel.Id);
+            return Task.CompletedTask;
         }
 
-        public void Update(Domain.ArticleAggregate.Article article)
+        public Task UpdateAsync(Domain.ArticleAggregate.Article article)
         {
             ArticleModel target = _dbContext.ArticleModels.Local.FirstOrDefault(am => am.Id == article.Id);
             _dbContext.Entry(ArticleMapper.MapToDataModel(article, target)).State = EntityState.Modified;
+            return Task.CompletedTask;
         }
 
-        public void Delete(int articleId)
+        public Task DeleteAsync(int articleId)
         {
             _dbContext.ArticleModels.Remove(new ArticleModel {Id = articleId});
+            return Task.CompletedTask;
         }
 
         private static class ArticleMapper
@@ -52,11 +53,9 @@ namespace MarcellTothNet.Services.Article.Infrastructure.Repositories
                 if (dataModel == null)
                     return null;
 
-                return new Domain.ArticleAggregate.Article(dataModel.Title, dataModel.PublishTime, dataModel.Content, dataModel.Thumbnail.ToDomainModel(),
-                    dataModel.ArticleTags.Select(at => at.TagId), dataModel.IsPublished)
-                {
-                    Id = dataModel.Id
-                };
+                return new Domain.ArticleAggregate.Article(dataModel.Id, dataModel.Title, dataModel.PublishTime,
+                    dataModel.Content, dataModel.Thumbnail.ToDomainModel(),
+                    dataModel.ArticleTags.Select(at => at.TagId), dataModel.IsPublished);
             }
 
             public static ArticleModel MapToDataModel(Domain.ArticleAggregate.Article domainModel, ArticleModel target = null)
@@ -74,7 +73,7 @@ namespace MarcellTothNet.Services.Article.Infrastructure.Repositories
                 target.ArticleTags.Clear();
                 foreach (int tagId in domainModel.TagIds)
                 {
-                    target.ArticleTags.Add(new ArticleTagModel()
+                    target.ArticleTags.Add(new ArticleTagModel
                     {
                         Article = target,
                         ArticleId = target.Id,

@@ -1,12 +1,12 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>MarcellTothNet.Services.Article.Domain</RootNamespace>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\common\DDDFoundations\DDDFoundations.csproj" />
+    <PackageReference Include="MarcellToth.DDDBuildingBlocks" Version="1.4.0" />
   </ItemGroup>
-
 </Project>
