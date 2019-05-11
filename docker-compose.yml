@@ -13,6 +13,12 @@ services:
       context: .
       dockerfile: src/services/Identity/Identity.Api/Dockerfile
 
+  files.api:
+    image: ${DOCKER_REGISTRY-}filesapi
+    build:
+      context: .
+      dockerfile: src/services/Files/Files.Api/Dockerfile
+
   admin.gateway:
     image: ${DOCKER_REGISTRY-}admingateway
     build:
