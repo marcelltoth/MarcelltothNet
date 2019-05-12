@@ -1,11 +1,15 @@
 using System.Reflection;
+using MarcellTothNet.Services.Files.Api.Misc.Json;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+
+[assembly: ApiController]
 
 namespace MarcellTothNet.Services.Files.Api
 {
@@ -22,7 +26,10 @@ namespace MarcellTothNet.Services.Files.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers()
-                .AddNewtonsoftJson();
+                .AddNewtonsoftJson(jsonOpts =>
+                {
+                    jsonOpts.SerializerSettings.Converters.Add(new ByteArrayConverter());
+                });
 
             services.AddDbContext<FilesDbContext>(options =>
             {
