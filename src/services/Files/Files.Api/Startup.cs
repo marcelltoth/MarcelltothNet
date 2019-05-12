@@ -1,5 +1,8 @@
+using System.Reflection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -20,6 +23,12 @@ namespace MarcellTothNet.Services.Files.Api
         {
             services.AddControllers()
                 .AddNewtonsoftJson();
+
+            services.AddDbContext<FilesDbContext>(options =>
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("FilesDatabase"));
+                options.ConfigureWarnings(warnings => warnings.Throw(RelationalEventId.QueryClientEvaluationWarning));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
