@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using MarcellTothNet.Services.Article.Api.Commands;
 using MarcellTothNet.Services.Article.Api.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -50,6 +51,7 @@ namespace MarcellTothNet.Services.Article.Api.Controllers
         /// <returns>The view model for the newly inserted article.</returns>
         [HttpPost]
         [Route("")]
+        [Authorize]
         public async Task<IActionResult> PostNew([FromBody] CreateArticleCommand command)
         {
             var id = await _mediator.Send(command);
@@ -58,6 +60,7 @@ namespace MarcellTothNet.Services.Article.Api.Controllers
 
         [HttpPut]
         [Route("{articleId}")]
+        [Authorize]
         public async Task<IActionResult> Update([FromRoute] int articleId, [FromBody] UpdateArticleCommand command)
         {
             if (command.Id != articleId)
@@ -79,6 +82,7 @@ namespace MarcellTothNet.Services.Article.Api.Controllers
         /// <returns><see cref="NoContentResult"/> on success.</returns>
         [HttpPatch]
         [Route("{articleId}/archive")]
+        [Authorize]
         public async Task<IActionResult> Archive([FromRoute] int articleId)
         {
             var command = new ArchiveArticleCommand(articleId);
@@ -95,6 +99,7 @@ namespace MarcellTothNet.Services.Article.Api.Controllers
         /// <returns><see cref="NoContentResult"/> on success.</returns>
         [HttpPatch]
         [Route("{articleId}/publish")]
+        [Authorize]
         public async Task<IActionResult> Publish([FromRoute] int articleId)
         {
             var command = new PublishArticleCommand(articleId);

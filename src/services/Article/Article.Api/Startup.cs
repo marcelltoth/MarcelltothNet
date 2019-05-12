@@ -7,6 +7,7 @@ using Autofac.Extensions.DependencyInjection;
 using AutoMapper;
 using MarcellTothNet.Services.Article.Api.Infrastructure.AutofacModules;
 using MarcellTothNet.Services.Article.Api.Infrastructure.Filters;
+using MarcellTothNet.Services.Article.Api.Infrastructure.Options;
 using MarcellTothNet.Services.Article.Infrastructure;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
@@ -31,6 +32,15 @@ namespace MarcellTothNet.Services.Article.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
+            // Add authentication
+
+            var urlConfig = Configuration.GetSection("Authentication").Get<AuthenticationOptions>();
+            services.AddAuthentication("jwt").AddJwtBearer("jwt", options =>
+            {
+                options.Authority = urlConfig.Authority;
+                options.Audience = "articleapi";
+            });
+
             // Add general services
 
             services.AddMvc(mvcOptions =>
@@ -91,6 +101,9 @@ namespace MarcellTothNet.Services.Article.Api
             }
 
             app.UseHttpsRedirection();
+
+            app.UseAuthentication();
+
             app.UseMvc();
         }
     }

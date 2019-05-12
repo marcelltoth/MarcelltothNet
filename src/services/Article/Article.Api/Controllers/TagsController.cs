@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using MarcellTothNet.Services.Article.Api.Commands;
 using MarcellTothNet.Services.Article.Api.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MarcellTothNet.Services.Article.Api.Controllers
@@ -39,6 +40,7 @@ namespace MarcellTothNet.Services.Article.Api.Controllers
         /// <param name="command">The data for the tag to create.</param>
         [HttpPost]
         [Route("")]
+        [Authorize]
         public async Task<IActionResult> PostNew([FromBody] CreateTagCommand command)
         {
             var id = await _mediator.Send(command);
@@ -48,6 +50,7 @@ namespace MarcellTothNet.Services.Article.Api.Controllers
 
         [HttpPut]
         [Route("{tagId}/display_name")]
+        [Authorize]
         public async Task<IActionResult> ReplaceDisplayName([FromRoute] int tagId, [FromBody] string newDisplayName)
         {
             if (tagId == default)
@@ -63,6 +66,7 @@ namespace MarcellTothNet.Services.Article.Api.Controllers
 
         [HttpDelete]
         [Route("{tagId}")]
+        [Authorize]
         public async Task<IActionResult> Archive([FromRoute] int tagId)
         {
             if (tagId == default)

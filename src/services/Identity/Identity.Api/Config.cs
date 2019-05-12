@@ -21,7 +21,8 @@ namespace Identity.Api
                 Claims =
                 {
                     new Claim(JwtClaimTypes.Address, "Wherever Hungary"),
-                    new Claim(JwtClaimTypes.Email, "marcell@marcelltoth.net")
+                    new Claim(JwtClaimTypes.Email, "marcell@marcelltoth.net"),
+                    new Claim(JwtClaimTypes.Role, "Owner")
                 }
             };
         }
@@ -37,7 +38,7 @@ namespace Identity.Api
         {
             yield return new ApiResource("api-article", "Articles API")
             {
-                UserClaims = { JwtClaimTypes.ClientId, JwtClaimTypes.Subject, JwtClaimTypes.Email }
+                UserClaims = { JwtClaimTypes.ClientId, JwtClaimTypes.Subject, JwtClaimTypes.Email, JwtClaimTypes.Role }
             };
         }
 
@@ -57,6 +58,7 @@ namespace Identity.Api
                     IdentityServerConstants.StandardScopes.OpenId,
                     IdentityServerConstants.StandardScopes.Profile,
                     IdentityServerConstants.StandardScopes.Email,
+                    "api-article"
                 },
                 RequireConsent = false
             };
