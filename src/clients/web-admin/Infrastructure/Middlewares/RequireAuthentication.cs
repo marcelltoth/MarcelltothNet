@@ -14,7 +14,7 @@ namespace MarcellTothNet.Clients.WebAdmin.Infrastructure.Middlewares
     {
         public async Task InvokeAsync(HttpContext context, RequestDelegate next)
         {
-            if (!context.User.Identity.IsAuthenticated)
+            if (!context.User.IsInRole("Owner"))
             {
                 await context.ChallengeAsync();
                 return;

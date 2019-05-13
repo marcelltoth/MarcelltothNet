@@ -50,6 +50,7 @@ namespace MarcellTothNet.Clients.WebAdmin
                     options.SaveTokens = true;
                     options.Scope.Clear();
                     options.Scope.Add("openid");
+                    options.Scope.Add("role");
                     options.Scope.Add("email");
                     options.Scope.Add("articleapi");
                     options.Scope.Add("offline_access");

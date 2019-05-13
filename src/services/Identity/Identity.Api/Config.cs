@@ -32,6 +32,7 @@ namespace Identity.Api
             yield return new IdentityResources.OpenId();
             yield return new IdentityResources.Profile();
             yield return new IdentityResources.Email();
+            yield return new IdentityResource("role", new [] { JwtClaimTypes.Role });
         }
 
         public static IEnumerable<ApiResource> GetApiResources()
@@ -58,6 +59,7 @@ namespace Identity.Api
                 Enabled = true,
                 ClientName = "Administrator SPA Application",
                 AllowOfflineAccess = true,
+                AlwaysIncludeUserClaimsInIdToken = true,
                 AllowedGrantTypes = GrantTypes.Hybrid,
                 AllowAccessTokensViaBrowser = true,
                 AccessTokenType = AccessTokenType.Jwt,
@@ -73,6 +75,7 @@ namespace Identity.Api
                     IdentityServerConstants.StandardScopes.OpenId,
                     IdentityServerConstants.StandardScopes.Profile,
                     IdentityServerConstants.StandardScopes.Email,
+                    "role",
                     "articleapi",
                     IdentityServerConstants.StandardScopes.OfflineAccess
                 },
