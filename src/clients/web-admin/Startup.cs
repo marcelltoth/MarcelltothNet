@@ -1,5 +1,7 @@
+using System.Threading.Tasks;
 using MarcellTothNet.Clients.WebAdmin.Infrastructure.Middlewares;
 using MarcellTothNet.Clients.WebAdmin.Infrastructure.Options;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -30,7 +32,7 @@ namespace MarcellTothNet.Clients.WebAdmin
             });
 
 
-            var urlConfig = Configuration.GetSection("UrlConfig").Get<UrlConfig>();
+            var authenticationOptions = Configuration.GetSection("Authentication").Get<AuthenticationOptions>();
             
             services.AddAuthentication(options =>
                 {
@@ -40,14 +42,21 @@ namespace MarcellTothNet.Clients.WebAdmin
                 .AddCookie("cookies")
                 .AddOpenIdConnect("openidc", options =>
                 {
-                    options.Authority = urlConfig.IdentityApi;
+                    options.Authority = authenticationOptions.Authority;
+                    options.ClientSecret = authenticationOptions.ClientSecret;
                     options.ClientId = "web-admin";
-                    options.ResponseType = "id_token";
+                    options.ResponseType = "code id_token";
+                    options.SaveTokens = true;
                     options.Scope.Clear();
                     options.Scope.Add("openid");
                     options.Scope.Add("email");
                     options.Scope.Add("articleapi");
+                    //options.Scope.Add("offline-access");
                     options.SignInScheme = "cookies";
+                    options.Events = new OpenIdConnectEvents()
+                    {
+                        OnRemoteFailure = (context) => { return Task.FromResult(0); }
+                    };
                 });
 
             services.AddTransient<RequireAuthenticationMiddleware>();

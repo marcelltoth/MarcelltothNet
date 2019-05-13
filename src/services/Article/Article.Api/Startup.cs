@@ -35,11 +35,12 @@ namespace MarcellTothNet.Services.Article.Api
             // Add authentication
 
             var urlConfig = Configuration.GetSection("Authentication").Get<AuthenticationOptions>();
-            services.AddAuthentication("jwt").AddJwtBearer("jwt", options =>
-            {
-                options.Authority = urlConfig.Authority;
-                options.Audience = "articleapi";
-            });
+
+            services.AddAuthentication("oidc").AddIdentityServerAuthentication("oidc", opts =>
+                {
+                    opts.Authority = urlConfig.Authority;
+                    opts.ApiName = "articleapi";
+                });
 
             // Add general services
 

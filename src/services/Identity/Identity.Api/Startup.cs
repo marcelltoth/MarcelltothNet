@@ -46,7 +46,7 @@ namespace Identity.Api
                 .AddTestUsers(Config.GetTestUsers().ToList())
                 .AddInMemoryIdentityResources(Config.GetIdentityResources())
                 .AddInMemoryApiResources(Config.GetApiResources())
-                .AddInMemoryClients(Config.GetClients(Configuration.GetSection("ClientUri").Get<ClientUriOptions>()));
+                .AddInMemoryClients(Config.GetClients(Configuration.GetSection("Clients").GetSection("WebAdmin").Get<ClientOptions>()));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

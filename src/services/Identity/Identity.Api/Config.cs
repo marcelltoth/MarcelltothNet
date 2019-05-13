@@ -36,29 +36,44 @@ namespace Identity.Api
 
         public static IEnumerable<ApiResource> GetApiResources()
         {
-            yield return new ApiResource("api-article", "Articles API")
+            yield return new ApiResource("articleapi", "Articles API")
             {
-                UserClaims = { JwtClaimTypes.ClientId, JwtClaimTypes.Subject, JwtClaimTypes.Email, JwtClaimTypes.Role }
+                UserClaims = { JwtClaimTypes.ClientId, JwtClaimTypes.Subject, JwtClaimTypes.Email, JwtClaimTypes.Role },
+                Scopes = new List<Scope>
+                {
+                    new Scope("articleapi")
+                }
             };
         }
 
-        public static IEnumerable<Client> GetClients(ClientUriOptions clientUriOptions)
+        public static IEnumerable<Client> GetClients(ClientOptions webAdminOptions)
         {
-            yield return new Client()
+            yield return new Client
             {
                 ClientId = "web-admin",
+                ClientSecrets =
+                {
+                    new Secret(webAdminOptions.Secret.Sha512())
+                },
+                Enabled = true,
                 ClientName = "Administrator SPA Application",
-                AllowedGrantTypes = GrantTypes.Implicit,
+                AllowOfflineAccess = true,
+                AllowedGrantTypes = GrantTypes.Hybrid,
                 AllowAccessTokensViaBrowser = true,
-                RedirectUris = {$"{clientUriOptions.WebAdmin}/signin-oidc"},
-                AllowedCorsOrigins = { clientUriOptions.WebAdmin },
-                PostLogoutRedirectUris = { $"{clientUriOptions.WebAdmin}/signout??" },
+                AccessTokenType = AccessTokenType.Jwt,
+                AccessTokenLifetime = 3600,
+                RefreshTokenUsage = TokenUsage.ReUse,
+                RefreshTokenExpiration = TokenExpiration.Sliding,
+                SlidingRefreshTokenLifetime = 3600*24*365*5,
+                RedirectUris = {$"{webAdminOptions.BaseUrl}/signin-oidc"},
+                AllowedCorsOrigins = { webAdminOptions.BaseUrl },
+                PostLogoutRedirectUris = { $"{webAdminOptions.BaseUrl}/signout-callback-oidc" },
                 AllowedScopes =
                 {
                     IdentityServerConstants.StandardScopes.OpenId,
                     IdentityServerConstants.StandardScopes.Profile,
                     IdentityServerConstants.StandardScopes.Email,
-                    "api-article"
+                    "articleapi"
                 },
                 RequireConsent = false
             };
