@@ -1,6 +1,6 @@
 import { ArticleData } from "../common/article";
 import { ActionCreatorMap, AsyncAction } from "../common";
-import axios from 'axios';
+import {apiClient} from '../../services/api-client';
 
 
 export interface LoadArticlesBeginAction{
@@ -142,7 +142,7 @@ export const actionCreators = {
         if(!getState().article.isRefreshing){
             dispatch({type: 'LOAD_ARTICLES_BEGIN'});
             try{
-                const response = await axios.get<ArticleData[]>('https://localhost:13101/v1/article/articles');
+                const response = await apiClient.get<ArticleData[]>('https://localhost:13101/v1/article/articles');
                 dispatch({type: 'LOAD_ARTICLES_SUCCESS', articleList: response.data});
             }
             catch{
@@ -154,7 +154,7 @@ export const actionCreators = {
         if(!getState().article.isRefreshing){
             dispatch({type: 'LOAD_SINGLE_ARTICLE_BEGIN'});
             try{
-                const response = await axios.get<ArticleData>(`https://localhost:13101/v1/article/articles/${id}`);
+                const response = await apiClient.get<ArticleData>(`https://localhost:13101/v1/article/articles/${id}`);
                 dispatch({type: 'LOAD_SINGLE_ARTICLE_SUCCESS', articleData: response.data});
             }
             catch{
@@ -178,7 +178,7 @@ export const actionCreators = {
                     isPublished: false
                 };
 
-                const response = await axios.post<ArticleData>(`https://localhost:13101/v1/article/articles`, newArticle);
+                const response = await apiClient.post<ArticleData>(`https://localhost:13101/v1/article/articles`, newArticle);
                 dispatch({type: 'CREATE_ARTICLE_SUCCESS', articleData: response.data});
             }
             catch{
@@ -191,7 +191,7 @@ export const actionCreators = {
         if(!getState().article.isRefreshing && article !== undefined){
             dispatch({type: 'SAVE_ARTICLE_BEGIN'});
             try{
-                const response = await axios.put<ArticleData>(`https://localhost:13101/v1/article/articles/${id}`, article);
+                const response = await apiClient.put<ArticleData>(`https://localhost:13101/v1/article/articles/${id}`, article);
                 dispatch({type: 'SAVE_ARTICLE_SUCCESS', articleData: response.data});
             }
             catch{
@@ -203,7 +203,7 @@ export const actionCreators = {
         if(!getState().article.isRefreshing){
             dispatch({type: 'ARCHIVE_ARTICLE_BEGIN'});
             try{
-                await axios.patch(`https://localhost:13101/v1/article/articles/${id}/archive`);
+                await apiClient.patch(`https://localhost:13101/v1/article/articles/${id}/archive`);
                 dispatch({type: 'ARCHIVE_ARTICLE_SUCCESS', id});
             }
             catch{
@@ -215,7 +215,7 @@ export const actionCreators = {
         if(!getState().article.isRefreshing){
             dispatch({type: 'PUBLISH_ARTICLE_BEGIN'});
             try{
-                await axios.patch(`https://localhost:13101/v1/article/articles/${id}/publish`);
+                await apiClient.patch(`https://localhost:13101/v1/article/articles/${id}/publish`);
                 dispatch({type: 'PUBLISH_ARTICLE_SUCCESS', id});
             }
             catch{
