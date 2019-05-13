@@ -38,6 +38,7 @@ namespace MarcellTothNet.Services.Article.Api
             services.AddAuthentication("jwt").AddJwtBearer("jwt", opts =>
                 {
                     opts.Authority = urlConfig.Authority;
+                    opts.RequireHttpsMetadata = false;
                 });
 
             // Add general services
