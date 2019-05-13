@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using IdentityModel.Client;
 using MarcellTothNet.Clients.WebAdmin.Infrastructure.Middlewares;
 using MarcellTothNet.Clients.WebAdmin.Infrastructure.Options;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
@@ -44,20 +45,22 @@ namespace MarcellTothNet.Clients.WebAdmin
                 {
                     options.Authority = authenticationOptions.Authority;
                     options.ClientSecret = authenticationOptions.ClientSecret;
-                    options.ClientId = "web-admin";
+                    options.ClientId = authenticationOptions.ClientId;
                     options.ResponseType = "code id_token";
                     options.SaveTokens = true;
                     options.Scope.Clear();
                     options.Scope.Add("openid");
                     options.Scope.Add("email");
                     options.Scope.Add("articleapi");
-                    //options.Scope.Add("offline-access");
+                    options.Scope.Add("offline_access");
                     options.SignInScheme = "cookies";
                     options.Events = new OpenIdConnectEvents()
                     {
                         OnRemoteFailure = (context) => { return Task.FromResult(0); }
                     };
                 });
+
+            services.AddTransient(sp => new TokenClient(authenticationOptions.Authority+"/connect/token", authenticationOptions.ClientId, authenticationOptions.ClientSecret));
 
             services.AddTransient<RequireAuthenticationMiddleware>();
 

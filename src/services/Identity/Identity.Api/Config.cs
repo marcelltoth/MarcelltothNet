@@ -73,7 +73,8 @@ namespace Identity.Api
                     IdentityServerConstants.StandardScopes.OpenId,
                     IdentityServerConstants.StandardScopes.Profile,
                     IdentityServerConstants.StandardScopes.Email,
-                    "articleapi"
+                    "articleapi",
+                    IdentityServerConstants.StandardScopes.OfflineAccess
                 },
                 RequireConsent = false
             };
