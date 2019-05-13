@@ -9,7 +9,6 @@ using MarcellTothNet.Services.Article.Api.Infrastructure.AutofacModules;
 using MarcellTothNet.Services.Article.Api.Infrastructure.Filters;
 using MarcellTothNet.Services.Article.Api.Infrastructure.Options;
 using MarcellTothNet.Services.Article.Infrastructure;
-using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -36,10 +35,9 @@ namespace MarcellTothNet.Services.Article.Api
 
             var urlConfig = Configuration.GetSection("Authentication").Get<AuthenticationOptions>();
 
-            services.AddAuthentication("oidc").AddIdentityServerAuthentication("oidc", opts =>
+            services.AddAuthentication("jwt").AddJwtBearer("jwt", opts =>
                 {
                     opts.Authority = urlConfig.Authority;
-                    opts.ApiName = "articleapi";
                 });
 
             // Add general services
