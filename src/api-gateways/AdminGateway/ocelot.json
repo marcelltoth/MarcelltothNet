@@ -25,6 +25,19 @@
       "UpstreamPathTemplate": "/v1/article/{url}",
       "UpstreamHttpMethod": [],
       "DangerousAcceptAnyServerCertificateValidator": true
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/{url}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "files.api",
+          "Port": 443
+        }
+      ],
+      "UpstreamPathTemplate": "/v1/static/{url}",
+      "UpstreamHttpMethod": [],
+      "DangerousAcceptAnyServerCertificateValidator": true
     }
   ]
 }

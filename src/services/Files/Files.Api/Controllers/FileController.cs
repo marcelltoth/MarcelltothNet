@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MarcellTothNet.Services.Files.Api.Controllers
 {
-    [Route("files")]
+    [Route("api/v1/files")]
     public class FileController : Controller
     {
         private readonly FilesDbContext _dbContext;
