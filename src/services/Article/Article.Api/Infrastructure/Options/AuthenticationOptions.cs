@@ -6,5 +6,10 @@
         ///     The authority of the OpenID Connect provider
         /// </summary>
         public string Authority { get; set; }
+
+        /// <summary>
+        ///     The audience name of this API
+        /// </summary>
+        public string Audience { get; set; }
     }
 }

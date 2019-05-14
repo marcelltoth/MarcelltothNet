@@ -33,12 +33,14 @@ namespace MarcellTothNet.Services.Article.Api
         {
             // Add authentication
 
-            var urlConfig = Configuration.GetSection("Authentication").Get<AuthenticationOptions>();
+            var authenticationOptions = Configuration.GetSection("Authentication").Get<AuthenticationOptions>();
 
             services.AddAuthentication("jwt").AddJwtBearer("jwt", opts =>
                 {
-                    opts.Authority = urlConfig.Authority;
+                    opts.Authority = authenticationOptions.Authority;
                     opts.RequireHttpsMetadata = false;
+                    opts.TokenValidationParameters.ValidAudience = authenticationOptions.Audience;
+                    opts.TokenValidationParameters.ValidateIssuer = false;
                 });
 
             // Add general services
