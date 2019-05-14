@@ -1,5 +1,5 @@
-using System.Reflection;
 using MarcellTothNet.Services.Files.Api.Misc.Json;
+using MarcellTothNet.Services.Files.Api.Options;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -25,6 +25,31 @@ namespace MarcellTothNet.Services.Files.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var authenticationOptions = Configuration.GetSection("Authentication").Get<AuthenticationOptions>();
+
+            services.AddAuthentication("jwt").AddJwtBearer("jwt", opts =>
+            {
+                opts.Authority = authenticationOptions.Authority;
+                opts.RequireHttpsMetadata = false;
+                opts.TokenValidationParameters.ValidAudience = authenticationOptions.Audience;
+                opts.TokenValidationParameters.ValidateIssuer = false;
+            });
+
+            services.AddAuthorization(ao =>
+            {
+                ao.AddPolicy("CanModify", policy =>
+                {
+                    policy.RequireAuthenticatedUser();
+                    policy.RequireRole("Owner");
+                });
+                
+                ao.AddPolicy("CanList", policy =>
+                {
+                    policy.RequireAuthenticatedUser();
+                    policy.RequireRole("Owner");
+                });
+            });
+            
             services.AddControllers()
                 .AddNewtonsoftJson(jsonOpts =>
                 {

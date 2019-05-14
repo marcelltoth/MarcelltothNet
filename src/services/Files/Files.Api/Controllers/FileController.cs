@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using MarcellTothNet.Services.Files.Api.Contract;
 using MarcellTothNet.Services.Files.Api.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace MarcellTothNet.Services.Files.Api.Controllers
 {
@@ -16,6 +19,19 @@ namespace MarcellTothNet.Services.Files.Api.Controllers
             _dbContext = dbContext;
         }
 
+        [HttpGet]
+        [Authorize("CanList")]
+        public async Task<IActionResult> ListAll()
+        {
+            return Ok(await _dbContext.Files.Select(f => new File
+            {
+                Id = f.Id,
+                MimeType = f.MimeType,
+                ModifyDate = f.ModifyDate,
+                UploadDate = f.UploadDate
+            }).ToListAsync());
+        }
+
         [HttpGet("{fileGuid}")]
         public async Task<IActionResult> Get(Guid fileGuid)
         {
@@ -27,6 +43,7 @@ namespace MarcellTothNet.Services.Files.Api.Controllers
         }
 
         [HttpPost]
+        [Authorize("CanModify")]
         public async Task<IActionResult> Post([FromBody] UploadFileDto newFile)
         {
             var model = new File
@@ -41,6 +58,20 @@ namespace MarcellTothNet.Services.Files.Api.Controllers
             await _dbContext.SaveChangesAsync();
 
             return CreatedAtAction(nameof(Get), new {fileGuid = model.Id}, model.Id);
+        }
+        
+        
+        [HttpDelete("{fileGuid}")]
+        [Authorize("CanModify")]
+        public async Task<IActionResult> Delete(Guid fileGuid)
+        {
+            var file = await _dbContext.Files.FindAsync(fileGuid);
+            if (file == null)
+                return NotFound();
+
+            _dbContext.Remove(file);
+            await _dbContext.SaveChangesAsync();
+            return NoContent();
         }
     }
 }

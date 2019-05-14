@@ -45,6 +45,15 @@ namespace Identity.Api
                     new Scope("articleapi")
                 }
             };
+            
+            yield return new ApiResource("filesapi", "Static Files API")
+            {
+                UserClaims = { JwtClaimTypes.ClientId, JwtClaimTypes.Role },
+                Scopes = new List<Scope>
+                {
+                    new Scope("filesapi")
+                }
+            };
         }
 
         public static IEnumerable<Client> GetClients(ClientOptions webAdminOptions)
@@ -77,6 +86,7 @@ namespace Identity.Api
                     IdentityServerConstants.StandardScopes.Email,
                     "role",
                     "articleapi",
+                    "filesapi",
                     IdentityServerConstants.StandardScopes.OfflineAccess
                 },
                 RequireConsent = false
