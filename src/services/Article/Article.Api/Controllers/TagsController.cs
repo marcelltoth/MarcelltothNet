@@ -40,7 +40,7 @@ namespace MarcellTothNet.Services.Article.Api.Controllers
         /// <param name="command">The data for the tag to create.</param>
         [HttpPost]
         [Route("")]
-        [Authorize]
+        [Authorize(Roles = "Owner")]
         public async Task<IActionResult> PostNew([FromBody] CreateTagCommand command)
         {
             var id = await _mediator.Send(command);
@@ -50,7 +50,7 @@ namespace MarcellTothNet.Services.Article.Api.Controllers
 
         [HttpPut]
         [Route("{tagId}/display_name")]
-        [Authorize]
+        [Authorize(Roles = "Owner")]
         public async Task<IActionResult> ReplaceDisplayName([FromRoute] int tagId, [FromBody] string newDisplayName)
         {
             if (tagId == default)
@@ -66,7 +66,7 @@ namespace MarcellTothNet.Services.Article.Api.Controllers
 
         [HttpDelete]
         [Route("{tagId}")]
-        [Authorize]
+        [Authorize(Roles = "Owner")]
         public async Task<IActionResult> Archive([FromRoute] int tagId)
         {
             if (tagId == default)
