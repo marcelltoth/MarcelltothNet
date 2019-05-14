@@ -43,6 +43,15 @@ namespace MarcellTothNet.Services.Article.Api
                     opts.TokenValidationParameters.ValidateIssuer = false;
                 });
 
+            services.AddAuthorization(ao =>
+            {
+                ao.AddPolicy("CanModify", policy =>
+                {
+                    policy.RequireAuthenticatedUser();
+                    policy.RequireRole("Owner");
+                });
+            });
+
             // Add general services
 
             services.AddMvc(mvcOptions =>
