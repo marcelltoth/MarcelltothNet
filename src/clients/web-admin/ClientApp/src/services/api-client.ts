@@ -16,7 +16,7 @@ class ApiClientInstance{
         }).then(accessToken => {
             this.clientInstance = Axios.create({
                 headers: { 'Authorization': "Bearer " + accessToken },
-                
+                baseURL: gatewayEndpointLocation
             });
             this.clientInstance.interceptors.response.use(
                 response => response,
