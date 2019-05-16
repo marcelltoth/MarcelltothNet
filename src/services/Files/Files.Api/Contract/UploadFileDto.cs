@@ -5,5 +5,7 @@
         public string MimeType { get; set; }
 
         public byte[] Content { get; set; }
+
+        public string DisplayName { get; set; }
     }
 }

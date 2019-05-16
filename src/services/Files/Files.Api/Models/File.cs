@@ -13,5 +13,7 @@ namespace MarcellTothNet.Services.Files.Api.Models
         public DateTimeOffset UploadDate { get; set; }
 
         public DateTimeOffset ModifyDate { get; set; }
+
+        public string DisplayName { get; set; }
     }
 }

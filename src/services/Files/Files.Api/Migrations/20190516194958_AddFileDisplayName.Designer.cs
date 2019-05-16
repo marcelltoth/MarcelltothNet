@@ -4,14 +4,16 @@ using MarcellTothNet.Services.Files.Api;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MarcellTothNet.Services.Files.Api.Migrations
 {
     [DbContext(typeof(FilesDbContext))]
-    partial class FilesDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190516194958_AddFileDisplayName")]
+    partial class AddFileDisplayName
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
