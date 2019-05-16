@@ -59,8 +59,28 @@ namespace MarcellTothNet.Services.Files.Api.Controllers
 
             return CreatedAtAction(nameof(Get), new {fileGuid = model.Id}, model.Id);
         }
-        
-        
+
+        [HttpPut("{fileGuid}")]
+        [Authorize("CanModify")]
+        public async Task<IActionResult> Modify(Guid fileGuid, [FromBody] UploadFileDto changeData)
+        {
+            var file = await _dbContext.Files.FindAsync(fileGuid);
+            if (file == null)
+                return NotFound();
+
+            file.DisplayName = changeData.DisplayName;
+            if (changeData.Content != null && changeData.MimeType != null)
+            {
+                file.Content = changeData.Content;
+                file.DisplayName = changeData.DisplayName;
+            }
+
+            _dbContext.Update(file);
+            await _dbContext.SaveChangesAsync();
+            return NoContent();
+        }
+
+
         [HttpDelete("{fileGuid}")]
         [Authorize("CanModify")]
         public async Task<IActionResult> Delete(Guid fileGuid)
