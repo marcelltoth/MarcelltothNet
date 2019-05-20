@@ -80,10 +80,13 @@ namespace MarcellTothNet.Services.Files.Api.Controllers
                 return NotFound();
 
             file.DisplayName = changeData.DisplayName;
-            if (changeData.Content != null && changeData.MimeType != null)
+            if (changeData.MimeType != null)
             {
-                file.Content = changeData.Content;
-                file.DisplayName = changeData.DisplayName;
+                file.MimeType = changeData.MimeType;
+                if (changeData.Content != null)
+                {
+                    file.Content = changeData.Content;
+                }
             }
 
             _dbContext.Update(file);
