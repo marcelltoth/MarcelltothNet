@@ -10,7 +10,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCloudDownloadAlt, faCopy, faEdit } from '@fortawesome/free-solid-svg-icons';
 import styles from './file-list-page.module.css';
 import { FileEditorModal, UploadedFile } from "./file-editor-modal";
-import { updateFile } from "../../store/actions/static-file/update-file";
+import { updateFile, createFile } from "../../store/actions/static-file";
+import { Button } from "reactstrap";
 
 interface StateProps{
     isLoading: boolean;
@@ -20,17 +21,20 @@ interface StateProps{
 type DispatchProps = {
     fetchStaticFiles: VoidFunctionOf<typeof fetchStaticFiles>;
     updateFile: VoidFunctionOf<typeof updateFile>;
+    createFile: VoidFunctionOf<typeof createFile>;
 };
 
 type FileListPageImplProps = StateProps & DispatchProps;
 
 interface FileListPageImplState{
     editedItem: StaticFileData | undefined;
+    uploadModalOpen: boolean;
 }
 
 class FileListPageImpl extends React.Component<FileListPageImplProps, FileListPageImplState>{
     public readonly state : FileListPageImplState = {
-        editedItem: undefined
+        editedItem: undefined,
+        uploadModalOpen: false
     };
 
     public componentDidMount(){
@@ -45,7 +49,8 @@ class FileListPageImpl extends React.Component<FileListPageImplProps, FileListPa
 
     private handleModalDismiss = () => {
         this.setState({
-            editedItem: undefined
+            editedItem: undefined,
+            uploadModalOpen: false
         })
     };
 
@@ -57,6 +62,18 @@ class FileListPageImpl extends React.Component<FileListPageImplProps, FileListPa
                 editedItem: undefined
             });
         }
+        else if(this.state.uploadModalOpen){
+            this.props.createFile(file.content as string, file.mimeType, file.displayName);
+            this.setState({
+                uploadModalOpen: false
+            });
+        }
+    };
+
+    private handleUploadClick = () => {
+        this.setState({
+            uploadModalOpen: true
+        });
     };
 
     public render(){
@@ -66,42 +83,50 @@ class FileListPageImpl extends React.Component<FileListPageImplProps, FileListPa
         }
         else{
             const DateCellFormatter : TableCellRenderer = ({ value }) => new Date(value).toLocaleDateString(undefined, { hour: "2-digit", minute: "2-digit" });
-            return <>
-                <ReactTable data={fileList} columns={[
-                    {
-                        id: "primaryActions",
-                        width: 80,
-                        Cell: ({original}) => <PriamryActionPanel uri={original.canonicalUri} />
-                    },
-                    {
-                        accessor: "displayName",
-                        Header: "Name"
-                    },
-                    {
-                        accessor: "mimeType",
-                        Header: "MIME Type",
-                        width: 120
-                    },
-                    {
-                        accessor: "modifyDate",
-                        Header: "Modify date",
-                        Cell: DateCellFormatter,
-                        width: 160
-                    },
-                    {
-                        accessor: "uploadDate",
-                        Header: "Upload date",
-                        Cell: DateCellFormatter,
-                        width: 160
-                    },
-                    {
-                        accessor: "secondaryActions",
-                        Cell: ({original}) => <SecondaryActionPanel file={original} onEditClick={() => this.handleEditClick(original)}/>,
-                        width: 50
-                    }
-                ]}/>
+            return <div className="mt-3">
+                <div className="d-flex justify-content-end mb-2">
+                    <Button outline color="primary" onClick={this.handleUploadClick}>Upload file</Button>
+                </div>
+                <ReactTable 
+                    data={fileList}
+                    defaultSorted={[{id: 'uploadDate', desc: true}]}
+                    columns={[
+                        {
+                            id: "primaryActions",
+                            width: 80,
+                            Cell: ({original}) => <PriamryActionPanel uri={original.canonicalUri} />
+                        },
+                        {
+                            accessor: "displayName",
+                            Header: "Name"
+                        },
+                        {
+                            accessor: "mimeType",
+                            Header: "MIME Type",
+                            width: 120
+                        },
+                        {
+                            accessor: "modifyDate",
+                            Header: "Modify date",
+                            Cell: DateCellFormatter,
+                            width: 160
+                        },
+                        {
+                            accessor: "uploadDate",
+                            Header: "Upload date",
+                            Cell: DateCellFormatter,
+                            width: 160
+                        },
+                        {
+                            accessor: "secondaryActions",
+                            Cell: ({original}) => <SecondaryActionPanel file={original} onEditClick={() => this.handleEditClick(original)}/>,
+                            width: 50
+                        }
+                    ]}
+                    />
                 {this.renderEditorModal()}
-            </>
+                {this.renderUploadModal()}
+            </div>
         }
     }
 
@@ -122,6 +147,17 @@ class FileListPageImpl extends React.Component<FileListPageImplProps, FileListPa
             onSave={this.handleSave}
             />;
     }
+
+    private renderUploadModal(){
+        const {uploadModalOpen} = this.state;
+
+        return <FileEditorModal
+            isOpen={uploadModalOpen}
+            contentRequired={true}
+            onDismiss={this.handleModalDismiss}
+            onSave={this.handleSave}
+            />;
+    }
 }
 
 
@@ -134,7 +170,7 @@ const mapStateToProps = (state: ApplicationState) : StateProps => {
 
 export const FileListPage = connect(
     mapStateToProps, 
-    {fetchStaticFiles, updateFile}
+    {fetchStaticFiles, updateFile, createFile}
 )(FileListPageImpl);
 
 

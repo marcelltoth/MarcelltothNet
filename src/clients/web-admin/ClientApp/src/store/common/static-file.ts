@@ -1,9 +1,9 @@
 export interface StaticFileData{
     id: string;
     mimeType: string;
+    displayName: string;
     content: string;
     uploadDate: string;
     modifyDate: string;
-    displayName: string;
     canonicalUri: string;
 }

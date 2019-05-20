@@ -13,8 +13,8 @@ interface FileEditorModalProps{
     onSave: (file: UploadedFile) => void;
     onDismiss: () => void;
 
-    initialDisplayName: string;
-    initialMimeType: string;
+    initialDisplayName?: string;
+    initialMimeType?: string;
 
     contentRequired: boolean;
 }
@@ -28,15 +28,15 @@ interface FileEditorModalState{
 export class FileEditorModal extends React.PureComponent<FileEditorModalProps, FileEditorModalState>{
 
     public readonly state : FileEditorModalState = {
-        displayName: this.props.initialDisplayName,
-        mimeType: this.props.initialMimeType,
+        displayName: this.props.initialDisplayName || "",
+        mimeType: this.props.initialMimeType || "",
         content: undefined
     };
 
     handleDismiss = () => {
         this.setState({
-            displayName: this.props.initialDisplayName,
-            mimeType: this.props.initialMimeType,
+            displayName: this.props.initialDisplayName || "",
+            mimeType: this.props.initialMimeType || "",
             content: undefined
         });
 

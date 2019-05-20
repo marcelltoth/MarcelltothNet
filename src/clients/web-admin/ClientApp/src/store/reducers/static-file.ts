@@ -2,6 +2,7 @@ import { StaticFileData } from "../common/static-file";
 import { Reducer, Action } from "redux";
 import { FetchStaticFilesActions } from "../actions/static-file";
 import { UpdateFileSuccessAction, updateFile } from "../actions/static-file/update-file";
+import { CreateFileSuccessAction } from "../actions/static-file/create-file";
 
 
 export interface StaticFileState{
@@ -14,7 +15,7 @@ const initialState : StaticFileState = {
     fileList: []
 };
 
-type KnownAction = FetchStaticFilesActions | UpdateFileSuccessAction;
+type KnownAction = FetchStaticFilesActions | UpdateFileSuccessAction | CreateFileSuccessAction;
 
 export const reducer : Reducer<StaticFileState> = (state = initialState, incommingAction: Action) => {
     
@@ -29,6 +30,8 @@ export const reducer : Reducer<StaticFileState> = (state = initialState, incommi
             return {...state, isRefreshing: false};
         case 'UPDATE_FILE_SUCCESS':
             return updateFileInState(state, action.id, {mimeType: action.newMimeType, displayName: action.newDisplayName});
+        case 'CREATE_FILE_SUCCESS':
+            return {...state, fileList: [...state.fileList, action.data]};
     }
 
     return state;
