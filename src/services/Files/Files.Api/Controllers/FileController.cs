@@ -44,7 +44,7 @@ namespace MarcellTothNet.Services.Files.Api.Controllers
 
             // Set up the content-disposition header with proper encoding of the filename
             var contentDisposition = new ContentDispositionHeaderValue("inline");
-            contentDisposition.SetHttpFileName(MakeFileName(file.DisplayName));
+            contentDisposition.SetHttpFileName(MakeFileName(file.DisplayName, file.MimeType));
             Response.Headers[HeaderNames.ContentDisposition] = contentDisposition.ToString();
 
             // Return the actual filestream
@@ -68,7 +68,7 @@ namespace MarcellTothNet.Services.Files.Api.Controllers
             _dbContext.Files.Add(model);
             await _dbContext.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(Get), new {fileGuid = model.Id}, model.Id);
+            return CreatedAtAction(nameof(Get), new {fileGuid = model.Id}, model);
         }
 
         [HttpPut("{fileGuid}")]
@@ -105,14 +105,14 @@ namespace MarcellTothNet.Services.Files.Api.Controllers
             return NoContent();
         }
 
-        private static string MakeFileName(string raw)
+        private static string MakeFileName(string raw, string mimeType)
         {
             foreach (var c in System.IO.Path.GetInvalidFileNameChars())
             {
                 raw = raw.Replace(c, '_');
             }
 
-            return raw;
+            return $"{raw}{MimeTypes.MimeTypeMap.GetExtension(mimeType)}";
         }
     }
 }
