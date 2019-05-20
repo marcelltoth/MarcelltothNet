@@ -1,0 +1,1 @@
+export * from './fetch-static-files';
