@@ -9,6 +9,8 @@ import 'react-table/react-table.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCloudDownloadAlt, faCopy, faEdit } from '@fortawesome/free-solid-svg-icons';
 import styles from './file-list-page.module.css';
+import { FileEditorModal, UploadedFile } from "./file-editor-modal";
+import { updateFile } from "../../store/actions/static-file/update-file";
 
 interface StateProps{
     isLoading: boolean;
@@ -16,21 +18,45 @@ interface StateProps{
 }
 
 type DispatchProps = {
-    fetchStaticFiles: VoidFunctionOf<typeof fetchStaticFiles>
+    fetchStaticFiles: VoidFunctionOf<typeof fetchStaticFiles>;
+    updateFile: VoidFunctionOf<typeof updateFile>;
 };
 
 type FileListPageImplProps = StateProps & DispatchProps;
 
+interface FileListPageImplState{
+    editedItem: StaticFileData | undefined;
+}
 
-
-class FileListPageImpl extends React.Component<FileListPageImplProps>{
+class FileListPageImpl extends React.Component<FileListPageImplProps, FileListPageImplState>{
+    public readonly state : FileListPageImplState = {
+        editedItem: undefined
+    };
 
     public componentDidMount(){
         this.props.fetchStaticFiles();
     }
 
     private handleEditClick = (file: StaticFileData) => {
+        this.setState({
+            editedItem: file
+        });
+    };
 
+    private handleModalDismiss = () => {
+        this.setState({
+            editedItem: undefined
+        })
+    };
+
+    private handleSave = (file: UploadedFile) => {
+        const editedItem = this.state.editedItem;
+        if(editedItem !== undefined){
+            this.props.updateFile(editedItem.id, file.displayName, file.mimeType, file.content);
+            this.setState({
+                editedItem: undefined
+            });
+        }
     };
 
     public render(){
@@ -40,40 +66,61 @@ class FileListPageImpl extends React.Component<FileListPageImplProps>{
         }
         else{
             const DateCellFormatter : TableCellRenderer = ({ value }) => new Date(value).toLocaleDateString(undefined, { hour: "2-digit", minute: "2-digit" });
-            return <ReactTable data={fileList} columns={[
-                {
-                    id: "primaryActions",
-                    width: 80,
-                    Cell: ({original}) => <PriamryActionPanel uri={original.canonicalUri} />
-                },
-                {
-                    accessor: "displayName",
-                    Header: "Name"
-                },
-                {
-                    accessor: "mimeType",
-                    Header: "MIME Type",
-                    width: 120
-                },
-                {
-                    accessor: "modifyDate",
-                    Header: "Modify date",
-                    Cell: DateCellFormatter,
-                    width: 160
-                },
-                {
-                    accessor: "uploadDate",
-                    Header: "Upload date",
-                    Cell: DateCellFormatter,
-                    width: 160
-                },
-                {
-                    accessor: "secondaryActions",
-                    Cell: ({original}) => <SecondaryActionPanel file={original} onEditClick={() => this.handleEditClick(original)}/>,
-                    width: 50
-                }
-            ]}/>
+            return <>
+                <ReactTable data={fileList} columns={[
+                    {
+                        id: "primaryActions",
+                        width: 80,
+                        Cell: ({original}) => <PriamryActionPanel uri={original.canonicalUri} />
+                    },
+                    {
+                        accessor: "displayName",
+                        Header: "Name"
+                    },
+                    {
+                        accessor: "mimeType",
+                        Header: "MIME Type",
+                        width: 120
+                    },
+                    {
+                        accessor: "modifyDate",
+                        Header: "Modify date",
+                        Cell: DateCellFormatter,
+                        width: 160
+                    },
+                    {
+                        accessor: "uploadDate",
+                        Header: "Upload date",
+                        Cell: DateCellFormatter,
+                        width: 160
+                    },
+                    {
+                        accessor: "secondaryActions",
+                        Cell: ({original}) => <SecondaryActionPanel file={original} onEditClick={() => this.handleEditClick(original)}/>,
+                        width: 50
+                    }
+                ]}/>
+                {this.renderEditorModal()}
+            </>
         }
+    }
+
+    private renderEditorModal(){
+        const {editedItem} = this.state;
+        if(!editedItem)
+            return null;
+
+        const {id, mimeType, displayName} = editedItem;
+
+        return <FileEditorModal 
+            key={id}
+            isOpen={true}
+            contentRequired={false}
+            initialDisplayName={displayName}
+            initialMimeType={mimeType}
+            onDismiss={this.handleModalDismiss}
+            onSave={this.handleSave}
+            />;
     }
 }
 
@@ -85,7 +132,10 @@ const mapStateToProps = (state: ApplicationState) : StateProps => {
     };
 }
 
-export const FileListPage = connect(mapStateToProps, {fetchStaticFiles})(FileListPageImpl);
+export const FileListPage = connect(
+    mapStateToProps, 
+    {fetchStaticFiles, updateFile}
+)(FileListPageImpl);
 
 
 
