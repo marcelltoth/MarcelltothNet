@@ -5,4 +5,5 @@ export interface StaticFileData{
     uploadDate: string;
     modifyDate: string;
     displayName: string;
+    canonicalUri: string;
 }

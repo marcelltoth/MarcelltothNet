@@ -1,4 +1,5 @@
 ﻿using System;
+using MarcellTothNet.Services.Files.Api.Misc;
 
 namespace MarcellTothNet.Services.Files.Api.Models
 {
@@ -15,5 +16,7 @@ namespace MarcellTothNet.Services.Files.Api.Models
         public DateTimeOffset ModifyDate { get; set; }
 
         public string DisplayName { get; set; }
+
+        public string CanonicalUri => $"{Id:N}/{UrlHelpers.MakeUrlFriendlyString(DisplayName)}";
     }
 }

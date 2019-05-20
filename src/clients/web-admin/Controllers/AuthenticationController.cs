@@ -54,7 +54,7 @@ namespace MarcellTothNet.Clients.WebAdmin.Controllers
                 });
             }
 
-            throw response.Exception;
+            throw response.Exception ?? new Exception("Unable to refresh token");
         }
     }
 }

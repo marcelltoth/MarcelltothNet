@@ -4,6 +4,11 @@ import { StaticFileData } from "../../store/common/static-file";
 import { ApplicationState } from "../../store/reducers";
 import { fetchStaticFiles } from "../../store/actions/static-file";
 import { VoidFunctionOf } from "../../store/common";
+import ReactTable, { TableCellRenderer } from "react-table";
+import 'react-table/react-table.css'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCloudDownloadAlt, faCopy } from '@fortawesome/free-solid-svg-icons';
+import styles from './file-list-page.module.css';
 
 interface StateProps{
     isLoading: boolean;
@@ -30,11 +35,38 @@ class FileListPageImpl extends React.Component<FileListPageImplProps>{
             return "Loading...";
         }
         else{
-            return "Loaded";
+            const DateCellFormatter : TableCellRenderer = ({ value }) => new Date(value).toLocaleDateString(undefined, { hour: "2-digit", minute: "2-digit" });
+            return <ReactTable data={fileList} columns={[
+                {
+                    id: "primaryActions",
+                    width: 100,
+                    Cell: ({original}) => <PriamryActionPanel uri={original.canonicalUri} />
+                },
+                {
+                    accessor: "displayName",
+                    Header: "Name"
+                },
+                {
+                    accessor: "mimeType",
+                    Header: "MIME Type",
+                    width: 120
+                },
+                {
+                    accessor: "modifyDate",
+                    Header: "Modify date",
+                    Cell: DateCellFormatter,
+                    width: 160
+                },
+                {
+                    accessor: "uploadDate",
+                    Header: "Upload date",
+                    Cell: DateCellFormatter,
+                    width: 160
+                }
+            ]}/>
         }
     }
 }
-
 
 
 const mapStateToProps = (state: ApplicationState) : StateProps => {
@@ -45,3 +77,21 @@ const mapStateToProps = (state: ApplicationState) : StateProps => {
 }
 
 export const FileListPage = connect(mapStateToProps, {fetchStaticFiles})(FileListPageImpl);
+
+
+
+interface PriamryActionPanelProps{
+    uri: string;
+}
+
+const PriamryActionPanel : React.FC<PriamryActionPanelProps> = ({uri}) => {
+    const absoluteUri = `https://localhost:13101/v1/static/files/${uri}`;
+    return <>
+        <a href={absoluteUri} className={styles['file-icon']}>
+            <FontAwesomeIcon icon={faCloudDownloadAlt} />
+        </a>
+        <a href={absoluteUri}>
+            <FontAwesomeIcon icon={faCopy} />
+        </a>
+    </>
+}

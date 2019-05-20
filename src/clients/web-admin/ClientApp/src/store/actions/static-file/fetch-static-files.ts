@@ -37,6 +37,7 @@ interface FileDto{
     uploadDate: string;
     modifyDate: string;
     displayName: string;
+    canonicalUri: string;
 }
 
 type FilesResponse = FileDto[];
