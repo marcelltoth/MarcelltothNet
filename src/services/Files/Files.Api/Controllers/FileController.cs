@@ -1,11 +1,13 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using MarcellTothNet.Services.Files.Api.Contract;
-using MarcellTothNet.Services.Files.Api.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Net.Http.Headers;
+using File = MarcellTothNet.Services.Files.Api.Models.File;
 
 namespace MarcellTothNet.Services.Files.Api.Controllers
 {
@@ -33,14 +35,21 @@ namespace MarcellTothNet.Services.Files.Api.Controllers
             }).ToListAsync());
         }
 
-        [HttpGet("{fileGuid}")]
+        [HttpGet("{fileGuid}/{fileName?}")]
         public async Task<IActionResult> Get(Guid fileGuid)
         {
             var file = await _dbContext.Files.FindAsync(fileGuid);
             if (file == null)
                 return NotFound();
 
-            return File(file.Content, file.MimeType, MakeFileName(file.DisplayName));
+            // Set up the content-disposition header with proper encoding of the filename
+            var contentDisposition = new ContentDispositionHeaderValue("inline");
+            contentDisposition.SetHttpFileName(MakeFileName(file.DisplayName));
+            Response.Headers[HeaderNames.ContentDisposition] = contentDisposition.ToString();
+
+            // Return the actual filestream
+            MemoryStream ms = new MemoryStream(file.Content, false);
+            return new FileStreamResult(ms, file.MimeType);
         }
 
         [HttpPost]
