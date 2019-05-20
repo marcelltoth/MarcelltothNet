@@ -9,9 +9,8 @@ services:
       - "12100:80"
       - "12101:443"
     volumes:
-      - ${APPDATA}/ASP.NET/Https:C:\Users\ContainerUser\AppData\Roaming\ASP.NET\https:ro
-      - ${APPDATA}/Microsoft/UserSecrets:C:\Users\ContainerUser\AppData\Roaming\Microsoft\UserSecrets:ro
-    isolation: "hyperv"
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets/\UserSecrets:ro
   identity.api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
@@ -20,9 +19,8 @@ services:
       - "12000:80"
       - "12001:443"
     volumes:
-      - ${APPDATA}/ASP.NET/Https:C:\Users\ContainerUser\AppData\Roaming\ASP.NET\https:ro
-      - ${APPDATA}/Microsoft/UserSecrets:C:\Users\ContainerUser\AppData\Roaming\Microsoft\UserSecrets:ro
-    isolation: "hyperv"
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets/\UserSecrets:ro
   files.api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
@@ -31,9 +29,8 @@ services:
       - "12200:80"
       - "12201:443"
     volumes:
-      - ${APPDATA}/ASP.NET/Https:C:\Users\ContainerUser\AppData\Roaming\ASP.NET\https:ro
-      - ${APPDATA}/Microsoft/UserSecrets:C:\Users\ContainerUser\AppData\Roaming\Microsoft\UserSecrets:ro
-    isolation: "hyperv"
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets/\UserSecrets:ro
   admin.gateway:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
@@ -42,12 +39,11 @@ services:
       - "13100:80"
       - "13101:443"
     volumes:
-      - ${APPDATA}/ASP.NET/Https:C:\Users\ContainerUser\AppData\Roaming\ASP.NET\https:ro
-      - ${APPDATA}/Microsoft/UserSecrets:C:\Users\ContainerUser\AppData\Roaming\Microsoft\UserSecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets/\UserSecrets:ro
     depends_on:
       - identity.api
       - article.api
-    isolation: "hyperv"
   spa.aggregator:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
@@ -56,9 +52,8 @@ services:
       - "13200:80"
       - "13201:443"
     volumes:
-      - ${APPDATA}/ASP.NET/Https:C:\Users\ContainerUser\AppData\Roaming\ASP.NET\Https:ro
-      - ${APPDATA}/Microsoft/UserSecrets:C:\Users\ContainerUser\AppData\Roaming\Microsoft\UserSecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets/\UserSecrets:ro
     depends_on:
       - identity.api
       - article.api
-    isolation: "hyperv"
