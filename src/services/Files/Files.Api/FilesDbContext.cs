@@ -24,6 +24,8 @@ namespace MarcellTothNet.Services.Files.Api
                 file.Property(f => f.MimeType)
                     .IsRequired();
 
+                file.Property(f => f.DisplayName)
+                    .IsRequired();
             });
         }
     }

@@ -28,7 +28,8 @@ namespace MarcellTothNet.Services.Files.Api.Controllers
                 Id = f.Id,
                 MimeType = f.MimeType,
                 ModifyDate = f.ModifyDate,
-                UploadDate = f.UploadDate
+                UploadDate = f.UploadDate,
+                DisplayName = f.DisplayName
             }).ToListAsync());
         }
 
@@ -39,7 +40,7 @@ namespace MarcellTothNet.Services.Files.Api.Controllers
             if (file == null)
                 return NotFound();
 
-            return File(file.Content, file.MimeType);
+            return File(file.Content, file.MimeType, MakeFileName(file.DisplayName));
         }
 
         [HttpPost]
@@ -50,6 +51,7 @@ namespace MarcellTothNet.Services.Files.Api.Controllers
             {
                 Content = newFile.Content,
                 MimeType = newFile.MimeType,
+                DisplayName = newFile.DisplayName,
                 UploadDate = DateTimeOffset.UtcNow,
                 ModifyDate = DateTimeOffset.UtcNow
             };
@@ -92,6 +94,16 @@ namespace MarcellTothNet.Services.Files.Api.Controllers
             _dbContext.Remove(file);
             await _dbContext.SaveChangesAsync();
             return NoContent();
+        }
+
+        private static string MakeFileName(string raw)
+        {
+            foreach (var c in System.IO.Path.GetInvalidFileNameChars())
+            {
+                raw = raw.Replace(c, '_');
+            }
+
+            return raw;
         }
     }
 }
