@@ -10,13 +10,13 @@ namespace Identity.Api
 {
     public class Config
     {
-        public static IEnumerable<TestUser> GetTestUsers()
+        public static IEnumerable<TestUser> GetTestUsers(string myPassword)
         {
             yield return new TestUser
             {
                 IsActive = true,
                 Username = "marcell",
-                Password = "marcell",
+                Password = myPassword,
                 SubjectId = "1234",
                 Claims =
                 {

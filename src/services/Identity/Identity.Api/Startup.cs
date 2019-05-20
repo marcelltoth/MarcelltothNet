@@ -40,7 +40,7 @@ namespace Identity.Api
 
             services.AddIdentityServer()
                 .AddSigningCredential(cert)
-                .AddTestUsers(Config.GetTestUsers().ToList())
+                .AddTestUsers(Config.GetTestUsers(Configuration.GetValue<string>("MyPassword")).ToList())
                 .AddInMemoryIdentityResources(Config.GetIdentityResources())
                 .AddInMemoryApiResources(Config.GetApiResources())
                 .AddInMemoryClients(Config.GetClients(Configuration.GetSection("Clients").GetSection("WebAdmin").Get<ClientOptions>()));
