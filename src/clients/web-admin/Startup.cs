@@ -53,6 +53,7 @@ namespace MarcellTothNet.Clients.WebAdmin
                     options.Scope.Add("role");
                     options.Scope.Add("email");
                     options.Scope.Add("articleapi");
+                    options.Scope.Add("filesapi");
                     options.Scope.Add("offline_access");
                     options.SignInScheme = "cookies";
                     options.Events = new OpenIdConnectEvents()

@@ -7,7 +7,7 @@ import * as StaticFileStore from "./static-file";
 export interface ApplicationState{
     article: ArticleStore.ArticleState;
     tag: TagStore.TagState;
-    staticFiles: StaticFileStore.StaticFileState;
+    staticFile: StaticFileStore.StaticFileState;
 }
 
 export const rootReducer = combineReducers({

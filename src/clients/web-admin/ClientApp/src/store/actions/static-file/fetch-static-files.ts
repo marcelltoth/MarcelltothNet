@@ -19,9 +19,9 @@ export type FetchStaticFilesActions = FetchStaticFilesBeginAction | FetchStaticF
 
 
 export const fetchStaticFiles = () : AsyncAction<FetchStaticFilesActions> => (dispatch, getState) => {
-    if(!getState().staticFiles.isRefreshing){
+    if(!getState().staticFile.isRefreshing){
         dispatch(createBeginAction());
-        apiClient.get<FilesResponse>('v1/static/files').then(response => {
+        apiClient.get<FilesResponse>('static/files').then(response => {
             dispatch(createSuccessAction(response.data));
         })
         .catch(() => {

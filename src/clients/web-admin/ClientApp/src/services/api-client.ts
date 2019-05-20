@@ -8,7 +8,9 @@ interface TokenResponse{
 }
 
 class ApiClientInstance{
-    private clientInstance : AxiosInstance = Axios;
+    private clientInstance : AxiosInstance = Axios.create({
+        baseURL: gatewayEndpointLocation
+    });
 
     private refreshAccessToken = () => {
         return Axios.post<TokenResponse>(tokenEndpointLocation).then(response => {
