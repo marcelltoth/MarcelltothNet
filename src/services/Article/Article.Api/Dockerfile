@@ -8,7 +8,6 @@ WORKDIR /src
 COPY src/services/Article/Article.Api/Article.Api.csproj ./services/Article/Article.Api/
 COPY src/services/Article/Article.Infrastructure/Article.Infrastructure.csproj ./services/Article/Article.Infrastructure/
 COPY src/services/Article/Article.Domain/Article.Domain.csproj ./services/Article/Article.Domain/
-COPY src/common/DDDFoundations/DDDFoundations.csproj ./common/DDDFoundations/
 COPY src/common/WebHostConfiguration/WebHostConfiguration.csproj ./common/WebHostConfiguration/
 RUN dotnet restore ./services/Article/Article.Api/Article.Api.csproj
 COPY src .
