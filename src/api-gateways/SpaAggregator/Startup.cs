@@ -80,7 +80,6 @@ namespace SpaAggregator
                     .AllowAnyHeader()
             );
 
-            app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
