@@ -5,6 +5,7 @@ using MarcellTothNet.Clients.WebAdmin.Infrastructure.Options;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
@@ -77,6 +78,11 @@ namespace MarcellTothNet.Clients.WebAdmin
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseForwardedHeaders(new ForwardedHeadersOptions()
+            {
+                ForwardedHeaders = ForwardedHeaders.All
+            });
 
             // Add authentication here. Non authenticated users should not see this site at all.
             app.UseAuthentication();
