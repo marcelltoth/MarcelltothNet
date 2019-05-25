@@ -44,6 +44,7 @@ namespace MarcellTothNet.Clients.WebAdmin
                 .AddOpenIdConnect("openidc", options =>
                 {
                     options.Authority = authenticationOptions.Authority;
+                    options.RequireHttpsMetadata = false;
                     options.ClientSecret = authenticationOptions.ClientSecret;
                     options.ClientId = authenticationOptions.ClientId;
                     options.ResponseType = "code id_token";
@@ -76,13 +77,6 @@ namespace MarcellTothNet.Clients.WebAdmin
             {
                 app.UseDeveloperExceptionPage();
             }
-            else
-            {
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
-
-            app.UseHttpsRedirection();
 
             // Add authentication here. Non authenticated users should not see this site at all.
             app.UseAuthentication();
