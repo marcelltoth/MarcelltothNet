@@ -4,6 +4,7 @@ using Identity.Api.Models;
 using Identity.Api.Options;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -53,11 +54,11 @@ namespace Identity.Api
             {
                 app.UseDeveloperExceptionPage();
             }
-            else
+
+            app.UseForwardedHeaders(new ForwardedHeadersOptions
             {
-                app.UseHsts();
-                app.UseHttpsRedirection();
-            }
+                ForwardedHeaders = ForwardedHeaders.All
+            });
 
 
             app.UseStaticFiles();
