@@ -1,6 +1,6 @@
 import { TagData } from "../common/tag";
 import { AsyncAction } from "../common";
-import axios from 'axios';
+import { apiClient } from "../../services/api-client";
 
 
 export interface LoadTagsBeginAction{
@@ -25,7 +25,7 @@ export const actionCreators = {
         if(!getState().tag.isRefreshing){
             dispatch({type: 'LOAD_TAGS_BEGIN'});
             try{
-                const response = await axios.get<TagData[]>('https://localhost:13101/v1/article/tags');
+                const response = await apiClient.get<TagData[]>('article/tags');
                 dispatch({type: 'LOAD_TAGS_SUCCESS', tagList: response.data});
             }
             catch{
