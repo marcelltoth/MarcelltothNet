@@ -39,7 +39,10 @@ namespace Identity.Api
             
             var cert = new X509Certificate2( "server.pfx", Configuration.GetSection("Kestrel").GetSection("Certificates").GetSection("Default").GetValue<string>("password"));
 
-            services.AddIdentityServer()
+            services.AddIdentityServer(iso =>
+                {
+                    iso.PublicOrigin = Configuration.GetValue<string>("PublicOrigin");
+                })
                 .AddSigningCredential(cert)
                 .AddTestUsers(Config.GetTestUsers(Configuration.GetValue<string>("MyPassword")).ToList())
                 .AddInMemoryIdentityResources(Config.GetIdentityResources())
@@ -57,7 +60,8 @@ namespace Identity.Api
 
             app.UseForwardedHeaders(new ForwardedHeadersOptions
             {
-                ForwardedHeaders = ForwardedHeaders.All
+                ForwardedHeaders = ForwardedHeaders.All,
+                RequireHeaderSymmetry = false
             });
 
 
