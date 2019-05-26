@@ -1,6 +1,6 @@
 import Axios, { AxiosInstance, AxiosRequestConfig } from "axios";
 
-const gatewayEndpointLocation = "https://localhost:13101/v1/";
+const gatewayEndpointLocation = process.env.REACT_APP_GATEWAY_LOCATION;
 const tokenEndpointLocation = `${window.location.protocol}//${window.location.hostname}:${window.location.port}/api/authentication/token`;
 
 interface TokenResponse{
