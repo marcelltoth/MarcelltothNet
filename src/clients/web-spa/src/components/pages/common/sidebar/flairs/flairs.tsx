@@ -1,4 +1,5 @@
 import * as React from 'react';
+import './linkedin.css';
 
 export const StackoverflowFlair : React.FC = () => {
     return <a href="https://stackoverflow.com/users/10614791/marcell-t%c3%b3th">
@@ -11,18 +12,33 @@ export const StackoverflowFlair : React.FC = () => {
 }
 
 export const LinkedInFlair : React.FC = React.memo(() => {
-    React.useEffect(() => {
-        const linkedinRenderCallback = (window as any).LIRenderAll;
-        if(linkedinRenderCallback){
-            linkedinRenderCallback();
-        }
-    });
 
-    return <div className="LI-profile-badge"  data-version="v1" data-size="large" data-locale="en_US" data-type="horizontal" data-theme="light" data-vanity="marcell-tóth-38a80815b">
-        <a className="LI-simple-link" href='https://hu.linkedin.com/in/marcell-t%C3%B3th-38a80815b?trk=profile-badge'>
-            Marcell Tóth
-        </a>
-    </div>;
+    return <div className="LI-profile-badge">
+        <a className="LI-simple-link" href="https://hu.linkedin.com/in/marcell-t%C3%B3th-38a80815b?trk=profile-badge">Marcell Tóth</a>
+            <div>
+                <div dir="ltr" className="LI-badge-container horizontal light" style={{display: 'inline-block', borderRadius: 2, wordWrap: 'break-word', wordBreak: 'break-word'}}>
+                    <div className="LI-profile-badge-header LI-name-container LI-row">
+                        <div className="LI-col">
+                            <div className="LI-profile-pic-container">
+                                <img src="https://media.licdn.com/dms/image/C4E03AQGUN6DoeY97Ww/profile-displayphoto-shrink_200_200/0?e=1565222400&amp;v=beta&amp;t=5ifAcqJviJ7tRctzHj0wWEobX5KIQQpsih3zjLSsSKY" className="LI-profile-pic" alt="Marcell Tóth" />
+                            </div>
+                        </div>
+                        <div className="LI-col LI-header">
+                            <div className="LI-name">
+                                <a href="https://hu.linkedin.com/in/marcell-t%C3%B3th-38a80815b?trk=profile-badge-name">Marcell Tóth</a>
+                            </div>
+                            <div className="LI-title">.NET/ReactJS expert, Team Leader, MCP, Autodidact</div>
+                        </div>
+                    </div>
+                    <div className="LI-footer LI-row">
+                        <a href="https://hu.linkedin.com/in/marcell-t%C3%B3th-38a80815b?trk=profile-badge-cta" className="LI-view-profile">View profile</a>
+                        <span className="LI-logo">
+                            <img src="https://static.licdn.com/scds/common/u/images/logos/linkedin/logo_linkedin_93x21_v2.png" alt="LinkedIn" className="LI-icon" />
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>;
 });
 
 export const GithubFlair : React.FC = () => {
