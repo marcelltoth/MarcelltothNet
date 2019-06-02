@@ -2,6 +2,10 @@
 @import 'variables';
 @import 'fonts';
 
+html{
+  overflow-x: hidden;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -9,11 +13,14 @@ body {
   font-size: 16px;
   color: $primary-color;
   font-weight: 400;
+  overflow-x: hidden;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+  word-wrap: break-word;
+  white-space: pre-wrap;
 }
 
 section, article{

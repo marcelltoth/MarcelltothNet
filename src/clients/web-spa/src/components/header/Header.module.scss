@@ -76,6 +76,7 @@ ul.LinkPanel{
     padding-left: 0;
     list-style-type: none;
     display: block;
+    overflow-x: hidden;
     @include horizontal-line();
     margin-bottom: 10px;
 
