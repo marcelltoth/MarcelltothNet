@@ -11,8 +11,10 @@ export const SharingPanel : React.FC<SharingPanelProps> = ({link}) => {
         medium: true,
         link: link,
         style: {
-            padding: "0.3em 0.4em",
+            padding: "0.3em 0.5em",
             fontSize: "14px",
+            color: '#FFF',
+            fontFamily: 'inherit'
         }
     };
     return (<div style={{fontSize: 14, marginBottom: 20}}>
