@@ -14,14 +14,27 @@ namespace MarcellTothNet.Services.Article.Api.Queries
         {
         }
 
-        public async Task<IEnumerable<ArticleViewModel>> GetAllArticlesAsync()
+        public Task<IEnumerable<ArticleViewModel>> GetAllArticlesAsync()
+        {
+            const string sql = @"SELECT [Id], [Title], [PublishTime] as PublishDate, [Thumbnail_AltText] as ThumbnailAltText, [IsPublished]
+                          FROM [Articles];";
+            return FetchArticlesInternalAsync(sql);
+        }
+
+        public Task<IEnumerable<ArticleViewModel>> GetAllPublishedArticlesAsync()
+        {
+            const string sql = @"SELECT [Id], [Title], [PublishTime] as PublishDate, [Thumbnail_AltText] as ThumbnailAltText, [IsPublished]
+                          FROM [Articles] WHERE [IsPublished] = 1 AND [PublishTime] < getdate();";
+            return FetchArticlesInternalAsync(sql);
+        }
+
+        private async Task<IEnumerable<ArticleViewModel>> FetchArticlesInternalAsync(string sql)
         {
             using (var connection = await CreateAndOpenDbConnectionAsync())
             {
                 // Load all the articles
                 IList<ArticleViewModel> articleViewModels = (await connection.QueryAsync<ArticleViewModel>(
-                    @"SELECT [Articles].[Id], [Articles].[Title], [Articles].[PublishTime] as PublishDate, [Articles].[Thumbnail_AltText] as ThumbnailAltText, [IsPublished]
-                          FROM [Articles];")).AsList();
+                    sql)).AsList();
 
                 // Load all the tag mappings
                 IList<Article2TagModel> article2TagModels = (await connection.QueryAsync<Article2TagModel>("SELECT [ArticleId], [TagId] FROM [Article2Tag]")).AsList();

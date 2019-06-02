@@ -41,7 +41,11 @@ namespace Identity.Api
 
             services.AddIdentityServer(iso =>
                 {
-                    iso.PublicOrigin = Configuration.GetValue<string>("PublicOrigin");
+                    var publicOrigin = Configuration.GetValue<string>("PublicOrigin");
+                    if (publicOrigin != null)
+                    {
+                        iso.PublicOrigin = publicOrigin;
+                    }
                 })
                 .AddSigningCredential(cert)
                 .AddTestUsers(Config.GetTestUsers(Configuration.GetValue<string>("MyPassword")).ToList())

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="JavaScriptLibraryMappings">
-    <excludedPredefinedLibrary name="MarcellTothNet/src/clients/web-spa/node_modules" />
+    <file url="file://$PROJECT_DIR$/src/clients/web-admin/ClientApp" libraries="{MarcellTothNet/src/clients/web-admin/ClientApp/node_modules}" />
+    <file url="PROJECT" libraries="{MarcellTothNet/src/clients/web-admin/ClientApp/node_modules, MarcellTothNet/src/clients/web-spa/node_modules}" />
   </component>
 </project>

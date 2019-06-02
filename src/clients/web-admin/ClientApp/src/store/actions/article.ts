@@ -142,7 +142,7 @@ export const actionCreators = {
         if(!getState().article.isRefreshing){
             dispatch({type: 'LOAD_ARTICLES_BEGIN'});
             try{
-                const response = await apiClient.get<ArticleData[]>('article/articles');
+                const response = await apiClient.get<ArticleData[]>('article/articles?includeUnpublished=true');
                 dispatch({type: 'LOAD_ARTICLES_SUCCESS', articleList: response.data});
             }
             catch{

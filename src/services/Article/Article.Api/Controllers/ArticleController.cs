@@ -13,12 +13,14 @@ namespace MarcellTothNet.Services.Article.Api.Controllers
     public class ArticleController : Controller
     {
         private readonly IMediator _mediator;
+        private readonly IAuthorizationService _authorizationService;
         private readonly IArticleQueries _queries;
 
-        public ArticleController(IArticleQueries queries, IMediator mediator)
+        public ArticleController(IArticleQueries queries, IMediator mediator, IAuthorizationService authorizationService)
         {
             _queries = queries;
             _mediator = mediator;
+            _authorizationService = authorizationService;
         }
 
         /// <summary>
@@ -26,9 +28,20 @@ namespace MarcellTothNet.Services.Article.Api.Controllers
         /// </summary>
         [HttpGet]
         [Route("")]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll(bool includeUnpublished = false)
         {
+            if (!includeUnpublished)
+                return Ok(await _queries.GetAllPublishedArticlesAsync());
+
+
+            var authResult = await _authorizationService.AuthorizeAsync(User, "CanModify");
+            if (!authResult.Succeeded)
+            {
+                return Challenge();
+            }
+
             return Ok(await _queries.GetAllArticlesAsync());
+
         }
 
         /// <summary>
