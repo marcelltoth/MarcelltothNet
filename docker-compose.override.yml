@@ -8,9 +8,6 @@ services:
     ports:
       - "12100:80"
       - "12101:443"
-    volumes:
-      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
-      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets/\UserSecrets:ro
   identity.api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
@@ -18,9 +15,6 @@ services:
     ports:
       - "12000:80"
       - "12001:443"
-    volumes:
-      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
-      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets/\UserSecrets:ro
   files.api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
@@ -28,9 +22,6 @@ services:
     ports:
       - "12200:80"
       - "12201:443"
-    volumes:
-      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
-      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets/\UserSecrets:ro
   admin.gateway:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
@@ -38,9 +29,6 @@ services:
     ports:
       - "13100:80"
       - "13101:443"
-    volumes:
-      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
-      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets/\UserSecrets:ro
     depends_on:
       - identity.api
       - article.api
@@ -51,9 +39,6 @@ services:
     ports:
       - "13200:80"
       - "13201:443"
-    volumes:
-      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
-      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets/\UserSecrets:ro
     depends_on:
       - identity.api
       - article.api
