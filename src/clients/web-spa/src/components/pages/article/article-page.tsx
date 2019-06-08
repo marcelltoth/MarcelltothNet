@@ -9,6 +9,7 @@ import { ApplicationState } from '../../../store/state';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { fetchArticleDetails } from '../../../store/actions/articles';
+import { CommentBox } from './comment-box';
 
 
 const fallbackThumbnailLocation = "https://via.placeholder.com/1200x800";
@@ -72,6 +73,7 @@ const ArticlePageImpl : React.FC<ArticlePageProps> = ({article, loadArticle}) =>
                             <article>
                                 <ContentRenderer content={content || fallbackContent} />
                             </article>
+                            <CommentBox />
                         </Col>
                         <Col md={4}>
                             <Sidebar />
