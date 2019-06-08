@@ -34,7 +34,7 @@ namespace SpaAggregator.Controllers
         }
 
         [HttpGet("thumbnails")]
-        [ResponseCache(Location = ResponseCacheLocation.Any, VaryByQueryKeys = new[]{"*"}, Duration = 3600)]
+        [ResponseCache(Location = ResponseCacheLocation.Client, VaryByQueryKeys = new[]{"*"}, Duration = 3600)]
         public async Task<IActionResult> GetThumbnails([FromQuery] int[] ids, [FromQuery] int targetWidth)
         {
             ThumbnailImage[] thumbnails = await Task.WhenAll(ids.Select(async id =>
