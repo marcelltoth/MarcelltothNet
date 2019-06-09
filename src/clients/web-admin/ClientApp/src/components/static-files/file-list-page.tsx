@@ -180,7 +180,7 @@ interface PriamryActionPanelProps{
 }
 
 const PriamryActionPanel : React.FC<PriamryActionPanelProps> = ({uri}) => {
-    const absoluteUri = `https://localhost:13101/v1/static/files/${uri}`;
+    const absoluteUri = `https://static.marcelltoth.net/files/${uri}`;
     return <>
         <a href={absoluteUri} className={styles['file-icon']} target="_blank">
             <FontAwesomeIcon icon={faCloudDownloadAlt} />
