@@ -4,8 +4,8 @@ import { ApplicationState } from "./state";
 import { Omit, Writable } from "ts-essentials";
 import { ArticleData } from "./state/articles";
 import { TagData } from "./state/tags";
-import { map, mapValues, flow } from "lodash-es";
-import memoize from 'memoize-state';
+import { mapValues } from "lodash-es";
+import memoizeOne from "memoize-one";
 
 
 /* BASIC */
@@ -23,13 +23,19 @@ export type ArticleDataDeep =
     Omit<Writable<ArticleData>, 'tagIds'| 'publishDate'> 
     & {tags: TagData[], publishDate: Date};
 
-const selectArticlesDeep = memoize((state: ApplicationState) => {
+const selectArticlesDeep = memoizeOne((state: ApplicationState) => {
     const articles = selectArticles(state);
     const tags = selectTags(state);
     return articles.map(a => {
         return {
-            ...a,
+            id: a.id,
+            isLoading: a.isLoading,
+            content: a.content,
+            thumbnailLocation: a.thumbnailLocation,
+            thumbnailAltText: a.thumbnailAltText,
+            title: a.title,
             publishDate: new Date(a.publishDate),
+            tagIds: a.tagIds,
             tags: a.tagIds.map(tagId => tags[tagId]).filter(t => t !== undefined)
         };
     });
@@ -37,12 +43,12 @@ const selectArticlesDeep = memoize((state: ApplicationState) => {
 
 export const selectArticle = (state: ApplicationState, id: number) => selectArticlesDeep(state).find(a => a.id === id);
 
-export const selectArticlesOrderedByAgeDesc = memoize((state: ApplicationState) => orderBy((selectArticlesDeep(state)), ['publishDate'], ['desc']))
+export const selectArticlesOrderedByAgeDesc = memoizeOne((state: ApplicationState) => orderBy((selectArticlesDeep(state)), ['publishDate'], ['desc']))
 
 
 /* TAGS */
 
-export const selectTagsByArticleCountDesc = memoize((state: ApplicationState) => {
+export const selectTagsByArticleCountDesc = memoizeOne((state: ApplicationState) => {
     const tags = selectTags(state);
     const articles = selectArticles(state);
     return orderBy(Object.values(tags).map(t => {

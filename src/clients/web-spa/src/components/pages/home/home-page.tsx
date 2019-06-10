@@ -81,12 +81,13 @@ const HomePageImpl : React.FC<HomePageImplProps> = ({articles, fetchThumbnails})
         </section>
     </>);
 }
+import memoize, { MemoizeStateOptions } from 'memoize-state';
 
-const mapStateToProps = (state: ApplicationState) : StateProps => {
+const mapStateToProps = memoize((state: ApplicationState) : StateProps => {
     return {
         articles: selectArticlesOrderedByAgeDesc(state)
     };
-}
+}, {safe: true} as MemoizeStateOptions);
 
 const mapDispatchToProps = {
     fetchThumbnails
