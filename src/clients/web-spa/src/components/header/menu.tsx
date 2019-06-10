@@ -8,11 +8,10 @@ export class Menu extends React.Component{
         return <Container>
             <ul className={styles.menu}>
                 <MenuItem title="Blog" target="/">
-                    <MenuItem title="Core C#" />
-                    <MenuItem title="ASP.NET Core" />
-                    <MenuItem title="Optimization, performance" />
-                    <MenuItem title="Frontend Dev" />
-                    <MenuItem title="Others" />
+                    <MenuItem title="Core C#" target="/tag/1/csharp" />
+                    <MenuItem title="ASP.NET Core" target="/tag/2/aspnetcore" />
+                    <MenuItem title="Optimization, performance" target="/tag/4/performance" />
+                    <MenuItem title="Frontend Dev" target="/tag/6/frontend" />
                 </MenuItem>
                 <MenuItem title="My story" />
                 <MenuItem title="Portfolio">
