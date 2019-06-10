@@ -7,7 +7,7 @@ export class Menu extends React.Component{
     render(){
         return <Container>
             <ul className={styles.menu}>
-                <MenuItem title="Blog">
+                <MenuItem title="Blog" target="/">
                     <MenuItem title="Core C#" />
                     <MenuItem title="ASP.NET Core" />
                     <MenuItem title="Optimization, performance" />

@@ -38,13 +38,13 @@ export class ContactPage extends React.Component{
                                     <span className={styles.icon}>
                                         <FontAwesomeIcon icon={faLinkedin} />
                                     </span>
-                                    <a href="https://www.linkedin.com/in/marcell-t%C3%B3th-38a80815b/">Contact me on LinkedIn</a>
+                                    <a href="https://www.linkedin.com/in/marcell-t%C3%B3th-38a80815b/" target="_blank">Contact me on LinkedIn</a>
                                 </li>
                                 <li>
                                     <span className={styles.icon}>
                                         <FontAwesomeIcon icon={faStackOverflow} />
                                     </span>
-                                    <a href="https://stackoverflow.com/users/10614791/marcell-t%C3%B3th">View my StackOverflow profile</a>
+                                    <a href="https://stackoverflow.com/users/10614791/marcell-t%C3%B3th" target="_blank">View my StackOverflow profile</a>
                                 </li>
                             </ul>
                         </section>

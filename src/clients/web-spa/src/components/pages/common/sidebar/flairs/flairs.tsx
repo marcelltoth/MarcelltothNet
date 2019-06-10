@@ -2,7 +2,7 @@ import * as React from 'react';
 import './linkedin.css';
 
 export const StackoverflowFlair : React.FC = () => {
-    return <a href="https://stackoverflow.com/users/10614791/marcell-t%c3%b3th">
+    return <a href="https://stackoverflow.com/users/10614791/marcell-t%c3%b3th" target="_blank">
         <img src="https://stackoverflow.com/users/flair/10614791.png" 
             alt="profile for Marcell T&#243;th at Stack Overflow, Q&amp;A for professional and enthusiast programmers" 
             title="profile for Marcell T&#243;th at Stack Overflow, Q&amp;A for professional and enthusiast programmers"
@@ -14,7 +14,7 @@ export const StackoverflowFlair : React.FC = () => {
 export const LinkedInFlair : React.FC = React.memo(() => {
 
     return <div className="LI-profile-badge">
-        <a className="LI-simple-link" href="https://hu.linkedin.com/in/marcell-t%C3%B3th-38a80815b?trk=profile-badge">Marcell Tóth</a>
+        <a className="LI-simple-link" href="https://hu.linkedin.com/in/marcell-t%C3%B3th-38a80815b?trk=profile-badge" target="_blank">Marcell Tóth</a>
             <div>
                 <div dir="ltr" className="LI-badge-container horizontal light" style={{display: 'inline-block', borderRadius: 2, wordWrap: 'break-word', wordBreak: 'break-word'}}>
                     <div className="LI-profile-badge-header LI-name-container LI-row">
@@ -25,13 +25,13 @@ export const LinkedInFlair : React.FC = React.memo(() => {
                         </div>
                         <div className="LI-col LI-header">
                             <div className="LI-name">
-                                <a href="https://hu.linkedin.com/in/marcell-t%C3%B3th-38a80815b?trk=profile-badge-name">Marcell Tóth</a>
+                                <a href="https://hu.linkedin.com/in/marcell-t%C3%B3th-38a80815b?trk=profile-badge-name" target="_blank">Marcell Tóth</a>
                             </div>
                             <div className="LI-title">.NET/ReactJS expert, Team Leader, MCP, Autodidact</div>
                         </div>
                     </div>
                     <div className="LI-footer LI-row">
-                        <a href="https://hu.linkedin.com/in/marcell-t%C3%B3th-38a80815b?trk=profile-badge-cta" className="LI-view-profile">View profile</a>
+                        <a href="https://hu.linkedin.com/in/marcell-t%C3%B3th-38a80815b?trk=profile-badge-cta" target="_blank" className="LI-view-profile">View profile</a>
                         <span className="LI-logo">
                             <img src="https://static.licdn.com/scds/common/u/images/logos/linkedin/logo_linkedin_93x21_v2.png" alt="LinkedIn" className="LI-icon" />
                         </span>
