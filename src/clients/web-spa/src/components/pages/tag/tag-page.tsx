@@ -33,7 +33,7 @@ class TagPageImpl extends React.Component<TagPageProps>{
         const {displayName, articles} = this.props;
 
         return <>
-            <PageHeaderWide title={displayName}  />
+            <PageHeaderWide title={`#${displayName}`}  />
             <Container>
                 <Row>
                     <Col md={8}>
