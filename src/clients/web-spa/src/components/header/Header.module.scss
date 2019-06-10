@@ -68,15 +68,15 @@ ul.LinkPanel{
 }
 
 
-
 .menu{
     position: relative;
     text-align: center;
     float: none;
     padding-left: 0;
     list-style-type: none;
-    display: block;
-    overflow-x: hidden;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
     @include horizontal-line();
     margin-bottom: 10px;
 
