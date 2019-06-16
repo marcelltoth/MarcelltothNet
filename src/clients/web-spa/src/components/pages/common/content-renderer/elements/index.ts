@@ -6,12 +6,14 @@ import { Table, TableHead, TableBody, TableRow, TableCell } from './table';
 import { Heading } from './heading';
 import { Link } from './link';
 import { Image } from './image';
+import { InlineCode } from './inline-code';
 
 export const elementMap = {
     code: CodeBlock,
     blockquote: Blockquote,
     heading: Heading,
     image: Image,
+    inlineCode: InlineCode,
     link: Link,
     list: List,
     listItem: ListItem,
