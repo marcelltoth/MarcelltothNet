@@ -5,6 +5,7 @@ import { BrowserRouter} from 'react-router-dom';
 
 import 'bootstrap/dist/css/bootstrap.css';
 import App from './components/app';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 import './index.scss';
 
 import * as serviceWorker from './serviceWorker';

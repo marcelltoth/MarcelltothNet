@@ -5,24 +5,27 @@ img{
 }
 
 .blockquote{
-    padding: 30px;
+    padding: 20px 25px;
     margin: 0 0 20px;
     border: 2px solid #e8eaed;
+    font-style: italic;
 
     &::before{
         content: "\f10d";
-        font-family: fontAwesome;
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
         width: 70px;
         height: 70px;
         line-height: 70px;
         text-align: center;
         border-radius: 50%;
         color: #ee4266;
-        font-size: 30px;
+        font-size: 26px;
         background: #fff;
         border: 2px solid #e8eaed;
         float: left;
         margin-right: 10px;
+        margin-top: 10px;
     }
 
     h5{
