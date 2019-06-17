@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { BrowserRouter} from 'react-router-dom';
+import { BrowserRouter, Route} from 'react-router-dom';
 
 import 'bootstrap/dist/css/bootstrap.css';
 import App from './components/app';
@@ -11,6 +11,7 @@ import './index.scss';
 import * as serviceWorker from './serviceWorker';
 import { buildStore } from './store';
 import { fetchBasicData } from './store/actions/basic-data';
+import { withTracker } from './analytics';
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
@@ -24,11 +25,11 @@ const store = buildStore();
 store.dispatch(fetchBasicData());
 
 const render = (Component) => {
-
+    const ComponentWithTracker = withTracker(Component);
     const tree = (
         <Provider store={store}>
             <BrowserRouter>
-                <Component />
+                <Route component={ComponentWithTracker} />
             </BrowserRouter>
         </Provider>
     );
