@@ -14,13 +14,17 @@ export const withTracker = (WrappedComponent, options = {}) => {
     ReactGA.pageview(page);
   };
 
-  const HOC = props => {
-    useEffect(() => trackPage(props.location.pathname), [
-      props.location.pathname
-    ]);
-
-    return <WrappedComponent {...props} />;
-  };
-
-  return HOC;
+  if(window.location.hostname !== 'localhost'){
+      return props => {
+        useEffect(() => trackPage(props.location.pathname), [
+          props.location.pathname
+        ]);
+    
+        return <WrappedComponent {...props} />;
+      };
+  }
+  else{
+      // Disable tracking on localhost
+      return WrappedComponent;
+  }
 };
