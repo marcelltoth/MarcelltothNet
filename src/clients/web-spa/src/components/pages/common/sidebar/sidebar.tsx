@@ -7,6 +7,7 @@ import { ApplicationState } from '../../../../store/state';
 import { connect } from 'react-redux';
 import { selectTagsByArticleCountDesc } from '../../../../store/selectors';
 import { take } from 'lodash';
+import { SubscribeForm } from './mailing-list';
 
 interface OwnProps{
     showPopularTags?: boolean;
@@ -27,6 +28,10 @@ const SidebarImpl : React.FC<SidebarImplProps> = ({tagsByArticleCount, showPopul
     const tagsToShow = take(tagsByArticleCount, 8);
 
     return (<>
+        <section>
+            <SectionTitle title="Mailing list" />
+            <SubscribeForm />
+        </section>
         <section>
             <SectionTitle title="Platforms" />
             <div className={styles['flair-holder']}>
