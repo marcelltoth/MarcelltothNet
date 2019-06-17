@@ -7,6 +7,7 @@ import { selectArticlesOrderedByAgeDesc, ArticleDataDeep } from '../../../store/
 import { take, slice } from 'lodash-es';
 import { connect } from 'react-redux';
 import { fetchThumbnails } from '../../../store/actions/basic-data';
+import memoize, { MemoizeStateOptions } from 'memoize-state';
 
 interface StateProps{
     articles: ReadonlyArray<ArticleDataDeep>;
@@ -28,12 +29,12 @@ const HomePageImpl : React.FC<HomePageImplProps> = ({articles, fetchThumbnails})
 
     const highlightedIds = highlightedArticles.map(a => a.id);
     React.useEffect(() => {
-        fetchThumbnails(highlightedIds, 400);
+        fetchThumbnails(highlightedIds, 600);
     }, [highlightedIds.join('-')])
     
     const olderIds = olderArticles.map(a => a.id);
     React.useEffect(() => {
-        fetchThumbnails(olderIds, 250);
+        fetchThumbnails(olderIds, 300);
     }, [olderIds.join('-')])
 
     return (<>
@@ -81,7 +82,6 @@ const HomePageImpl : React.FC<HomePageImplProps> = ({articles, fetchThumbnails})
         </section>
     </>);
 }
-import memoize, { MemoizeStateOptions } from 'memoize-state';
 
 const mapStateToProps = memoize((state: ApplicationState) : StateProps => {
     return {

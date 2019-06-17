@@ -7,27 +7,27 @@ type ThumbnailsDto = string[];
 
 export interface FetchThumbnailsBeginAction{
     type: 'FETCH_THUMBNAILS_BEGIN';
-    ids: number[];
+    ids: ReadonlyArray<number>;
     width: number;
 }
 
 export interface FetchThumbnailsSuccessAction{
     type: 'FETCH_THUMBNAILS_SUCCESS';
-    ids: number[];
+    ids: ReadonlyArray<number>;
     width: number;
     data: ThumbnailsDto;
 }
 
 export interface FetchThumbnailsErrorAction{
     type: 'FETCH_THUMBNAILS_ERROR';
-    ids: number[];
+    ids: ReadonlyArray<number>;
     width: number;
 }
 
 export type FetchThumbnailsActions = FetchThumbnailsBeginAction | FetchThumbnailsSuccessAction | FetchThumbnailsErrorAction;
 
 
-export const fetchThumbnails = (ids: number[], width: number) : ThunkAction => (dispatch, getState) => {
+export const fetchThumbnails = (ids: ReadonlyArray<number>, width: number) : ThunkAction => (dispatch, getState) => {
     // only load those that do not have a thumbnail yet
     const actualIds = ids.filter(i => {
         const article = selectArticle(getState(), i);
@@ -46,14 +46,14 @@ export const fetchThumbnails = (ids: number[], width: number) : ThunkAction => (
         });
 }
 
-function createBeginAction(ids: number[], width: number) : FetchThumbnailsBeginAction{
+function createBeginAction(ids: ReadonlyArray<number>, width: number) : FetchThumbnailsBeginAction{
     return {
         type: 'FETCH_THUMBNAILS_BEGIN',
         ids,
         width
     };
 }
-function createSuccessAction(ids: number[], width: number, data: ThumbnailsDto) : FetchThumbnailsSuccessAction{
+function createSuccessAction(ids: ReadonlyArray<number>, width: number, data: ThumbnailsDto) : FetchThumbnailsSuccessAction{
     return {
         type: 'FETCH_THUMBNAILS_SUCCESS',
         ids,
@@ -61,7 +61,7 @@ function createSuccessAction(ids: number[], width: number, data: ThumbnailsDto) 
         data
     };
 }
-function createErrorAction(ids: number[], width: number) : FetchThumbnailsErrorAction{
+function createErrorAction(ids: ReadonlyArray<number>, width: number) : FetchThumbnailsErrorAction{
     return {
         type: 'FETCH_THUMBNAILS_ERROR',
         ids,

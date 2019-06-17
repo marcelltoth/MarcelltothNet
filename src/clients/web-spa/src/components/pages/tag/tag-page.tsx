@@ -6,6 +6,7 @@ import { SectionTitle, ArticlePreviewPanel, Sidebar } from '../common';
 import { ArticleDataDeep, selectArticlesByTag, selectTagById } from '../../../store/selectors';
 import { ApplicationState } from '../../../store/state';
 import { connect } from 'react-redux';
+import { fetchThumbnails } from '../../../store/actions/basic-data';
 
 const fallbackThumbnailLocation = "https://via.placeholder.com/1200x800";
 
@@ -21,42 +22,51 @@ type StateProps = {
     articles: ReadonlyArray<ArticleDataDeep>;
 } | { notFound: true; }
 
-type TagPageProps = OwnProps & StateProps;
-
-class TagPageImpl extends React.Component<TagPageProps>{
-
-    render(){
-        if(this.props.notFound){
-            return <Redirect to="/" />
-        }
-
-        const {displayName, articles} = this.props;
-
-        return <>
-            <PageHeaderWide title={`#${displayName}`}  />
-            <Container>
-                <Row>
-                    <Col md={8}>
-                        <SectionTitle title="Recent posts" />
-                        {articles.map(a => <ArticlePreviewPanel 
-                                key={a.id}
-                                articleId={a.id}
-                                thumbnailImage={a.thumbnailLocation || fallbackThumbnailLocation}
-                                thumbnailAltText={a.thumbnailAltText}
-                                title={a.title}
-                                author="Marcell Toth"
-                                publishDate={a.publishDate}
-                                tags={a.tags}
-                            />)}
-                    </Col>
-                    <Col md={4}>
-                        <Sidebar />
-                    </Col>
-                </Row>
-            </Container>
-        </>
-    }
+type DispatchProps = {
+    fetchThumbnails: typeof fetchThumbnails
 }
+
+type TagPageProps = OwnProps & StateProps & DispatchProps;
+
+const TagPageImpl : React.FC<TagPageProps> = (props) => {
+
+    if(props.notFound){
+        return <Redirect to="/" />
+    }
+
+    
+    const {displayName, articles, fetchThumbnails} = props;
+
+    const articleIds = articles.map(a => a.id);
+    React.useEffect(() => {
+        fetchThumbnails(articleIds, 300);
+    }, [articleIds.join('-')])
+
+
+    return <>
+        <PageHeaderWide title={`#${displayName}`}  />
+        <Container>
+            <Row>
+                <Col md={8}>
+                    <SectionTitle title="Recent posts" />
+                    {articles.map(a => <ArticlePreviewPanel 
+                            key={a.id}
+                            articleId={a.id}
+                            thumbnailImage={a.thumbnailLocation || fallbackThumbnailLocation}
+                            thumbnailAltText={a.thumbnailAltText}
+                            title={a.title}
+                            author="Marcell Toth"
+                            publishDate={a.publishDate}
+                            tags={a.tags}
+                        />)}
+                </Col>
+                <Col md={4}>
+                    <Sidebar />
+                </Col>
+            </Row>
+        </Container>
+    </>
+};
 
 const mapStateToProps = (state: ApplicationState, ownProps: OwnProps) : StateProps => {
     const tags = selectTagById(state);
@@ -72,4 +82,7 @@ const mapStateToProps = (state: ApplicationState, ownProps: OwnProps) : StatePro
     };
 }
 
-export const TagPage = connect<StateProps, {}, OwnProps, ApplicationState>(mapStateToProps)(TagPageImpl as any);
+export const TagPage = connect<StateProps, {}, OwnProps, ApplicationState>(
+    mapStateToProps, 
+    {fetchThumbnails}
+)(TagPageImpl as any);
