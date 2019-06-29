@@ -13,8 +13,8 @@ export class Menu extends React.Component{
                     <MenuItem title="Optimization, performance" target="/tag/4/performance" />
                     <MenuItem title="Frontend Dev" target="/tag/6/frontend" />
                 </MenuItem>
-                <MenuItem title="My story" />
-                <MenuItem title="Portfolio">
+                <MenuItem title="My story" disabled/>
+                <MenuItem title="Portfolio" disabled>
                     <MenuItem title="Blog" />
                     <MenuItem title="Neptun Lite" />
                 </MenuItem>
@@ -27,11 +27,17 @@ export class Menu extends React.Component{
 interface MenuItemProps{
     title: string;
     target?: string;
+    disabled?: boolean;
 }
 
 class MenuItem extends React.Component<MenuItemProps>{
     render(){
-        const {title, target, children} = this.props;
+        const {title, target, children, disabled} = this.props;
+
+        if(disabled){
+            return <li><a href="#" className={styles.disabled}>{title}</a></li>;
+        }
+
         const hasDropdown = React.Children.count(children) > 0;
         return <li>
             {target ? <Link to={target}>{title}</Link> : <a href="#">{title}</a>}
