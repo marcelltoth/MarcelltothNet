@@ -51,7 +51,7 @@ const ArticlePageImpl : React.FC<ArticlePageProps> = ({article, loadArticle}) =>
         
         // redirect to the canonical url if we are not there
         const canonicalUrl = generateArticleUrl(id, title);
-        if(location.pathname !== canonicalUrl){
+        if(window.location.pathname !== canonicalUrl){
             return <Redirect to={canonicalUrl}/>;
         }
 
@@ -90,11 +90,11 @@ const mapStateToProps = (state: ApplicationState, ownProps: OwnProps) : StatePro
     }
 };
 
-const mapDispatchToProps = (dispatch: Dispatch<any>, ownProps: OwnProps) : DispatchProps => {
+const mapDispatchToProps = (dispatch: any, ownProps: OwnProps) : DispatchProps => {
     const articleId = Number(ownProps.match.params.id);
     return {
         loadArticle: () => dispatch(fetchArticleDetails(articleId))
     };
 }
 
-export const ArticlePage = connect(mapStateToProps, mapDispatchToProps)(ArticlePageImpl);
+export const ArticlePage = connect<StateProps, DispatchProps, OwnProps, ApplicationState>(mapStateToProps, mapDispatchToProps)(ArticlePageImpl);

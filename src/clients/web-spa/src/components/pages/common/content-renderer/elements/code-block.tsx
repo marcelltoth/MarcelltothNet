@@ -18,7 +18,7 @@ export class CodeBlock extends React.PureComponent<CodeBlockProps>{
         const {value, language} = this.props;
         const actualLanguage = (language && Prism.languages[language] !== undefined) ? language : "markup";
 
-        const highlighted = Prism.highlight(value, Prism.languages[actualLanguage]);
+        const highlighted = Prism.highlight(value, Prism.languages[actualLanguage], actualLanguage);
         const className = `language-${actualLanguage}`;
         
         return <pre className={className}>

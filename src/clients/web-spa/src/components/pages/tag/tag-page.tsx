@@ -20,7 +20,7 @@ type StateProps = {
     notFound?: false;
     displayName: string;
     articles: ReadonlyArray<ArticleDataDeep>;
-} | { notFound: true; }
+} | { notFound: true; articles: []; }
 
 type DispatchProps = {
     fetchThumbnails: typeof fetchThumbnails
@@ -30,18 +30,19 @@ type TagPageProps = OwnProps & StateProps & DispatchProps;
 
 const TagPageImpl : React.FC<TagPageProps> = (props) => {
 
+    React.useEffect(() => {
+        if(!props.notFound){
+            const {fetchThumbnails} = props;
+            const articleIds = props.articles.map(a => a.id);
+            fetchThumbnails(articleIds, 300);
+        }
+    }, [props.articles])
+
     if(props.notFound){
         return <Redirect to="/" />
     }
 
-    
-    const {displayName, articles, fetchThumbnails} = props;
-
-    const articleIds = articles.map(a => a.id);
-    React.useEffect(() => {
-        fetchThumbnails(articleIds, 300);
-    }, [articleIds.join('-')])
-
+    const {displayName, articles} = props;
 
     return <>
         <PageHeaderWide title={`#${displayName}`}  />
@@ -74,6 +75,7 @@ const mapStateToProps = (state: ApplicationState, ownProps: OwnProps) : StatePro
     if(tagInfo === undefined){
         return {
             notFound: true,
+            articles: []
         };
     }
     return {

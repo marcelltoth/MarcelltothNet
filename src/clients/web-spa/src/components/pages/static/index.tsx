@@ -3,9 +3,11 @@ import { ContentRenderer, Sidebar } from '../common';
 import { PageHeaderWide } from '../common/page-header-wide';
 import { Container, Row, Col } from 'reactstrap';
 
+import raw from "raw.macro";
+
 
 export const portfolioPages = {
-    'neptun-lite': createStaticPage(require('!!raw-loader!./portfolio/neptun-lite.md'), <PageHeaderWide title="Neptun Lite" subtitle="A .NET Standard / Xamarin.Android based mobile application for students." />)
+    'neptun-lite': createStaticPage(raw('./portfolio/neptun-lite.md'), <PageHeaderWide title="Neptun Lite" subtitle="A .NET Standard / Xamarin.Android based mobile application for students." />)
 }
 
 
