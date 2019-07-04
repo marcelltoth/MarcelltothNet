@@ -1,7 +1,7 @@
 # MarcelltothNet
 This is the source repository of my personal website / blog found at https://marcelltoth.net.
 
-If you are interested in samples of my work, I recommend you to check out the [Articles microservice](./src/services/Article) for backend and the public facing [Web SPA](./src/clients/web-spa) for frontend.
+If you are interested in samples of my work, I recommend you to check out the [Articles microservice](./src/services/Article) for backend and the public facing [Web SPA](./src/clients/web-spa) for frontend and also to read the articles on my site as they are a really good insight to the problems I am solving and the tech I am using day to day.
 
 ## The story
 A while ago I decided that I would like to have a central place where I can share stories about my coding journey.
