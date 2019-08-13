@@ -24,10 +24,20 @@ There are places where it's just not worth the effort of trying to completely wr
 The outer structure is default CRA setup. The interesting part of the application is inside the [src](./src) folder.
 
 ### [@types](./src/@types)
-@types contains typings I wrote for external libraries that came without a *.d.ts* file. I will contribute those back to *DefinitelyTyped* when I'll have some spare time.
+*@types* contains typings I wrote for external libraries that came without a *.d.ts* file. I will contribute those back to *DefinitelyTyped* when I'll have some spare time.
 
-### [store](./src/@store)
+### [store](./src/store)
 
-store contains Redux architecture. I like to structure those into 4 folders (3 on non-TS projects):
+*store* contains Redux architecture. I like to structure those into 4 folders (3 on non-TS projects):
 - *state* that holds the usually type-only files that define the shape of the state.
-- **... TO BE CONTINUED ...**
+- *reducers* that holds the reducers.
+- *actions* that holds both the action type definitions and the action creators themselves. For asynchronous actions I use *redux-thunk*.
+- *selectors* that hold the (memoized) selectors. In this case because of the size of the project I am using a single file instead of a directory. I try to follow the pattern where only the reducers and the selectors can ever care about the shape of the store. Everything else goes through the reducers. This allows for much easier shape-refactoring, that could otherwise be a pain for bigger applications.
+
+### [components](./src/components)
+
+*components* holds the actual React components. Nowadays I try to go for the newer Functional Component pattern rather than using classes. For styling I am using *SCSS Modules* along with a `classnames` utility that is good enough for the complexity I require. I tried several CSS-in-JS frameworks, but I was never convinced that the added complexity was entirely justified.
+
+### Entry point
+
+The entry point is `index.js`, which is one example where I omit TypeScript. This is also where I set up my main infrastructure, including Hot Module Reloading and the service worker (which is disabled now, but I am planning on building a complete PWA.)
